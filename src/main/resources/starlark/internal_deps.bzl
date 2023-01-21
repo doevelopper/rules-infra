@@ -10,7 +10,7 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 def http_archive(name, **kwargs):
     maybe(_http_archive, name = name, **kwargs)
 
-def rules_mylang_internal_deps():
+def rules_infra_internal_deps():
     "Fetch deps needed for local development"
     http_archive(
         name = "io_bazel_rules_go",
@@ -20,8 +20,11 @@ def rules_mylang_internal_deps():
 
     http_archive(
         name = "bazel_gazelle",
-        sha256 = "448e37e0dbf61d6fa8f00aaa12d191745e14f07c31cabfa731f0c8e8a4f41b97",
-        urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.28.0/bazel-gazelle-v0.28.0.tar.gz"],
+        sha256 = "ecba0f04f96b4960a5b250c8e8eeec42281035970aa8852dda73098274d14a1d",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.29.0/bazel-gazelle-v0.29.0.tar.gz",
+            "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.29.0/bazel-gazelle-v0.29.0.tar.gz",
+        ],
     )
 
     # Override bazel_skylib distribution to fetch sources instead
@@ -42,7 +45,7 @@ def rules_mylang_internal_deps():
 
     http_archive(
         name = "aspect_bazel_lib",
-        sha256 = "a7bfc7aed7b86a4caaba382116e0214ebbaa623f393a9e716d87a3e1bab29d78",
-        strip_prefix = "bazel-lib-1.19.0",
-        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.19.0.tar.gz",
+        sha256 = "79623d656aa23ad3fd4692ab99786c613cd36e49f5566469ed97bc9b4c655f03",
+        strip_prefix = "bazel-lib-1.23.3",
+        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.23.3.tar.gz",
     )

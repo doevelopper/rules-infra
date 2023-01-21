@@ -16,8 +16,8 @@ bzl_library(
     srcs = ["repositories.bzl"],
     visibility = ["//visibility:public"],
     deps = [
-        "//mylang/private:toolchains_repo",
-        "//mylang/private:versions",
+        "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/private:toolchains_repo",
+        "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/private:versions",
         "@bazel_tools//tools/build_defs/repo:http.bzl",
         "@bazel_tools//tools/build_defs/repo:utils.bzl",
     ],

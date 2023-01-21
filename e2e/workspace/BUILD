@@ -2,8 +2,8 @@
 Add a basic smoke-test target below.
 """
 
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-# load("com_myorg_rules_mylang//mylang:defs.bzl", "...")
+load("@bazel_skylib//src/main/resources/starlark/rules:build_test.bzl", "build_test")
+# load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:defs.bzl", "...")
 
 # Replace with a usage of your rule/macro
 filegroup(name = "empty")
