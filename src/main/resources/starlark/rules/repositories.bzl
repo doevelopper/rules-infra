@@ -19,7 +19,7 @@ def http_archive(name, **kwargs):
 # changes in this function should be marked as BREAKING in the commit message
 # and released only in semver majors.
 # This is all fixed by bzlmod, so we just tolerate it for now.
-def rules_mylang_dependencies():
+def rules_infra_register_dependencies():
     # The minimal version of bazel_skylib we require
     http_archive(
         name = "bazel_skylib",
@@ -67,7 +67,7 @@ mylang_repositories = repository_rule(
 )
 
 # Wrapper macro around everything above, this is the primary API
-def mylang_register_toolchains(name, **kwargs):
+def rules_infra_register_toolchains(name, **kwargs):
     """Convenience macro for users which does typical setup.
 
     - create a repository for each built-in platform like "mylang_linux_amd64" -

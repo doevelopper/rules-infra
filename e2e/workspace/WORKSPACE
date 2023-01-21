@@ -14,5 +14,5 @@ local_repository(
 # you should fetch it *before* calling this.
 # Alternatively, you can skip calling this function, so long as you've
 # already fetched all the dependencies.
-load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl", "rules_mylang_dependencies")
-rules_mylang_dependencies()
+load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl", "rules_infra_register_dependencies")
+rules_infra_register_dependencies()

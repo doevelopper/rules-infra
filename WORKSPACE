@@ -39,12 +39,12 @@ load("@com.github.doevelopper.rules-infra//src/main/resources/starlark:internal_
 # Fetch deps needed only locally for development
 rules_infra_internal_deps()
 
-load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl", "mylang_register_toolchains", "rules_mylang_dependencies")
+load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl", "rules_infra_register_toolchains", "rules_infra_register_dependencies")
 
 # Fetch dependencies which users need as well
-rules_mylang_dependencies()
+rules_infra_register_dependencies()
 
-mylang_register_toolchains(
+rules_infra_register_toolchains(
     name = "mylang1_14",
     mylang_version = "1.14.2",
 )
