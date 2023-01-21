@@ -46,7 +46,7 @@ rules_infra_register_dependencies()
 
 rules_infra_register_toolchains(
     name = "mylang1_14",
-    mylang_version = "1.14.2",
+    rules_infra_version = "1.14.2",
 )
 
 # For running our own unit tests
