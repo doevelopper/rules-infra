@@ -1,7 +1,7 @@
 """This module implements the language-specific toolchain rule.
 """
 
-MylangInfo = provider(
+RulesInfraInfo = provider(
     doc = "Information about how to invoke the tool executable.",
     fields = {
         "target_tool_path": "Path to the tool executable for the target platform.",
@@ -18,7 +18,7 @@ def _to_manifest_path(ctx, file):
     else:
         return ctx.workspace_name + "/" + file.short_path
 
-def _mylang_toolchain_impl(ctx):
+def _rules_infra_toolchain_impl(ctx):
     if ctx.attr.target_tool and ctx.attr.target_tool_path:
         fail("Can only set one of target_tool or target_tool_path but both were set.")
     if not ctx.attr.target_tool and not ctx.attr.target_tool_path:
@@ -40,7 +40,7 @@ def _mylang_toolchain_impl(ctx):
         files = depset(tool_files),
         runfiles = ctx.runfiles(files = tool_files),
     )
-    mylanginfo = MylangInfo(
+    rulesinfrainfo = RulesInfraInfo(
         target_tool_path = target_tool_path,
         tool_files = tool_files,
     )
@@ -48,7 +48,7 @@ def _mylang_toolchain_impl(ctx):
     # Export all the providers inside our ToolchainInfo
     # so the resolved_toolchain rule can grab and re-export them.
     toolchain_info = platform_common.ToolchainInfo(
-        mylanginfo = mylanginfo,
+        rulesinfrainfo = rulesinfrainfo,
         template_variables = template_variables,
         default = default,
     )
@@ -59,7 +59,7 @@ def _mylang_toolchain_impl(ctx):
     ]
 
 rules_infra_toolchain = rule(
-    implementation = _mylang_toolchain_impl,
+    implementation = _rules_infra_toolchain_impl,
     attrs = {
         "target_tool": attr.label(
             doc = "A hermetically downloaded executable target for the target platform.",

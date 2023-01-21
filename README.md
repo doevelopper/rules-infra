@@ -34,5 +34,5 @@ Ready to get started? Copy this repo, then
 ## Installation
 
 From the release you wish to use:
-<https://github.com/myorg/rules_mylang/releases>
+<https://github.com/doevelopper/rules_infra/releases>
 copy the WORKSPACE snippet into your `WORKSPACE` file.
