@@ -91,7 +91,7 @@ resolved_toolchain(name = "resolved_toolchain", visibility = ["//visibility:publ
 toolchain(
     name = "{platform}_toolchain",
     exec_compatible_with = {compatible_with},
-    toolchain = "@{user_repository_name}_{platform}//:mylang_toolchain",
+    toolchain = "@{user_repository_name}_{platform}//:rules_infra_toolchain",
     toolchain_type = "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:toolchain_type",
 )
 """.format(

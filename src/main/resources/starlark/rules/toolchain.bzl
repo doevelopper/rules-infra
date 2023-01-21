@@ -58,7 +58,7 @@ def _mylang_toolchain_impl(ctx):
         template_variables,
     ]
 
-mylang_toolchain = rule(
+rules_infra_toolchain = rule(
     implementation = _mylang_toolchain_impl,
     attrs = {
         "target_tool": attr.label(
