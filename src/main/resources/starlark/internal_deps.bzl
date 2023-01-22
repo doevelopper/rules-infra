@@ -49,3 +49,8 @@ def rules_infra_internal_deps():
         strip_prefix = "bazel-lib-1.23.3",
         url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.23.3.tar.gz",
     )
+
+    # # Register toolchains for tests
+    # register_jq_toolchains()
+    # register_yq_toolchains()
+    # register_coreutils_toolchains()

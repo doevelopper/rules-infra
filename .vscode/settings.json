@@ -1,0 +1,141 @@
+{
+    "files.exclude": {
+      "out/[^D]*/": true,
+      "out/Debug/[^g]*": false,
+      "out/Debug/g[^e]*": false,
+      "out_*/**": true,
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/.idea": true,
+      "**/node_modules": true,
+      "**/bazel-bin": true,
+      "**/bazel-out": true,
+      "**/bazel-testlogs": true,
+      "**/target": true,
+      "**/bazel-infra": true,
+      "**/bin/**": true,
+      "**/obj/**": true,
+      "**/packages/**": true,
+      "**/Generated Files/**": true
+    },
+    "files.associations": {
+        ".clang-format": "yaml",
+        "header-units.json": "jsonc",
+        "**/stl/inc/**": "cpp"
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.ignoredRepositories": [
+        "benchmarks/google-benchmark",
+        "boost-math",
+        "llvm-project"
+    ],
+    // The number of spaces a tab is equal to. This setting is overridden
+    // based on the file contents when `editor.detectIndentation` is true.
+    "editor.tabSize": 4,
+
+    // Insert spaces when pressing Tab. This setting is overriden
+    // based on the file contents when `editor.detectIndentation` is true.
+    "editor.insertSpaces": true,
+
+    // When opening a file, `editor.tabSize` and `editor.insertSpaces`
+    // will be detected based on the file contents. Set to false to keep
+    // the values you've explicitly set, above.
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "all",
+    "workbench.colorCustomizations" : {
+      "terminal.foreground" : "#1abe3ee3",
+      "terminal.background" : "#020f299d",
+      "terminal.ansiBrightBlue":"#babd0fe5",
+      "terminalCursor.foreground": "#ebebe1",
+      "titleBar.activeBackground": "#5F9EA0",
+      "titleBar.activeForeground": "#00008B",
+      "titleBar.inactiveBackground": "#0f0f16",
+      "titleBar.inactiveForeground": "#f3fefe",
+      "statusBar.background": "#055737",
+      "editorLineNumber.foreground": "#9e9797ea",
+      "editor.background": "#201e1ee0",
+      "editor.lineHighlightBackground": "#050a0e",
+      "editor.lineHighlightBorder": "#70460fe0",
+      "editor.selectionBackground": "#0a3464",
+      "editorUnnecessaryCode.opacity": "#ffffff",
+      "editorWidget.background": "#555555",
+      "dropdown.background": "#ffffff",
+      "dropdown.listBackground": "#555555",
+      "dropdown.border": "#000000",
+      "dropdown.foreground": "#000000",
+      "scrollbarSlider.hoverBackground": "#080200",
+      "scrollbarSlider.background": "#080200",
+      "editorGroup.border": "#080200",
+      "list.highlightForeground": "#ffff55",
+      "list.hoverBackground": "#aaaaaa",
+      "pickerGroup.foreground": "#ffff55",
+      "contrastActiveBorder": "#000000",
+      "contrastBorder": "#000000",
+      //"editor.scrollbar.verticalScrollbarSize": 0,
+      //"sideBar.background": "#ebebe4",
+      //"sideBar.foreground": "#030303",
+      //"sideBarTitle.foreground": "#0a0a0a",
+      "tab.activeForeground": "#00FFFF"
+    },
+    "C_Cpp.doxygen.generatedStyle": "/*!",
+    "C_Cpp.default.browse.path": [
+        "${workspaceFolder}"
+    ],
+    "C_Cpp.loggingLevel": "None",
+    "C/C++ Include Guard.Header Extensions": [
+        ".h",
+        ".hpp",
+        ".h++",
+        ".hh",
+        ".ipp"
+    ],
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": true,
+    "[ruby][html]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "[csharp][typescript]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    },
+    "[python]": {
+        "editor.tabSize": 4,
+      // Auto sort imports
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": true
+      },
+    },
+      // Enable Python linting and Pylance type checking
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120"
+    ],
+    "python.sortImports.args": [
+        "--profile",
+        "black",
+        "--line-length",
+        "120"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pydocstyleArgs": [
+        "--convention=google"
+    ],
+    "python.linting.banditEnabled": true,
+    "cpplint.lineLength": 120,
+    "cpplint.filters": [
+        "-build/include_subdir",
+        "-runtime/references"
+    ],
+}

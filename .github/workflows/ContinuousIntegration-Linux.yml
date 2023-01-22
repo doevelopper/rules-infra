@@ -1,0 +1,203 @@
+#
+#       .github/workflows/ContinuousTesting-Linux.yml
+#
+#       Copyright (C) 2014 - 2021  The CFS SW Platform Development Team.
+#                        All rights reserved.
+#
+#
+#    Permission is hereby granted, free of charge, to any person obtaining
+#    a copy of this software and associated documentation files (the
+#    "Software"), to deal in the Software without restriction, including
+#    without limitation the rights to use, copy, modify, merge, publish,
+#    distribute, sublicense, and/or sell copies of the Software, and to
+#    permit persons to whom the Software is furnished to do so, subject to
+#    the following conditions:
+#
+#    The above copyright notice and this permission notice shall be
+#    included in all copies or substantial portions of the Software.
+#
+#    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+#    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+#    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+#    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+#    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+#    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+#    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+#
+
+# GitHub Actions workflow file
+# https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 🐧🐧 Continuous Integration#
+#       .github/workflows/ContinuousTesting-Linux.yml
+#
+#       Copyright (C) 2014 - 2021  The CFS SW Platform Development Team.
+#                        All rights reserved.
+#
+#
+#    Permission is hereby granted, free of charge, to any person obtaining
+#    a copy of this software and associated documentation files (the
+#    "Software"), to deal in the Software without restriction, including
+#    without limitation the rights to use, copy, modify, merge, publish,
+#    distribute, sublicense, and/or sell copies of the Software, and to
+#    permit persons to whom the Software is furnished to do so, subject to
+#    the following conditions:
+#
+#    The above copyright notice and this permission notice shall be
+#    included in all copies or substantial portions of the Software.
+#
+#    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+#    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+#    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+#    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+#    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+#    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+#    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+#
+
+# GitHub Actions workflow file
+# https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+name: 🐧🐧 Continuous Integration
+
+concurrency:
+    # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
+    # group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    # group: ci-${{ github.event.pull_request.number || github.ref }}
+    #${{ github.workflow }}-${{ github.ref }}
+    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+    cancel-in-progress: true
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main, master, develop, feature/**, bugfix/**, hotfix/**, support/**, defects/** ]
+    paths-ignore:
+      - '**.md'
+      - 'src/main/resources/**'
+      - 'src/test/resources/**'
+      - 'src/site/**'
+    # - '.github/workflows/**'
+    tags: [ 'rev-*.*.*' ] # Workflow run on tags for vx.x.x only.
+    branches-ignore: [ incubator/**]
+    tags-ignore:
+      - 'rev-0*.*.*'
+  pull_request:
+    branches: [ main, master, develop, feature/**, bugfix/**, hotfix/**, support/**, defects/** ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+  # matrix-prep-* steps generate JSON used to create a dynamic actions matrix.
+  # Insanely complex for how simple this requirement is inspired from
+  # https://stackoverflow.com/questions/65384420/how-to-make-a-github-action-matrix-element-conditional
+
+  matrix-prep-bazelversion:
+    # Prepares the 'bazelversion' axis of the test matrix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: bazel_from_bazelversion
+        run: echo "bazelversion=$(head -n 1 .bazelversion)" >> $GITHUB_OUTPUT
+      - id: bazel_5
+        run: echo "bazelversion=5.3.2" >> $GITHUB_OUTPUT
+    outputs:
+      # Will look like ["<version from .bazelversion>", "5.3.2"]
+      bazelversions: ${{ toJSON(steps.*.outputs.bazelversion) }}
+
+  unit-test:
+    name: ${{ github.repository }} Unit tests using ${{ matrix.compiler.name }}
+    needs: []
+    runs-on: ${{ matrix.config.os }}
+    # if: github.event.workflow_run.conclusion != 'skipped'
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      # max-parallel: 1
+      matrix:
+        bazel: [6.0.0]
+        bazelisk: [1.15.0]
+        python-version: [3.10]
+        # compilation_mode: [ fastbuild, dbg, opt]
+        # shared: [true, false]
+        folder:
+          - "."
+          - "e2e/workspace"
+        config:
+          - { name: "Ubuntu", os: ubuntu-latest, target: "linux" }
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout ${{ github.ref }} ( ${{ github.sha }} )
+        if: ${{ github.event_name != 'pull_request_target' }}
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          submodules: 'recursive'
+          fetch-depth: 0
+
+      - name: setup bazelisk ${{ matrix.bazelisk }}
+        uses: bazelbuild/setup-bazelisk@v2
+        with:
+          bazelisk-version: ${{ matrix.bazelisk }}
+      #     ref: ${{ github.event.pull_request.head.sha }}
+      # Cache build and external artifacts so that the next ci build is incremental.
+      # Because github action caches cannot be updated after a build, we need to
+      # store the contents of each build in a unique cache key, then fall back to loading
+      # it on the next ci run. We use hashFiles(...) in the key and restore-keys- with
+      # the prefix to load the most recent cache for the branch on a cache miss. You
+      # should customize the contents of hashFiles to capture any bazel input sources,
+      # although this doesn't need to be perfect. If none of the input sources change
+      # then a cache hit will load an existing cache and bazel won't have to do any work.
+      # In the case of a cache miss, you want the fallback cache to contain most of the
+      # previously built artifacts to minimize build time. The more precise you are with
+      # hashFiles sources the less work bazel will have to do.
+      # ${{ hashFiles('**/BUILD.bazel', '**/*.bzl', 'WORKSPACE') }}
+      - name: Mount bazel caches
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/bazel
+            ~/.cache/bazel-repo
+          key: bazel-cache-${{ runner.os }}-${{ hashFiles('WORKSPACE') }}
+          restore-keys: |
+            bazel-cache-
+            bazel-cache-${{ runner.os }}-
+
+      - name: Display goals of main and test packages.
+        run: |
+          ls -laFS ${{ github.workspace }}
+          bazelisk build  --config linux --nobuild //...
+          bazelisk query @com.github.doevelopper.rules-infra//src/main/...
+          bazelisk query @com.github.doevelopper.rules-infra//src/test/...
+
+      - name: Configure Bazel version
+        working-directory: ${{ matrix.folder }}
+        run: echo "${{ matrix.bazelversion }}" > .bazelversion
+
+      - name: Compile the main source code
+        env:
+          # Bazelisk will download bazel to here, ensure it is cached between runs.
+          XDG_CACHE_HOME: ~/.cache/bazel-repo
+        working-directory: ${{ matrix.folder }}
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //srs/man/...
+
+      - name: Compile the test source code
+        env:
+          # Bazelisk will download bazel to here, ensure it is cached between runs.
+          XDG_CACHE_HOME: ~/.cache/bazel-repo
+        working-directory: ${{ matrix.folder }}
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //srs/test/...
+
+      - name: ./test.sh
+        # Run if there is a test.sh file in the folder
+        if: steps.has_test_sh.outputs.files_exists == 'true'
+        working-directory: ${{ matrix.folder }}
+        shell: bash
+        run: ./test.sh

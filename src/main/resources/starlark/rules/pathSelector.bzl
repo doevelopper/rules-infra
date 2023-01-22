@@ -1,6 +1,7 @@
-#       src/main/resources/starlark/BUILD.bazel
+#
+#       src/main/resources/starlark/pathSelector.bzl
 
-#       Copyright (C) 2014 - 2023  The CFS SW Platform Development Team.
+#       Copyright (C) 2014 - 2021  The CFS SW Platform Development Team.
 #                        All rights reserved.
 
 #    Permission is hereby granted, free of charge, to any person obtaining
@@ -22,30 +23,11 @@
 #    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 #    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+"""Shared bzl constants and methods for building the rules-sdlc product."""
 
-load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
-load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
-
-package(default_visibility = ["//visibility:public"])
-
-gazelle_binary(
-    name = "gazelle_bin",
-    languages = ["@bazel_skylib//gazelle/bzl"],
-)
-
-gazelle(
-    name = "gazelle",
-    gazelle = "gazelle_bin",
-)
-
-bzl_library(
-    name = "internal_deps",
-    srcs = [
-        ":internal_deps.bzl",
-    ],
-    visibility = ["//visibility:public"],
-    deps = [
-        "@bazel_tools//tools/build_defs/repo:http.bzl",
-        "@bazel_tools//tools/build_defs/repo:utils.bzl",
-    ],
-)
+shared_object_path_selector = {
+    "@platforms//os:linux": "/usr/share/rules-sdlc",
+    "@platforms//os:macos": "/Library/rules-sdlc",
+    "@platforms//os:windows": "/Program Files/rules-sdlc",
+    "//conditions:default": "/usr/local/share/rules-sdlc",
+}
