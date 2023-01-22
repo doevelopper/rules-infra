@@ -50,6 +50,70 @@ def rules_infra_internal_deps():
         url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.23.3.tar.gz",
     )
 
+    http_archive(
+        name = "rules_pkg",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
+            "https://github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
+        ],
+        sha256 = "eea0f59c28a9241156a47d7a8e32db9122f3d50b505fae0f33de6ce4d9b61834",
+    )
+
+    http_archive(
+        name = "com_github_bazelbuild_buildtools",
+        sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
+        strip_prefix = "buildtools-4.2.2",
+        urls = [
+            "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
+        ],
+    )
+
+    http_archive(
+        name = "rules_foreign_cc",
+        sha256 = "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
+        strip_prefix = "rules_foreign_cc-0.9.0",
+        url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
+    )
+
+    http_archive(
+        name = "rules_cc",
+        urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.0.4/rules_cc-0.0.4.tar.gz"],
+        sha256 = "af6cc82d87db94585bceeda2561cb8a9d55ad435318ccb4ddfee18a43580fb5d",
+        strip_prefix = "rules_cc-0.0.4",
+    )
+
+    http_archive(
+        name = "com_github_google_rules_install",
+        urls = [
+            "https://github.com/google/bazel_rules_install/releases/download/0.4/bazel_rules_install-0.4.tar.gz",
+        ],
+        sha256 = "ac2c9c53aa022a110273c0e510d191a4c04c6adafefa069a5eeaa16313edc9b9",
+        strip_prefix = "bazel_rules_install-0.4",
+    )
+
+    http_archive(
+        name = "platforms",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/0.0.6/platforms-0.0.6.tar.gz",
+            "https://github.com/bazelbuild/platforms/releases/download/0.0.6/platforms-0.0.6.tar.gz",
+        ],
+        sha256 = "5308fc1d8865406a49427ba24a9ab53087f17f5266a7aabbfc28823f3916e1ca",
+    )
+
+    http_archive(
+        name = "rules_python",
+        sha256 = "48a838a6e1983e4884b26812b2c748a35ad284fd339eb8e2a6f3adf95307fbcd",
+        strip_prefix = "rules_python-0.16.2",
+        url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
+    )
+
+    http_archive(
+        name = "bazel_toolchains",
+        urls = ["https://github.com/bazelbuild/bazel-toolchains/archive/03bb68c854a9268bcf68d1138dc00b09cd928cff.tar.gz"],
+        strip_prefix = "bazel-toolchains-03bb68c854a9268bcf68d1138dc00b09cd928cff",
+        # sha256 = "56d5370eb99559b4c74f334f81bc8a298f728bd16d5a4333c865c2ad10fae3bc",
+    )
+
     # # Register toolchains for tests
     # register_jq_toolchains()
     # register_yq_toolchains()

@@ -30,37 +30,9 @@
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
 name: 🐧🐧 Continuous Integration#
-#       .github/workflows/ContinuousTesting-Linux.yml
-#
-#       Copyright (C) 2014 - 2021  The CFS SW Platform Development Team.
-#                        All rights reserved.
-#
-#
-#    Permission is hereby granted, free of charge, to any person obtaining
-#    a copy of this software and associated documentation files (the
-#    "Software"), to deal in the Software without restriction, including
-#    without limitation the rights to use, copy, modify, merge, publish,
-#    distribute, sublicense, and/or sell copies of the Software, and to
-#    permit persons to whom the Software is furnished to do so, subject to
-#    the following conditions:
-#
-#    The above copyright notice and this permission notice shall be
-#    included in all copies or substantial portions of the Software.
-#
-#    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-#    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-#    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-#    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-#    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-#    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-#    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
-#
 
 # GitHub Actions workflow file
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
-
-name: Continuous Integration
 
 concurrency:
     # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
@@ -97,18 +69,6 @@ jobs:
   # Insanely complex for how simple this requirement is inspired from
   # https://stackoverflow.com/questions/65384420/how-to-make-a-github-action-matrix-element-conditional
 
-  matrix-prep-bazelversion:
-    # Prepares the 'bazelversion' axis of the test matrix
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - id: bazel_from_bazelversion
-        run: echo "bazelversion=$(head -n 1 .bazelversion)" >> $GITHUB_OUTPUT
-      - id: bazel_5
-        run: echo "bazelversion=5.3.2" >> $GITHUB_OUTPUT
-    outputs:
-      # Will look like ["<version from .bazelversion>", "5.3.2"]
-      bazelversions: ${{ toJSON(steps.*.outputs.bazelversion) }}
 
   unit-test:
     name: ${{ github.repository }} Unit tests using ${{ matrix.compiler.name }}
@@ -141,6 +101,20 @@ jobs:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           submodules: 'recursive'
           fetch-depth: 0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+          cache: 'pip'
+          cache-dependency-path: '**/dev-requirements'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade setuptools
+          python -m pip install -e .[dev]
+          python -m pip install tox tox-gh-action
 
       - name: setup bazelisk ${{ matrix.bazelisk }}
         uses: bazelbuild/setup-bazelisk@v2
@@ -176,10 +150,6 @@ jobs:
           bazelisk build  --config linux --nobuild //...
           bazelisk query @com.github.doevelopper.rules-infra//src/main/...
           bazelisk query @com.github.doevelopper.rules-infra//src/test/...
-
-      - name: Configure Bazel version
-        working-directory: ${{ matrix.folder }}
-        run: echo "${{ matrix.bazelversion }}" > .bazelversion
 
       - name: Compile the main source code
         env:

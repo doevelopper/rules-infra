@@ -24,12 +24,12 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 
-https://raw.githubusercontent.com/doevelopper/rules-sdlc/master/src/main/resources/images/sdlc.png
+https://raw.githubusercontent.com/doevelopper/rules-infra/master/src/main/resources/images/infra.png
 -->
 
 <p align="center">
   <a href="https://tbd.io" target="blank_">
-    <img width="100px" src="https://raw.githubusercontent.com/doevelopper/rules-sdlc/feature/bazel-sdlc-redesign/src/main/resources/images/sdlc.png" align="center" alt="Rules SDLCs" />
+    <img width="100px" src="https://raw.githubusercontent.com/doevelopper/rules-infra/feature/bazel-infra-redesign/src/main/resources/images/infra.png" align="center" alt="Rules infras" />
   </a>
 </p>
 
@@ -61,3 +61,17 @@ https://raw.githubusercontent.com/doevelopper/rules-sdlc/master/src/main/resourc
 | :heavy_check_mark: [__Release__](#www.tbd.acme) | Builds created out of the release repository, qualified by QA as being of sufficient quality to release to hundreds of millions of people.
 
 # Bazel rules resources.
+
+
+
+
+
+
+[download-shield]: https://img.shields.io/github/downloads/doevelopper/rules-infra/total?style=for-the-badge&labelColor=4c566a&color=5e81ac&logo=github&logoColor=white
+[download-url]: https://github.com/doevelopper/rules-infra/releases/latest
+[release-shield]: https://img.shields.io/github/v/release/doevelopper/rules-infra?style=for-the-badge&labelColor=4c566a&color=5e81ac&logo=Battle.net&logoColor=white
+[release-url]: https://github.com/doevelopper/rules-infra/releases/latest
+[issues-shield]: https://img.shields.io/github/issues/doevelopper/rules-infra?style=for-the-badge&labelColor=4c566a&color=5e81ac&logo=Todoist&logoColor=white
+[issues-url]: https://github.com/doevelopper/rules-infra/issues
+[license-shield]: https://img.shields.io/github/license/doevelopper/rules-infra?style=for-the-badge&labelColor=4c566a&color=5e81ac&logo=AdGuard&logoColor=white
+[license-url]: https://github.com/doevelopper/rules-infra/blob/master/LICENSE
