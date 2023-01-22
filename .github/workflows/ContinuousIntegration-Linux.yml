@@ -53,8 +53,8 @@ on:
       - 'src/test/resources/**'
       - 'src/site/**'
     # - '.github/workflows/**'
-    tags: [ 'rev-*.*.*' ] # Workflow run on tags for vx.x.x only.
-    branches-ignore: [ incubator/**]
+    # tags: [ 'rev-*.*.*' ] # Workflow run on tags for vx.x.x only.
+    # branches-ignore: [ incubator/**]
     tags-ignore:
       - 'rev-0*.*.*'
   pull_request:
