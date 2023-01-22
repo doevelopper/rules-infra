@@ -148,26 +148,18 @@ jobs:
         run: |
           ls -laFS ${{ github.workspace }}
           bazelisk build  --config linux --nobuild //...
-          bazelisk query @com.github.doevelopper.rules-infra//src/main/...
-          bazelisk query @com.github.doevelopper.rules-infra//src/test/...
+          bazelisk query @com.github.doevelopper.rules-infra//...
 
       - name: Compile the main source code
         env:
           # Bazelisk will download bazel to here, ensure it is cached between runs.
           XDG_CACHE_HOME: ~/.cache/bazel-repo
         working-directory: ${{ matrix.folder }}
-        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //srs/man/...
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc build @com.github.doevelopper.rules-infra//...
 
-      - name: Compile the test source code
+      - name: Compile the test source code and rune unit tests
         env:
           # Bazelisk will download bazel to here, ensure it is cached between runs.
           XDG_CACHE_HOME: ~/.cache/bazel-repo
         working-directory: ${{ matrix.folder }}
-        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //srs/test/...
-
-      - name: ./test.sh
-        # Run if there is a test.sh file in the folder
-        if: steps.has_test_sh.outputs.files_exists == 'true'
-        working-directory: ${{ matrix.folder }}
-        shell: bash
-        run: ./test.sh
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test @com.github.doevelopper.rules-infra//...
