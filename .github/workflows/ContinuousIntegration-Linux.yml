@@ -82,7 +82,7 @@ jobs:
       matrix:
         bazel: [6.0.0]
         bazelisk: [1.15.0]
-        python-version: [3.10]
+        # python-version: [3.10]
         # compilation_mode: [ fastbuild, dbg, opt]
         # shared: [true, false]
         folder:
@@ -102,19 +102,19 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-          architecture: x64
-          cache: 'pip'
-          cache-dependency-path: '**/dev-requirements'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools
-          python -m pip install -e .[dev]
-          python -m pip install tox tox-gh-action
+      # - name: Set up Python ${{ matrix.python-version }}
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
+      #     architecture: x64
+      #     cache: 'pip'
+      #     cache-dependency-path: '**/dev-requirements'
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     python -m pip install --upgrade setuptools
+      #     python -m pip install -e .[dev]
+      #     python -m pip install tox tox-gh-action
 
       - name: setup bazelisk ${{ matrix.bazelisk }}
         uses: bazelbuild/setup-bazelisk@v2
