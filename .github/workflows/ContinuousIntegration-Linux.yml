@@ -60,7 +60,7 @@ name: 🐧🐧 Continuous Integration#
 # GitHub Actions workflow file
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 🐧🐧 Continuous Integration
+name: Continuous Integration
 
 concurrency:
     # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
