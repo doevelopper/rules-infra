@@ -64,6 +64,9 @@ load(
 
 bazel_skylib_workspace()
 
+load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl","qa_repositories")
+qa_repositories()
+
 ############################################
 # Gazelle, for generating bzl_library targets
 load(

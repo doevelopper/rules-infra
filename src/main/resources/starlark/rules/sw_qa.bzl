@@ -35,10 +35,10 @@ def qa_repositories():
         http_archive,
         name = "com_google_googletest",
         # strip_prefix = "googletest-master",
-        strip_prefix = "googletest-ec25eea8f8237cf86c30703f59747e42f34b6f75",
+        strip_prefix = "googletest-b72202078d0a7a2f2509eb5237685bcf1baea3b4",
         # sha256 = "12ef65654dc01ab40f6f33f9d02c04f2097d2cd9fbe48dc6001b29543583b0ad",
         # urls = ["https://github.com/google/googletest/archive/master.zip"],
-        urls = ["https://github.com/google/googletest/archive/ec25eea8f8237cf86c30703f59747e42f34b6f75.zip"],
+        urls = ["https://github.com/google/googletest/archive/b72202078d0a7a2f2509eb5237685bcf1baea3b4.zip"],
     )
 
     #  Third party gherkin need this goal name

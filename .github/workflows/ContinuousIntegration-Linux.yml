@@ -29,7 +29,7 @@
 # GitHub Actions workflow file
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-name: 🐧🐧 Continuous Integration#
+name: 🐧🐧 Continuous Integration
 
 # GitHub Actions workflow file
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
@@ -39,8 +39,11 @@ concurrency:
     # group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
     # group: ci-${{ github.event.pull_request.number || github.ref }}
     #${{ github.workflow }}-${{ github.ref }}
-    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
-    cancel-in-progress: true
+    # group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+    # cancel-in-progress: true
+
+    group: "workflow = ${{ github.workflow }}, ref = ${{ github.event.ref }}, pr = ${{ github.event.pull_request.id }}"
+    cancel-in-progress: ${{ github.event_name == 'pull_request' || github.repository != 'doevelopper/rules-infra' }}
 
 # Controls when the action will run.
 on:
@@ -114,7 +117,7 @@ jobs:
       #     python -m pip install --upgrade pip
       #     python -m pip install --upgrade setuptools
       #     python -m pip install -e .[dev]
-      #     python -m pip install tox tox-gh-action
+      #     python -m pip install tox tox-gh-action pyperf
 
       - name: setup bazelisk ${{ matrix.bazelisk }}
         uses: bazelbuild/setup-bazelisk@v2

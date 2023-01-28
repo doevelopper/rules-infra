@@ -18,7 +18,26 @@ http_archive(
     strip_prefix = "${PREFIX}",
     url = "https://github.com/doevelopper/rules_infra/archive/refs/tags/${TAG}.tar.gz",
 )
+
+load(
+  "@com.github.doevelopper.rules-infra//src/main/resources/starlark:sw_dev.bzl",
+  "dev_repositories"
+)
+dev_repositories()
+
+load(
+  "@com.github.doevelopper.rules-infra//src/main/resources/starlark:sw_qa.bzl",
+  "qa_repositories"
+)
+qa_repositories()
+
+load(
+  "@com.github.doevelopper.rules-infra//src/main/resources/starlark:dependencies.bzl",
+  "rules_sdlc_dependencies"
+)
+rules_sdlc_dependencies()
+
 EOF
 
 awk 'f;/--SNIP--/{f=1}' e2e/workspace/WORKSPACE
-echo "\`\`\`" 
+echo "\`\`\`"
