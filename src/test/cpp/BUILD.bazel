@@ -1,0 +1,74 @@
+# # Intentionally left empty (for now).
+
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "cc_test"
+)
+
+load(
+    "@rules_pkg//:pkg.bzl",
+    "pkg_tar",
+    "pkg_deb"
+  )
+
+licenses(["notice"])  # Apache License
+
+cc_library(
+    name = "com.github.doevelopper.rules.infra.test",
+    srcs = [
+    ],
+
+    copts = [
+        "-D_REENTRANT",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [],
+        "@bazel_tools//src/conditions:linux_x86_64": [
+              "-I/usr/local/include/",
+          ],
+        "@bazel_tools//src/conditions:darwin": [],
+    }),
+
+    includes = [
+        ".",
+    ],
+
+    linkopts = [
+
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [],
+        "@bazel_tools//src/conditions:linux_x86_64": [
+          "-pthread",
+          "-L/usr/local/lib",
+          ],
+        "@bazel_tools//src/conditions:darwin": [],
+    }),
+
+    deps = [
+        "@com.github.doevelopper.rules-infra//src/main/cpp:com.github.doevelopper.rules.infra.main",
+        "@com_google_googletest//:gtest",
+        # "@org_apache_apr_util//:aprutil",
+        # "@org_apache_logging_log4cxx//:log4cxx",
+        # "@com_github_tencent_rapidjson//:rapidjson",
+        # "@com_google_absl//absl/strings",
+        # "@org_apache_apr//:apr",
+    ],
+
+    visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "com.github.doevelopper.rules.infra.test.bin",
+    srcs = [
+        "main.cpp",
+    ],
+    deps = [
+        "@com.github.doevelopper.rules-infra//src/test/cpp:com.github.doevelopper.rules.infra.test",
+    ],
+
+    # env = [
+    #     $(location log4cxx) ,
+    # ],
+
+    visibility = ["//visibility:public"],
+)
