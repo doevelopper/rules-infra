@@ -37,20 +37,19 @@ load(
     "cc_gherkin_steps"
 )
 
-# cc_gherkin_steps(
-#     name = "com.github.doevelopper.rules.infra.steps",
-#     srcs = [
-#         "features/step_definitions/DummyTestSteps.hpp",
-#         "features/step_definitions/DummyTestSteps.cpp",
-#     ],
-#     includes = [
-#         ".",
-#     ],
-#     visibility = ["//visibility:public"],
-#     deps = [
-#         "@com.github.doevelopper.rules-infra//src/main/cpp:com.github.doevelopper.rules.infra.main",
-#         "@com_google_googletest//:gtest",
-#         "@com_github_cucumber_cucumber_cpp//:cucumber_cpp",
-#         # "@org_apache_logging_log4cxx//:log4cxx",
-#     ],
-# )
+cc_gherkin_steps(
+    name = "com.github.doevelopper.rules.infra.steps",
+    srcs = [
+        "features/step_definitions/DummyTestSteps.hpp",
+        "features/step_definitions/DummyTestSteps.cpp",
+    ],
+    includes = [
+        ".",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com.github.doevelopper.rules-infra//src/main/cpp:com.github.doevelopper.rules.infra.main",
+        "@com_google_googletest//:gtest",
+        "@com_github_cucumber_cucumber_cpp//:cucumber_cpp",
+    ],
+)
