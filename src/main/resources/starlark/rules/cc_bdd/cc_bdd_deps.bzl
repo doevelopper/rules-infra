@@ -12,30 +12,31 @@ def cc_bdd_deps():
     if "com_github_nelhage_rules_boost" not in native.existing_rules():
         git_repository(
             name = "com_github_nelhage_rules_boost",
-            commit = "5cff96018ec4662cc61268cf248edfc6e6fe4635",
+            commit = "812ba130cd895d142388d9b8fde7a66d9b3da6a5",
             remote = "https://github.com/nelhage/rules_boost",
-            shallow_since = "1591047380 -0700",
+            # shallow_since = "1591047380 -0700",
         )
     if "gtest" not in native.existing_rules():
         git_repository(
             name = "gtest",
-            commit = "703bd9caab50b139428cea1aaff9974ebee5742e",
+            commit = "b72202078d0a7a2f2509eb5237685bcf1baea3b4",
             remote = "https://github.com/google/googletest",
         )
     if "bazelruby_rules_ruby" not in native.existing_rules():
+    # c449402aa6e2ddf33e04ab266c87707705bcca7a in branch develop contains ruby "2.6.3",  need for cucumber-cpp
         git_repository(
             name = "bazelruby_rules_ruby",
-            branch = "master",
+            branch = "develop",
             remote = "https://github.com/bazelruby/rules_ruby.git",
         )
     if "bazel_skylib" not in native.existing_rules():
         http_archive(
             name = "bazel_skylib",
+            sha256 = "f24ab666394232f834f74d19e2ff142b0af17466ea0c69a3f4c276ee75f6efce",
             urls = [
-                "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
-                "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+              "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.4.0/bazel-skylib-1.4.0.tar.gz",
+              "https://github.com/bazelbuild/bazel-skylib/releases/download/1.4.0/bazel-skylib-1.4.0.tar.gz",
             ],
-            sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
         )
     if "cucumber_cpp" not in native.existing_rules():
         git_repository(
@@ -47,9 +48,23 @@ def cc_bdd_deps():
     if "rules_pkg" not in native.existing_rules():
         http_archive(
             name = "rules_pkg",
+            sha256 = "eea0f59c28a9241156a47d7a8e32db9122f3d50b505fae0f33de6ce4d9b61834",
             urls = [
-                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.3.0/rules_pkg-0.3.0.tar.gz",
-                "https://github.com/bazelbuild/rules_pkg/releases/download/0.3.0/rules_pkg-0.3.0.tar.gz",
+                "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
+                "https://github.com/bazelbuild/rules_pkg/releases/download/0.8.0/rules_pkg-0.8.0.tar.gz",
             ],
-            sha256 = "6b5969a7acd7b60c02f816773b06fcf32fbe8ba0c7919ccdc2df4f8fb923804a",
+        )
+    if "com_grail_bazel_toolchain" not in native.existing_rules():
+        git_repository(
+            name = "com_grail_bazel_toolchain",
+            commit = "f2d1ba2c9d713b2aa6e7063f6d11dd3d64aa402a",
+            remote = "https://github.com/grailbio/bazel-toolchain.git",
+        )
+    if "com_github_cucumber_cucumber_cpp" not in native.existing_rules():
+        git_repository(
+            name = "com_github_cucumber_cucumber_cpp",
+            build_file = "@com.github.doevelopper.rules-infra//src/main/resources/off-the-shelf-software:cucumber-cpp.BUILD",
+            commit = "c79100eb70fbb34f6ea10030cec051c2cc9f7961",
+            remote = "https://github.com/cucumber/cucumber-cpp.git",
+            # shallow_since = "1610936570 +0800",
         )

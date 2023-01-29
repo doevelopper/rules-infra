@@ -9,7 +9,7 @@ namespace com::github::doevelopper::rules::infra::guide::test
 {
     class CodingStyleTest : public ::testing::Test
     {
-        LOG4CXX_DECLARE_STATIC_TEST_LOGGER
+        // LOG4CXX_DECLARE_STATIC_TEST_LOGGER
     public:
 
         CodingStyleTest();

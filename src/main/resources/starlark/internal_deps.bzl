@@ -30,12 +30,23 @@ def rules_infra_internal_deps():
     # Override bazel_skylib distribution to fetch sources instead
     # so that the gazelle extension is included
     # see https://github.com/bazelbuild/bazel-skylib/issues/250
+
     http_archive(
         name = "bazel_skylib",
         sha256 = "3b620033ca48fcd6f5ef2ac85e0f6ec5639605fa2f627968490e52fc91a9932f",
         strip_prefix = "bazel-skylib-1.3.0",
         urls = ["https://github.com/bazelbuild/bazel-skylib/archive/refs/tags/1.3.0.tar.gz"],
     )
+
+    ##Add a BUILD file to a directory to mark it as a package. and referenced by '//src/main/resources/starlark:gazelle_bin'
+    # http_archive(
+    #     name = "bazel_skylib",
+    #     sha256 = "f24ab666394232f834f74d19e2ff142b0af17466ea0c69a3f4c276ee75f6efce",
+    #     urls = [
+    #         "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.4.0/bazel-skylib-1.4.0.tar.gz",
+    #         "https://github.com/bazelbuild/bazel-skylib/releases/download/1.4.0/bazel-skylib-1.4.0.tar.gz",
+    #     ],
+    # )
 
     http_archive(
         name = "io_bazel_stardoc",

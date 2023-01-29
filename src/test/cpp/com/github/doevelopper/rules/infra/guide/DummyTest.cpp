@@ -1,4 +1,4 @@
-#include <com/github/doevelopper/rules/infra/DummyTest.hpp>
+#include <com/github/doevelopper/rules/infra/guide/DummyTest.hpp>
 
 using namespace com::github::doevelopper::rules::infra::guide;
 using namespace com::github::doevelopper::rules::infra::guide::test;
@@ -17,12 +17,14 @@ DummyTest::~DummyTest()
 void DummyTest::SetUp()
 {
     // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-    m_targetUnderTest = new OptionDescription();
+    m_targetUnderTest = new Dummy();
 }
 
 void DummyTest::TearDown()
 {
     // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
+    if(m_targetUnderTest)
+        m_targetUnderTest = nullptr;
     delete m_targetUnderTest;
 }
 

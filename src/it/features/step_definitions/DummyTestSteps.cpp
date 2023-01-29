@@ -1,41 +1,41 @@
 
-#include <project/object/model/features/step_definitions/DummyTestSteps.hpp>
+#include <features/step_definitions/DummyTestSteps.hpp>
 
-using namespace rules::sdlc::stdc;
-using namespace rules::sdlc::stdc::features;
-using namespace rules::sdlc::stdc::features::it;
-using cucumber::ScenarioScope;
-using namespace ::testing;
+using namespace com::github::doevelopper::rules::infra::guide;
+using namespace com::github::doevelopper::rules::infra::guide::test;
+using namespace com::github::doevelopper::rules::infra::guide::test::it;
+// using cucumber::ScenarioScope;
+// using namespace ::testing;
 
-log4cxx::LoggerPtr DummyTestSteps::logger =
-    log4cxx::Logger::getLogger(std::string("cfs.platform.it.DummyTestSteps"));
+// log4cxx::LoggerPtr DummyTestSteps::logger =
+//     log4cxx::Logger::getLogger(std::string("cfs.platform.it.DummyTestSteps"));
 
 // @see include/cucumber-cpp/internal/hook/HookMacros.hpp
 
-BEFORE_ALL()
-{
-    LOG4CXX_TRACE(DummyTestSteps::logger, "Before all scenarios" );
-}
+// BEFORE_ALL()
+// {
+//     LOG4CXX_TRACE(DummyTestSteps::logger, "Before all scenarios" );
+// }
 
-AFTER_ALL()
-{
-    LOG4CXX_TRACE(DummyTestSteps::logger, "After all scenarios" );
-}
+// AFTER_ALL()
+// {
+//     LOG4CXX_TRACE(DummyTestSteps::logger, "After all scenarios" );
+// }
 
-AFTER_STEP()
-{
-    LOG4CXX_TRACE(DummyTestSteps::logger, "After each steps" );
-}
+// AFTER_STEP()
+// {
+//     LOG4CXX_TRACE(DummyTestSteps::logger, "After each steps" );
+// }
 
-BEFORE()
-{
-    LOG4CXX_TRACE(DummyTestSteps::logger, "Before any scenario" );
-}
+// BEFORE()
+// {
+//     LOG4CXX_TRACE(DummyTestSteps::logger, "Before any scenario" );
+// }
 
-AFTER()
-{
-    LOG4CXX_TRACE(DummyTestSteps::logger, "After any scenario" );
-}
+// AFTER()
+// {
+//     LOG4CXX_TRACE(DummyTestSteps::logger, "After any scenario" );
+// }
 
 
 

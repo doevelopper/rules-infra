@@ -56,8 +56,15 @@ MAKEFLAGS += --no-print-directory
 
 .PHONY: format
 format:
+	@echo "Formating codes"
 	@find src/main/cpp/com/github/doevelopper/rules/infra/guide  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
 	@find src/test/cpp/com/github/doevelopper/rules/infra/guide  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
+
+.PHONY: tidy
+tidy:## Check with clang-tidy
+
+.PHONY: analyzer
+analyzer:## Check with clang static analyzer'
 
 .PHONY: main-compile
 main-compile: ## Build all main target rules
@@ -77,10 +84,12 @@ test: compile ## Build projects sources and run unit test
 
 .PHONY: clean
 clean: ## Cleaned up the objects and intermediary files
+	@echo "Cleaning up the objects and intermediary files"
 	@bazelisk clean
 
 .PHONY: expunge
 expunge: ## Removes the entire working tree for this bazel instance
+	@echo "Removing the entire working tree for this bazel instance..."
 	@bazelisk clean --expunge --async
 
 .PHONY: help

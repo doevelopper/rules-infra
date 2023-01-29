@@ -17,6 +17,8 @@ licenses(["notice"])  # Apache License
 cc_library(
     name = "com.github.doevelopper.rules.infra.test",
     srcs = [
+      "com/github/doevelopper/rules/infra/guide/DummyTest.cpp",
+      "com/github/doevelopper/rules/infra/guide/DummyTest.hpp",
     ],
 
     copts = [

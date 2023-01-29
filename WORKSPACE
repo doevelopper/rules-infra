@@ -33,7 +33,6 @@ workspace(
     name = "com.github.doevelopper.rules-infra",
 )
 
-
 load(
     "@com.github.doevelopper.rules-infra//src/main/resources/starlark:internal_deps.bzl",
     "rules_infra_internal_deps"
@@ -41,6 +40,8 @@ load(
 
 # Fetch deps needed only locally for development
 rules_infra_internal_deps()
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+rules_foreign_cc_dependencies()
 
 load(
     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl",
@@ -61,11 +62,16 @@ load(
     "@bazel_skylib//:workspace.bzl",
     "bazel_skylib_workspace"
 )
-
 bazel_skylib_workspace()
 
 load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl","qa_repositories")
 qa_repositories()
+
+load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:cc_bdd_deps.bzl","cc_bdd_deps")
+cc_bdd_deps()
+
+load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:bdd_ws_tools.bzl","bdd_ws_tools")
+bdd_ws_tools()
 
 ############################################
 # Gazelle, for generating bzl_library targets

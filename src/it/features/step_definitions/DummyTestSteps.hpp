@@ -9,11 +9,11 @@
 #include <mutex>
 #include <functional>
 
-#include <cucumber-cpp/generic.hpp>
+// #include <cucumber-cpp/generic.hpp>
 #include <gtest/gtest.h>
-#include <rules/sdlc/common/Dummy.hpp>
+#include <com/github/doevelopper/rules/infra/guide/Dummy.hpp>
 
-namespace rules::sdlc::stdc::features::it
+namespace com::github::doevelopper::rules::infra::guide::test::it
 {
     class DummyTestSteps
     {
@@ -30,11 +30,11 @@ namespace rules::sdlc::stdc::features::it
         virtual ~DummyTestSteps();
 
 
-        std::vector<project::object::model::Dummy> dummies{};
+        std::vector<com::github::doevelopper::rules::infra::guide::Dummy> dummies{};
         std::string say_hello_result{};
         void loop(std::mutex & mutex, bool const & running);
         void yield(std::chrono::milliseconds ms);
-        static log4cxx::LoggerPtr logger;
+        // static log4cxx::LoggerPtr logger;
     private:
     };
 
