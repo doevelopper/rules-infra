@@ -94,7 +94,7 @@ gherkin_test = rule(
         ),
         "_cucumber_ruby": attr.label(
             doc = "The path to cucumber ruby",
-            default = Label("@rules_gherkin//:cucumber_ruby"),
+            default = Label("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:cucumber_ruby"),
             allow_single_file = True,
         ),
     },
