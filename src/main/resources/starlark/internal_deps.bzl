@@ -125,6 +125,15 @@ def rules_infra_internal_deps():
         # sha256 = "56d5370eb99559b4c74f334f81bc8a298f728bd16d5a4333c865c2ad10fae3bc",
     )
 
+    http_archive(
+        name = "rules_license",
+        urls = [
+            "https://github.com/bazelbuild/rules_license/releases/download/0.0.4/rules_license-0.0.4.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_license/releases/download/0.0.4/rules_license-0.0.4.tar.gz",
+        ],
+        sha256 = "6157e1e68378532d0241ecd15d3c45f6e5cfd98fc10846045509fb2a7cc9e381",
+    )
+
     # # Register toolchains for tests
     # register_jq_toolchains()
     # register_yq_toolchains()

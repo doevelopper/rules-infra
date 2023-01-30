@@ -53,7 +53,6 @@ endif
 
 MAKEFLAGS += --no-print-directory
 
-
 .PHONY: format
 format:
 	@echo "Formating codes"
@@ -65,6 +64,10 @@ tidy:## Check with clang-tidy
 
 .PHONY: analyzer
 analyzer:## Check with clang static analyzer'
+
+.PHONY: deps
+deps:
+	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS)   @net_zlib_zlib//...
 
 .PHONY: main-compile
 main-compile: ## Build all main target rules

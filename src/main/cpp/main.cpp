@@ -22,5 +22,30 @@ int main(
 
     std::cout << "argv[" << argc << "] == " << static_cast<void*>(argv[argc]) << '\n';
 
+    try
+    {
+        // UnitTestBuilder unit_test;
+        // runStatus = unit_test.run(argc,argv);
+    }
+    catch ( const std::exception & e )
+    {
+        std::cerr << e.what ( ) << std::endl;
+        return ( EXIT_FAILURE );
+    }
+    catch ( ... )
+    {
+        std::cerr << "unknown exception\n";
+        return ( EXIT_FAILURE );
+    }
+
+    if (runStatus != EXIT_SUCCESS)
+    {
+        std::cerr << "FAILED!" << std::endl;
+    }
+    else
+    {
+        std::cout << "Hello, World!" << std::endl;
+    }
+
     return (runStatus == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }

@@ -3,9 +3,28 @@
 # https://clang.llvm.org/extra/clang-tidy/
 # WARNING this is a raw generation, Filter need for later check
 ---
-Checks:          'clang-diagnostic-*,clang-analyzer-*,*'
+# Checks:          'clang-diagnostic-*,clang-analyzer-*,*'
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+    -cppcoreguidelines-pro-bounds-constant-array-index,
+    -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+    -cppcoreguidelines-owning-memory,
+    -cppcoreguidelines-macro-usage,
+    -cppcoreguidelines-avoid-non-const-global-variables,
+    -cppcoreguidelines-pro-type-vararg,
+    -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  google-*,-google-runtime-references,
+  performance-*,
+  portability-*,
+  readability-*,readability-identifier-naming,
+  modernize-*,-modernize-use-trailing-return-type,
+  hicpp-*,-hicpp-vararg,
+  cert-*,-cert-err58-cpp,
+  bugprone-*,
 WarningsAsErrors: ''
-HeaderFilterRegex: ''
+HeaderFilterRegex: 'src/test/cpp'
 AnalyzeTemporaryDtors: false
 FormatStyle:     file
 User:            happyman
@@ -678,4 +697,40 @@ CheckOptions:
     value:           'false'
   - key:             cert-msc32-c.DisallowedSeedTypes
     value:           'time_t,std::time_t'
+
+# CheckOptions:
+#   # Naming Conventions
+#   # for these parameters of the naming convention,
+#   # see https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
+#   - key: readability-identifier-naming.NamespaceCase
+#     value: lower_case
+
+#   - key: readability-identifier-naming.ClassCase
+#     value: lower_case
+#   - key: readability-identifier-naming.StructCase
+#     value: lower_case
+#   - key: readability-identifier-naming.EnumCase
+#     value: lower_case
+
+#   - key: readability-identifier-naming.FunctionCase
+#     value: lower_case
+
+#   - key: readability-identifier-naming.VariableCase
+#     value: lower_case
+#   - key: readability-identifier-naming.ParameterCase
+#     value: lower_case
+#   - key: readability-identifier-naming.EnumConstantCase
+#     value: lower_case
+#   - key: readability-identifier-naming.MemberCase
+#     value: lower_case
+#   - key: readability-identifier-naming.PrivateMemberSuffix
+#     value: _
+#   - key: readability-identifier-naming.ProtectedMemberSuffix
+#     value: _
+
+#   - key: readability-identifier-naming.TypeTemplateParameterCase
+#     value: CamelCase
+#   - key: readability-identifier-naming.ValueTemplateParameterCase
+#     value: CamelCase
+
 ...

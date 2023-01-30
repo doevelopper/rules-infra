@@ -37,57 +37,66 @@ load(
     "@com.github.doevelopper.rules-infra//src/main/resources/starlark:internal_deps.bzl",
     "rules_infra_internal_deps"
 )
-
-# Fetch deps needed only locally for development
+# # Fetch deps needed only locally for development
 rules_infra_internal_deps()
-load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
-rules_foreign_cc_dependencies()
 
 load(
-    "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl",
-    "rules_infra_register_toolchains",
-    "rules_infra_register_dependencies"
+    "@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software:of_the_shell_repositories.bzl",
+    "of_the_shell_repositories"
 )
 
-# Fetch dependencies which users need as well
-rules_infra_register_dependencies()
+of_the_shell_repositories()
 
-rules_infra_register_toolchains(
-    name = "rules_infra_14",
-    rules_infra_version = "1.14.2",
-)
 
-# For running our own unit tests
-load(
-    "@bazel_skylib//:workspace.bzl",
-    "bazel_skylib_workspace"
-)
-bazel_skylib_workspace()
 
-load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl","qa_repositories")
-qa_repositories()
+# load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+# rules_foreign_cc_dependencies()
 
-load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:cc_bdd_deps.bzl","cc_bdd_deps")
-cc_bdd_deps()
+# load(
+#     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl",
+#     "rules_infra_register_toolchains",
+#     "rules_infra_register_dependencies"
+# )
 
-load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:bdd_ws_tools.bzl","bdd_ws_tools")
-bdd_ws_tools()
+# # Fetch dependencies which users need as well
+# rules_infra_register_dependencies()
 
-############################################
-# Gazelle, for generating bzl_library targets
-load(
-    "@io_bazel_rules_go//go:deps.bzl",
-    "go_register_toolchains",
-    "go_rules_dependencies"
-)
+# rules_infra_register_toolchains(
+#     name = "rules_infra_14",
+#     rules_infra_version = "1.14.2",
+# )
 
-load(
-    "@bazel_gazelle//:deps.bzl",
-    "gazelle_dependencies"
-)
+# # For running our own unit tests
+# load(
+#     "@bazel_skylib//:workspace.bzl",
+#     "bazel_skylib_workspace"
+# )
+# bazel_skylib_workspace()
 
-go_rules_dependencies()
+# load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl","qa_repositories")
+# qa_repositories()
 
-go_register_toolchains(version = "1.19.3")
+# load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:cc_bdd_deps.bzl","cc_bdd_deps")
+# cc_bdd_deps()
 
-gazelle_dependencies()
+# load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:bdd_ws_tools.bzl","bdd_ws_tools")
+# bdd_ws_tools()
+
+# ############################################
+# # Gazelle, for generating bzl_library targets
+# load(
+#     "@io_bazel_rules_go//go:deps.bzl",
+#     "go_register_toolchains",
+#     "go_rules_dependencies"
+# )
+
+# load(
+#     "@bazel_gazelle//:deps.bzl",
+#     "gazelle_dependencies"
+# )
+
+# go_rules_dependencies()
+
+# go_register_toolchains(version = "1.19.3")
+
+# gazelle_dependencies()
