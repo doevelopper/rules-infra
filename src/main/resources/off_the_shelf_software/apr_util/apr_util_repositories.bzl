@@ -6,8 +6,8 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 def apr_util_repositories():
     maybe(
         http_archive,
-        name = "apr_util",
-        build_file = Label("//apr_util:BUILD.apr_util.bazel"),
+        name = "org_apache_apr_util",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/apr_util/apr-utils.BUILD"),
         sha256 = "b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459",
         strip_prefix = "apr-util-1.6.1",
         urls = [
@@ -18,8 +18,8 @@ def apr_util_repositories():
 
     maybe(
         http_archive,
-        name = "expat",
-        build_file = Label("//apr_util:BUILD.expat.bazel"),
+        name = "com_github_expat",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/apr_util:BUILD.expat.bazel"),
         sha256 = "a00ae8a6b96b63a3910ddc1100b1a7ef50dc26dceb65ced18ded31ab392f132b",
         strip_prefix = "expat-2.4.1",
         urls = [
