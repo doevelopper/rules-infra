@@ -6,35 +6,59 @@ load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 def openssl_repositories():
     maybe(
         http_archive,
-        name = "openssl",
-        build_file = Label("//openssl:BUILD.openssl.bazel"),
-        sha256 = "9384a2b0570dd80358841464677115df785edb941c71211f75076d72fe6b438f",
-        strip_prefix = "openssl-1.1.1o",
+        name = "com_github_openssl_openssl",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.openssl.bazel"),
+        sha256 = "c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa",
+        strip_prefix = "openssl-1.1.1s",
         urls = [
-            "https://mirror.bazel.build/www.openssl.org/source/openssl-1.1.1o.tar.gz",
-            "https://www.openssl.org/source/openssl-1.1.1o.tar.gz",
-            "https://github.com/openssl/openssl/archive/OpenSSL_1_1_1o.tar.gz",
+            "https://mirror.bazel.build/www.openssl.org/source/openssl-1.1.1s.tar.gz",
+            "https://www.openssl.org/source/openssl-1.1.1s.tar.gz",
+            "https://github.com/openssl/openssl/archive/OpenSSL_1_1_1s.tar.gz",
         ],
     )
 
     maybe(
         http_archive,
-        name = "nasm",
-        build_file = Label("//openssl:BUILD.nasm.bazel"),
-        sha256 = "f5c93c146f52b4f1664fa3ce6579f961a910e869ab0dae431bd871bdd2584ef2",
-        strip_prefix = "nasm-2.15.05",
+        name = "com_github_openssl_openssl_third",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.openssl3.bazel"),
+        # sha256 = "c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa",
+        strip_prefix = "openssl-openssl-3.0.7",
         urls = [
-            "https://mirror.bazel.build/www.nasm.us/pub/nasm/releasebuilds/2.15.05/win64/nasm-2.15.05-win64.zip",
-            "https://www.nasm.us/pub/nasm/releasebuilds/2.15.05/win64/nasm-2.15.05-win64.zip",
+            "https://github.com/openssl/openssl/archive/refs/tags/openssl-3.0.7.tar.gz",
+            "https://www.openssl.org/source/openssl-3.0.7.tar.gz",
+            "https://github.com/openssl/openssl/releases/download/openssl-3.0.7/openssl-3.0.7.tar.gz",
+        ],
+    )
+
+    maybe(
+        http_archive,
+        name = "us_nasm_nasm",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.nasm.bazel"),
+        sha256 = "c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558",
+        strip_prefix = "nasm-2.16.01",
+        urls = [
+            "https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/nasm-2.16.01.tar.xz",
+            "https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/nasm-2.16.01.tar.xz",
         ],
     )
 
     maybe(
         http_archive,
         name = "rules_perl",
-        sha256 = "765e6a282cc38b197a6408c625bd3fc28f3f2d44353fb4615490a6eb0b8f420c",
-        strip_prefix = "rules_perl-e3ed0f1727d15db6c5ff84f64454b9a4926cc591",
+        sha256 = "391edb08802860ba733d402c6376cfe1002b598b90d2240d9d302ecce2289a64",
+        strip_prefix = "rules_perl-7f10dada09fcba1dc79a6a91da2facc25e72bd7d",
         urls = [
-            "https://github.com/bazelbuild/rules_perl/archive/e3ed0f1727d15db6c5ff84f64454b9a4926cc591.tar.gz",
+            "https://github.com/bazelbuild/rules_perl/archive/7f10dada09fcba1dc79a6a91da2facc25e72bd7d.tar.gz",
+        ],
+    )
+
+    maybe(
+        http_archive,
+        name = "perl",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.perl.bazel"),
+        sha256 = "aeb973da474f14210d3e1a1f942dcf779e2ae7e71e4c535e6c53ebabe632cc98",
+        urls = [
+            "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+            "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
         ],
     )

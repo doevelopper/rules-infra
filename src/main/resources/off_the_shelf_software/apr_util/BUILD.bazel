@@ -10,7 +10,7 @@
 # build_test(
 #     name = "apr_util_build_test",
 #     targets = [
-#         "@apr_util//:apr_util",
+#         "@org_apache_apr_util//:apr_util",
 #     ],
 #     visibility = ["//:__pkg__"],
 # )

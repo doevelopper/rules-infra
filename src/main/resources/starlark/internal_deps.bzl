@@ -79,11 +79,20 @@ def rules_infra_internal_deps():
         ],
     )
 
+    # http_archive(
+    #     name = "rules_foreign_cc",
+    #     sha256 = "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
+    #     strip_prefix = "rules_foreign_cc-0.9.0",
+    #     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
+    # )
+   # this version contains procedure  runnable_binary  need to build openssl
     http_archive(
         name = "rules_foreign_cc",
-        sha256 = "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
-        strip_prefix = "rules_foreign_cc-0.9.0",
-        url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
+        sha256 = "ff5b7cdb650377b5baf358e38abf7d849395add601116393b16e722ffb33eb4b",
+        strip_prefix = "rules_foreign_cc-34fa6a796d6933cc0529950fee313579cd0d8c51",
+        urls = [
+            "https://github.com/bazelbuild/rules_foreign_cc/archive/34fa6a796d6933cc0529950fee313579cd0d8c51.tar.gz",
+        ],
     )
 
     http_archive(
@@ -133,6 +142,15 @@ def rules_infra_internal_deps():
         ],
         sha256 = "6157e1e68378532d0241ecd15d3c45f6e5cfd98fc10846045509fb2a7cc9e381",
     )
+
+    # http_archive(
+    #     name = "rules_perl",
+    #     sha256 = "391edb08802860ba733d402c6376cfe1002b598b90d2240d9d302ecce2289a64",
+    #     strip_prefix = "rules_perl-7f10dada09fcba1dc79a6a91da2facc25e72bd7d",
+    #     urls = [
+    #         "https://github.com/bazelbuild/rules_perl/archive/7f10dada09fcba1dc79a6a91da2facc25e72bd7d.tar.gz",
+    #     ],
+    # )
 
     # # Register toolchains for tests
     # register_jq_toolchains()

@@ -41,6 +41,13 @@ load(
 rules_infra_internal_deps()
 
 load(
+    "@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software:soup.bzl",
+    "soup_dependencies"
+)
+
+soup_dependencies()
+
+load(
     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl",
     "qa_repositories"
 )
@@ -60,6 +67,14 @@ load(
 )
 
 rules_foreign_cc_dependencies()
+
+load(
+    "@rules_license//:deps.bzl",
+    "rules_license_dependencies"
+)
+
+rules_license_dependencies()
+
 
 # load(
 #     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl",

@@ -17,6 +17,14 @@ load(
     "pkg_zip"
 )
 
+load(
+    "@rules_pkg//:mappings.bzl",
+    "pkg_attributes",
+    "pkg_filegroup",
+    "pkg_files",
+    "strip_prefix",
+)
+
 COMMON_DEFINES = [
     "LOG_LEVEL=1",
     "DLOG4CXX_STATIC",
@@ -102,6 +110,7 @@ cc_library(
     }),
 
     deps = [
+
     ] + select({
         "@bazel_tools//src/conditions:windows": [],
         "@bazel_tools//src/conditions:linux_x86_64": [],

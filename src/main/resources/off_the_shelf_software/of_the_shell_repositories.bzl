@@ -10,6 +10,8 @@ load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_soft
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/zlib:zlib_repositories.bzl", "zlib_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/xerces:xerces_repositories.bzl", "xerces_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/rapidjson:rapidjson_repositories.bzl","rapidjson_repositories")
+load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:openssl_repositories.bzl","openssl_repositories")
+# load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:openssl_setup.bzl","openssl_setup")
 # load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/ace_tao:ace_tao_repositories.bzl", "ace_tao_repositories")
 # load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openDDS:opendds_repositories.bzl", "opendds_repositories")
 # buildifier: disable=unnamed-macro
@@ -22,5 +24,7 @@ def of_the_shell_repositories():
   zlib_repositories()
   xerces_repositories()
   rapidjson_repositories()
+  # openssl_setup()
+  # openssl_repositories()
   # ace_tao_repositories()
   # opendds_repositories()

@@ -1,3 +1,8 @@
+
+load("@rules_license//rules:license.bzl", "license")
+# load("@rules_license//rules:package_info.bzl", "package_info")
+load("@rules_license//:version.bzl", "version")
+
 exports_files([
     "CPPLINT.cfg",
     "tox.ini",

@@ -319,7 +319,7 @@ def _git_repo_deps(excludes = []):
 #         if name not in ignores:
 #             maybe(native.maven_jar, name, **dependencies_jar_repositories[name])
 
-def rules_sdlc_dependencies():
+def soup_dependencies():
     _archives_deps()
     _git_repo_deps()
     # _java_dependencies()

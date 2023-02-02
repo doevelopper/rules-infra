@@ -7,7 +7,7 @@ def apr_util_repositories():
     maybe(
         http_archive,
         name = "org_apache_apr_util",
-        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/apr_util/apr-utils.BUILD"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/apr_util:BUILD.apr_util.bazel"),
         sha256 = "b65e40713da57d004123b6319828be7f1273fbc6490e145874ee1177e112c459",
         strip_prefix = "apr-util-1.6.1",
         urls = [

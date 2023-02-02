@@ -12,20 +12,20 @@
 #     name = "openssl_test",
 #     srcs = ["openssl_test.cc"],
 #     linkopts = select({
-#         "@openssl//:msvc_compiler": [
+#         "@com_github_openssl_openssl//:msvc_compiler": [
 #             "advapi32.lib",
 #             "user32.lib",
 #         ],
 #         "//conditions:default": [],
 #     }),
-#     deps = ["@openssl"],
+#     deps = ["@com_github_openssl_openssl"],
 # )
 
 # build_test(
 #     name = "build_test",
 #     targets = [
-#         "@openssl//:openssl",
-#         "@openssl//:runnable_openssl",
+#         "@com_github_openssl_openssl//:openssl",
+#         "@com_github_openssl_openssl//:runnable_openssl",
 #     ],
 #     visibility = ["//:__pkg__"],
 # )
@@ -33,9 +33,9 @@
 # sh_test(
 #     name = "openssl_launch_test",
 #     srcs = ["openssl_test.sh"],
-#     data = ["@openssl//:runnable_openssl"],
+#     data = ["@com_github_openssl_openssl//:runnable_openssl"],
 #     env = {
-#         "OPENSSL": "$(rootpath @openssl//:runnable_openssl)",
+#         "OPENSSL": "$(rootpath @com_github_openssl_openssl//:runnable_openssl)",
 #     },
 # )
 
