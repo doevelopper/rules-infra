@@ -21,6 +21,18 @@
     We use the same flags as absl, plus turn some warnings into errors.
 """
 
+NIX_DEBUGGING = [
+    "-g",
+]
+
+# Standard compiler flags to reduce output binary size.
+REDUCED_SIZE_COPTS = [
+    "-fno-common",
+    "-fno-exceptions",
+    "-ffunction-sections",
+    "-fdata-sections",
+]
+
 CLANG_CL_FLAGS = [
     "/W3",
     "/DNOMINMAX",

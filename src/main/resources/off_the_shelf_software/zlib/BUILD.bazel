@@ -7,15 +7,15 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
-# cc_binary(
-#     name = "zlib_usage_example",
-#     srcs = ["zlib-example.cpp"],
-#     deps = ["@net_zlib"],
-# )
+cc_binary(
+    name = "zlib_usage_example",
+    srcs = ["zlib-example.cpp"],
+    deps = ["@net_zlib_zlib"],
+)
 
-# sh_test(
-#     name = "test_zlib",
-#     srcs = ["test_zlib.sh"],
-#     data = [":zlib_usage_example"],
-#     visibility = ["//:__pkg__"],
-# )
+sh_test(
+    name = "test_zlib",
+    srcs = ["test_zlib.sh"],
+    data = [":zlib_usage_example"],
+    visibility = ["//:__pkg__"],
+)

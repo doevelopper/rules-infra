@@ -23,7 +23,7 @@ configure_make(
     out_static_libs = ["libaprutil-1.a"],
     visibility = ["//visibility:public"],
     deps = [
-        "@org_apache_apr",
-        "@com_github_expat",
+        "@org_apache_apr//:apr",
+        "@com_github_expat//:expat",
     ],
 )

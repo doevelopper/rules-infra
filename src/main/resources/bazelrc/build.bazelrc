@@ -17,6 +17,13 @@ build:gnu-gcc --client_env=CXX=g++
 
 ###############################                LLVM Compiler                  ###############################
 
+# Flags for libc++
+build:libc++ --action_env=CXXFLAGS=-stdlib=libc++
+build:libc++ --action_env=LDFLAGS=-stdlib=libc++
+build:libc++ --action_env=BAZEL_CXXOPTS=-stdlib=libc++
+build:libc++ --action_env=BAZEL_LINKLIBS=-lc++abi:-lc++
+build:libc++ --define force_libcpp=enabled
+
 # TODO(leary): 2020-09-09 Make it possible to enable this option.
 # Currently m4 doesn't seem to work as a dependency.
 # build --crosstool_top=@llvm_toolchain_llvm//:toolchain
@@ -25,7 +32,9 @@ build:llvm --action_env=CC=clang
 build:llvm --action_env=CXX=clang++
 build:llvm --client_env=CC=clang
 build:llvm --client_env=CXX=clang++
-
+build:llvm --action_env=BAZEL_COMPILER=clang
+build:llvm --incompatible_linkopts_to_linklibs=false
+build:llvm --config=libc++
 ###############################                Linux build quirks                  ###############################
 
 build:linux --action_env=PYTHON_BIN_PATH=python3
@@ -119,3 +128,14 @@ build:linux --cxxopt="-fdiagnostics-color=always"
 
 # build:dbg --compilation_mode=dbg
 # build:dbg --copt=-Werror=return-stack-address
+
+# # For coverage builds, don't include tests tagged with "nocoverage"
+# coverage --config=coverage --test_tag_filters=-nocoverage
+# build:coverage --cxxopt=-DNDEBUG
+# build:coverage --action_env=BAZEL_USE_LLVM_NATIVE_COVERAGE=1
+# build:coverage --action_env=GCOV=llvm-profdata
+# build:coverage --action_env=BAZEL_LLVM_COV=llvm-cov
+# build:coverage --experimental_generate_llvm_lcov
+# build:coverage --collect_code_coverage
+# build:coverage --combined_report=lcov
+# build:coverage --instrumentation_filter="//src[:/]"

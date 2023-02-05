@@ -23,29 +23,29 @@
 #    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-# load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
-# load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 
-# package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:public"])
 
-# gazelle_binary(
-#     name = "gazelle_bin",
-#     languages = ["@bazel_skylib//gazelle/bzl"],
-# )
+gazelle_binary(
+    name = "gazelle_bin",
+    languages = ["@bazel_skylib//gazelle/bzl"],
+)
 
-# gazelle(
-#     name = "gazelle",
-#     gazelle = "gazelle_bin",
-# )
+gazelle(
+    name = "gazelle",
+    gazelle = "gazelle_bin",
+)
 
-# bzl_library(
-#     name = "internal_deps",
-#     srcs = [
-#         ":internal_deps.bzl",
-#     ],
-#     visibility = ["//visibility:public"],
-#     deps = [
-#         "@bazel_tools//tools/build_defs/repo:http.bzl",
-#         "@bazel_tools//tools/build_defs/repo:utils.bzl",
-#     ],
-# )
+bzl_library(
+    name = "internal_deps",
+    srcs = [
+        ":internal_deps.bzl",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "@bazel_tools//tools/build_defs/repo:utils.bzl",
+    ],
+)

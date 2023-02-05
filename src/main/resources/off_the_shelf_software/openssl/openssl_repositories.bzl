@@ -62,3 +62,14 @@ def openssl_repositories():
             "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
         ],
     )
+
+    # maybe(
+    #     http_archive,
+    #     name = "com_google_fuzztest",
+    #     # build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.perl.bazel"),
+    #     sha256 = "aeb973da474f14210d3e1a1f942dcf779e2ae7e71e4c535e6c53ebabe632cc98",
+    #     urls = [
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+    #     ],
+    # )

@@ -11,18 +11,18 @@ filegroup(
     ),
 )
 
-# cmake(
-#     name = "net_zlib",
-# #     generate_args = select({
-# #         "@bazel_tools//src/conditions:windows": ["-GNinja"],
-# #         "//conditions:default": [],
-# #     }),
-#     lib_source = ":all_srcs",
-# #     out_static_libs = select({
-# #         "@bazel_tools//src/conditions:windows": ["zlibstatic.lib"],
-# #         "//conditions:default": ["libz.a"],
-# #     }),
-# )
+cmake(
+    name = "net_zlib_zlib",
+    generate_args = select({
+        "@bazel_tools//src/conditions:windows": ["-GNinja"],
+        "//conditions:default": [],
+    }),
+    lib_source = ":all_srcs",
+    out_static_libs = select({
+        "@bazel_tools//src/conditions:windows": ["zlibstatic.lib"],
+        "//conditions:default": ["libz.a"],
+    }),
+)
 
 # configure_make(
 #     name = "net_zlib",

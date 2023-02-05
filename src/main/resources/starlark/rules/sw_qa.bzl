@@ -31,14 +31,15 @@ def qa_repositories():
         ],
     )
 
+
+    # Version as of 2021-12-07.
+    googletest_ver = "d9251171f5a42eaf993395e7ef127546af5814b0"
     _maybe(
         http_archive,
         name = "com_google_googletest",
-        # strip_prefix = "googletest-master",
-        strip_prefix = "googletest-d9251171f5a42eaf993395e7ef127546af5814b0",
+        strip_prefix = "googletest-%s" % googletest_ver,
         # sha256 = "12ef65654dc01ab40f6f33f9d02c04f2097d2cd9fbe48dc6001b29543583b0ad",
-        # urls = ["https://github.com/google/googletest/archive/master.zip"],
-        urls = ["https://github.com/google/googletest/archive/d9251171f5a42eaf993395e7ef127546af5814b0.zip"],
+        url = "https://github.com/google/googletest/archive/%s.tar.gz" % googletest_ver,
     )
 
     # _maybe(
@@ -51,20 +52,55 @@ def qa_repositories():
     #     ],
     # )
 
+    # benchmark_ver="f59d021ebc9631a4eee574192d09ace8be666a85"
 
-    #  Third party gherkin need this goal name
+    # _maybe(
+    #     http_archive,
+    #     name = "com_github_google_benchmark",
+    #     # sha256 = "8b66a7a22ddb7ee7cdb3eae4e9f1d93dab062177eb87dcc87458e54d696434b8",
+    #     strip_prefix = "benchmark-%s" % benchmark_ver,
+    #     # url = "https://github.com/google/benchmark/archive/refs/%s/%s.tar.gz" % (abseil_ref, benchmark_ver),
+    #     url = "https://github.com/google/benchmark/archive/%s.tar.gz" % benchmark_ver,
+    # )
+
+    re2_ref = "tags"
+    re2_ver = "2023-02-01"
     _maybe(
         http_archive,
-        name = "gtest",
-        strip_prefix = "googletest-master",
-        # sha256 = "02e0c8a1863faa2032e72362a807414b75cf47d1c36b6d53969c14cb4c07ee46",
-        urls = ["https://github.com/google/googletest/archive/master.zip"],
+        name = "com_googlesource_code_re2",
+        sha256 = "cbce8b7803e856827201a132862e41af386e7afd9cc6d9a9bc7a4fa4d8ddbdde",
+        strip_prefix = "re2-%s" % re2_ver,
+        url = "https://github.com/google/re2/archive/refs/%s/%s.tar.gz" % (re2_ref, re2_ver),
     )
+
+    #abseil_ref = "tags"
+    #abseil_ver = "20220623.0"
+
+    # Use these values to get the tip of the master branch:
+    # abseil_ref = "heads"
+    # abseil_ver = "master"
+    abseil_ver="3020b58f0d987073b8adab204426f82c3f60b283"
+
     _maybe(
         http_archive,
-        name = "com_github_google_benchmark",
-        strip_prefix = "benchmark-master",
-        urls = ["https://github.com/google/benchmark/archive/master.zip"],
+        name = "com_google_absl",
+        sha256 = "8b66a7a22ddb7ee7cdb3eae4e9f1d93dab062177eb87dcc87458e54d696434b8",
+        strip_prefix = "abseil-cpp-%s" % abseil_ver,
+        # url = "https://github.com/abseil/abseil-cpp/archive/refs/%s/%s.tar.gz" % (abseil_ref, abseil_ver),
+        url = "https://github.com/abseil/abseil-cpp/archive/%s.tar.gz" % abseil_ver,
+    )
+
+    fuzztest_ver="f68e2e128c0411b9edba15392fc458e44487a6d7"
+    # fuzztest_ref = "heads"
+    # fuzztest_ver = "main"
+    _maybe(
+        http_archive,
+        name = "com_google_fuzztest",
+        sha256 = "42cbd9b400bbd5867c57b1a52c5e68a0540fc46f90ac7b03923abd6f2281a6ba",
+        strip_prefix = "fuzztest-%s" % fuzztest_ver,
+        # url = "https://github.com/google/fuzztest/archive/refs/%s/%s.tar.gz" % (fuzztest_ref, fuzztest_ver),
+        url = "https://github.com/google/fuzztest/archive/%s.tar.gz" % fuzztest_ver,
+
     )
 
     # _maybe(
@@ -92,25 +128,17 @@ def qa_repositories():
     #     # shallow_since = "1610936570 +0800",
     # )
 
-    # _maybe(
-    #     http_archive,
-    #     name = "com_github_google_benchmark",
-    #     sha256 = "3d489382142d9449798d255d43acce7d8c7b603525b2c15c7eb953d75036a783",
-    #     strip_prefix = "benchmark-3d1c2677686718d906f28c1d4da001c42666e6d2",
-    #     urls = [
-    #         # Use the same URL twice to trick bazel into re-trying if connection fails
-    #         "https://github.com/google/benchmark/archive/3d1c2677686718d906f28c1d4da001c42666e6d2.zip",
-    #         "https://github.com/google/benchmark/archive/3d1c2677686718d906f28c1d4da001c42666e6d2.zip"
-    #     ],
-    # )
-
-    # _maybe(
-    #     git_repository,
-    #     commit = "rules_license",
-    #     strip_prefix = "4a20d4e66ffefd3c0db5b72f7a7a5ea69c9d6806",
-    #     remote = ""https://github.com/bazelbuild/rules_license.git",
-    #     shallow_since = "",
-    # )
+    _maybe(
+        http_archive,
+        name = "com_github_google_benchmark",
+        sha256 = "3d489382142d9449798d255d43acce7d8c7b603525b2c15c7eb953d75036a783",
+        strip_prefix = "benchmark-3d1c2677686718d906f28c1d4da001c42666e6d2",
+        urls = [
+            # Use the same URL twice to trick bazel into re-trying if connection fails
+            "https://github.com/google/benchmark/archive/3d1c2677686718d906f28c1d4da001c42666e6d2.zip",
+            "https://github.com/google/benchmark/archive/3d1c2677686718d906f28c1d4da001c42666e6d2.zip"
+        ],
+    )
 
 def _maybe(repo_rule, name, **kwargs):
     """Declares an external repository if it hasn't been declared already."""

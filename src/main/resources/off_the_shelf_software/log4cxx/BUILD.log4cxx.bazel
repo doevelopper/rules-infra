@@ -1,5 +1,5 @@
-load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
-
+# load("@rules_foreign_cc//foreign_cc:defs.bzl", "configure_make")
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
 filegroup(
     name = "all_srcs",
     srcs = glob(
@@ -8,27 +8,81 @@ filegroup(
     ),
 )
 
-configure_make(
+# configure_make(
+#     name = "log4cxx",
+#     configure_options = [
+#         "--disable-shared",
+#         "--with-apr=$EXT_BUILD_DEPS/apr",
+#         "--with-apr-util=$EXT_BUILD_DEPS/apr_util",
+#     ],
+#     env = select({
+#         "@platforms//os:macos": {
+#             "AR": "",
+#             "CXXFLAGS": "-Wno-c++11-narrowing",
+#         },
+#         "//conditions:default": {
+#             "CXXFLAGS": "-Wno-narrowing",
+#         },
+#     }),
+#     lib_source = ":all_srcs",
+#     out_static_libs = ["liblog4cxx.a"],
+#     visibility = ["//visibility:public"],
+#     deps = [
+#         "@org_apache_apr//:apr",
+#         "@org_apache_apr_util//:apr_util",
+#     ],
+# )
+
+cmake(
     name = "log4cxx",
-    configure_options = [
-        "--disable-shared",
-        "--with-apr=$EXT_BUILD_DEPS/apr",
-        "--with-apr-util=$EXT_BUILD_DEPS/apr_util",
-    ],
-    env = select({
-        "@platforms//os:macos": {
-            "AR": "",
-            "CXXFLAGS": "-Wno-c++11-narrowing",
-        },
-        "//conditions:default": {
-            "CXXFLAGS": "-Wno-narrowing",
-        },
+    cache_entries = {
+        "CMAKE_C_FLAGS": "-fPIC",
+        "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$;$$EXT_BUILD_DEPS$$/apr;$$EXT_BUILD_DEPS$$/expat/;$$EXT_BUILD_DEPS$$/apr_util;$$EXT_BUILD_DEPS$$/openssl",
+    },
+
+    generate_args = [
+        "-DAPU_STATIC=YES",
+        "-DAPR_STATIC=YES",
+        "-DPREFER_BOOST=OFF",
+        "-DLOG4CXX_UNICHAR=YES",
+        "-DBUILD_TESTING=OFF",
+        "-DLOG4CXX=1",
+        "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
+        "-DLOG4CXX_ABI_CHEC=OFF",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_VERBOSE_MAKEFILE=ON",
+        "-DCMAKE_CXX_STANDARD=17",
+        # "-DCMAKE_PREFIX_PATH=$EXT_BUILD_DEPS/apr_util;$EXT_BUILD_DEPS/apr",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [
+            "-DLOG4CXX_WCHAR_T=YES",
+        ],
+        "@bazel_tools//src/conditions:linux_x86_64": [],
+        "@bazel_tools//src/conditions:darwin": [
+            "-DLOG4CXX_CFSTRING=yes",
+        ],
+        "//conditions:default": [],
     }),
+
+    build_args = [
+        "--verbose",
+        "--clean-first",
+        "--",  # <- Pass remaining options to the native tool.
+        "-j 1",
+    ],
+# lib_source = "@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/log4cxx:all_srcs",
+    # defines = [
+    #   "-DCMAKE_PREFIX_PATH=$EXT_BUILD_DEPS/apr_util;$EXT_BUILD_DEPS/apr",
+    # ],
+    includes = [
+        "$EXT_BUILD_DEPS/apr/include",
+        "$EXT_BUILD_DEPS/apr_util/include",
+    ],
+
     lib_source = ":all_srcs",
-    out_static_libs = ["liblog4cxx.a"],
     visibility = ["//visibility:public"],
     deps = [
-        "@apr",
-        "@apr_util",
+        "@org_apache_apr//:apr",
+        "@org_apache_apr_util//:apr_util",
     ],
 )

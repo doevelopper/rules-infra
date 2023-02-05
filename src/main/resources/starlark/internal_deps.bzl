@@ -120,11 +120,18 @@ def rules_infra_internal_deps():
         sha256 = "5308fc1d8865406a49427ba24a9ab53087f17f5266a7aabbfc28823f3916e1ca",
     )
 
+    # http_archive(
+    #     name = "rules_python",
+    #     sha256 = "48a838a6e1983e4884b26812b2c748a35ad284fd339eb8e2a6f3adf95307fbcd",
+    #     strip_prefix = "rules_python-0.16.2",
+    #     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
+    # )
+
     http_archive(
         name = "rules_python",
-        sha256 = "48a838a6e1983e4884b26812b2c748a35ad284fd339eb8e2a6f3adf95307fbcd",
-        strip_prefix = "rules_python-0.16.2",
-        url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
+        sha256 = "8c15896f6686beb5c631a4459a3aa8392daccaab805ea899c9d14215074b60ef",
+        strip_prefix = "rules_python-0.17.3",
+        url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.17.3.tar.gz",
     )
 
     http_archive(
@@ -141,6 +148,13 @@ def rules_infra_internal_deps():
             "https://mirror.bazel.build/github.com/bazelbuild/rules_license/releases/download/0.0.4/rules_license-0.0.4.tar.gz",
         ],
         sha256 = "6157e1e68378532d0241ecd15d3c45f6e5cfd98fc10846045509fb2a7cc9e381",
+    )
+
+    http_archive(
+        name = "rules_fuzzing",
+        sha256 = "d9002dd3cd6437017f08593124fdd1b13b3473c7b929ceb0e60d317cb9346118",
+        strip_prefix = "rules_fuzzing-0.3.2",
+        urls = ["https://github.com/bazelbuild/rules_fuzzing/archive/v0.3.2.zip"],
     )
 
     # http_archive(

@@ -23,6 +23,7 @@ cc_library(
 
     copts = [
         "-D_REENTRANT",
+        "-DGTEST_REMOVE_LEGACY_TEST_CASEAPI_=1",
     ] + select({
         "@bazel_tools//src/conditions:windows": [],
         "@bazel_tools//src/conditions:linux_x86_64": [
@@ -61,16 +62,86 @@ cc_library(
 
 cc_test(
     name = "com.github.doevelopper.rules.infra.test.bin",
+    size = "small",
     srcs = [
         "main.cpp",
     ],
+
+    copts = [
+        "-D_REENTRANT",
+        "-DGTEST_REMOVE_LEGACY_TEST_CASEAPI_=1",
+        # "-DROOT_DIR=$(workspace)",
+    ] + select({
+        "@bazel_tools//src/conditions:windows": [],
+        "@bazel_tools//src/conditions:linux_x86_64": [
+              "-I/usr/local/include/",
+          ],
+        "@bazel_tools//src/conditions:darwin": [],
+    }),
 #     deps = [
 #         "@com.github.doevelopper.rules-infra//src/test/cpp:com.github.doevelopper.rules.infra.test",
 #     ],
 
-#     # env = [
-#     #     $(location log4cxx) ,
-#     # ],
-
+    # env = [
+    #   "GTEST_INSTALL_FAILURE_SIGNAL_HANDLER:1",
+    #     # $(location log4cxx) ,
+    # ],
+    # env = {"ENVVAR:foo"},
     visibility = ["//visibility:public"],
 )
+
+
+# cc_test(
+#     name = "first_fuzz_test",
+#     srcs = ["first_fuzz_test.cc"],
+#     shard_count = 50,
+#     deps = [
+#         "@com_google_fuzztest//fuzztest",
+#         "@com_google_fuzztest//fuzztest:fuzztest_gtest_main",
+#         "@com_google_googletest//:gtest"
+#     ],
+# )
+
+# Can be run with or without `--config=fuzztest`. When running without, the
+# fuzzing mode tests are skipped.
+# cc_test(
+#     name = "functional_test",
+#     timeout = "long",
+#     srcs = ["functional_test.cc"],
+#     data = [
+#         "@com_google_fuzztest//e2e_tests/testdata:fuzz_tests_for_functional_testing.stripped",
+#         "@com_google_fuzztest//e2e_tests/testdata:fuzz_tests_with_invalid_seeds.stripped",
+#     ],
+#     shard_count = 50,
+#     deps = [
+#         "@com_google_absl//absl/container:flat_hash_map",
+#         "@com_google_absl//absl/strings",
+#         "@com_google_absl//absl/strings:str_format",
+#         "@com_google_absl//absl/time",
+#         "@com_google_fuzztest//fuzztest:io",
+#         "@com_google_fuzztest//fuzztest:logging",
+#         "@com_google_fuzztest//fuzztest:serialization",
+#         "@com_google_fuzztest//fuzztest:subprocess",
+#         "@com_google_fuzztest//fuzztest:type_support",
+#         "@com_google_googletest//:gtest_main",
+#         "@com_googlesource_code_re2//:re2",
+#     ],
+# )
+
+# Must be run with `--config=fuzztest`, as it benchmarks fuzzing mode, which
+# needs coverage instrumentation.
+# cc_binary(
+#     name = "benchmark_test",
+#     testonly = 1,
+#     srcs = ["benchmark_test.cc"],
+#     data = ["@com_google_fuzztest//e2e_tests/testdata:fuzz_tests_for_microbenchmarking.stripped"],
+#     deps = [
+#         "@com_google_absl//absl/flags:flag",
+#         "@com_google_absl//absl/flags:parse",
+#         "@com_google_absl//absl/strings",
+#         "@com_google_absl//absl/strings:str_format",
+#         "@com_google_absl//absl/time",
+#         "@com_google_fuzztest//fuzztest:logging",
+#         "@com_google_fuzztest//fuzztest:subprocess",
+#     ],
+# )

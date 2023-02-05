@@ -11,6 +11,7 @@ load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_soft
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/xerces:xerces_repositories.bzl", "xerces_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/rapidjson:rapidjson_repositories.bzl","rapidjson_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:openssl_repositories.bzl","openssl_repositories")
+load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/log4cxx:log4cxx_repositories.bzl","log4cxx_repositories")
 # load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:openssl_setup.bzl","openssl_setup")
 # load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/ace_tao:ace_tao_repositories.bzl", "ace_tao_repositories")
 # load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openDDS:opendds_repositories.bzl", "opendds_repositories")
@@ -19,11 +20,12 @@ def of_the_shell_repositories():
   """
     Load all repositories needed for the targets of rules_foreign_cc_examples_third_party
   """
+  zlib_repositories()
   apr_repositories()
   apr_util_repositories()
-  zlib_repositories()
-  xerces_repositories()
-  rapidjson_repositories()
+  log4cxx_repositories()
+  # xerces_repositories()
+  # rapidjson_repositories()
   # openssl_setup()
   # openssl_repositories()
   # ace_tao_repositories()

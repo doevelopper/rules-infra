@@ -34,18 +34,16 @@ name: 🐧🐧 Continuous Integration
 # GitHub Actions workflow file
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 
-concurrency:
-    # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
     # group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
     # group: ci-${{ github.event.pull_request.number || github.ref }}
-    #${{ github.workflow }}-${{ github.ref }}
     # group: "workflow = ${{ github.workflow }}, ref = ${{ github.event.ref }}, pr = ${{ github.event.pull_request.id }}"
     # cancel-in-progress: ${{ github.event_name == 'pull_request' || github.repository != 'doevelopper/rules-infra' }}
-    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+    # group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+concurrency:
+    # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
+    group: ci-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
-
-# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -72,52 +70,89 @@ jobs:
   # Insanely complex for how simple this requirement is inspired from
   # https://stackoverflow.com/questions/65384420/how-to-make-a-github-action-matrix-element-conditional
 
-
-  unit-test:
-    name: ${{ github.repository }} Unit tests using ${{ matrix.compiler.name }}
-    needs: []
-    runs-on: ${{ matrix.config.os }}
-    # if: github.event.workflow_run.conclusion != 'skipped'
-    timeout-minutes: 20
+  Build-test-and-package:
+    name: >
+      ${{ github.actor }} Compile, link, test and produce ${{ github.repository }} 's artifacts on ${{ matrix.host_os }} with ${{ matrix.compiler }}.
+    continue-on-error: ${{ matrix.ignore-errors }}
+    timeout-minutes: 10
+    env:
+      CC: ${{matrix.cc}}
+      CXX: ${{matrix.cxx}}
+      LD: ${{matrix.ld}}
     strategy:
-      fail-fast: false
-      # max-parallel: 1
+      fail-fast: false # Keep running other jobs even if one fails
+      bazel_compilation_mode: ["fastbuild", "dbg" , "opt"]
       matrix:
-        bazel: [6.0.0]
-        bazelisk: [1.15.0]
-        # python-version: [3.10]
-        # compilation_mode: [ fastbuild, dbg, opt]
-        # shared: [true, false]
-        folder:
-          - "."
-          - "e2e/workspace"
-        config:
-          - { name: "Ubuntu", os: ubuntu-latest, target: "linux" }
+        path:
+          - check: 'src'
+            exclude: '(hello|world)' # Exclude file paths containing "hello" or "world"
+          - check: 'examples'
+            exclude: ''              # Nothing to exclude
+        include:
+          - host_os: ubuntu-22.04
+            compiler: clang
+            compiler-version: 14
+            ignore-errors: false
+            cc: clang
+            cxx: clang++
+            ld: ld
+            bazelisk: "1.16.0"
+          - host_os: ubuntu-22.04
+            compiler: gcc
+            compiler-version: 12
+            ignore-errors: false
+            cc: gcc
+            cxx: g++
+            ld: ld
+            bazelisk: "1.16.0"
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+        # host_os: [ubuntu-22.04, ubuntu-20.04]
+        # # target_os: [linux, ios, android, windows, arm64v8l]
+        # jdk: [8, 11, 14]
+        # bazelisk: [1.16.0]
+    runs-on: ${{ matrix.host_os }}
+    env:
+      JDK_VERSION:  ${{ matrix.jdk }}
+
+    name: Java ${{ matrix.Java }} sample
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout ${{ github.ref }} ( ${{ github.sha }} )
-        if: ${{ github.event_name != 'pull_request_target' }}
+        # if: ${{ github.event_name != 'pull_request_target' }}
         uses: actions/checkout@v3
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           submodules: 'recursive'
           fetch-depth: 0
 
-      # - name: Set up Python ${{ matrix.python-version }}
-      #   uses: actions/setup-python@v2
-      #   with:
-      #     python-version: ${{ matrix.python-version }}
-      #     architecture: x64
-      #     cache: 'pip'
-      #     cache-dependency-path: '**/dev-requirements'
-      # - name: Install dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     python -m pip install --upgrade setuptools
-      #     python -m pip install -e .[dev]
-      #     python -m pip install tox tox-gh-action pyperf
+      - name: Setup java version ${{ matrix.java }}
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
+
+      - name: Run clang format
+        uses: DoozyX/clang-format-lint-action@v0.14
+          with:
+            source: '.'
+            exclude: './src/main/resources ./src/test/resources'
+            extensions: 'hpp,cpp'
+            clangFormatVersion: 14
+            # style: chromium
+
+      - name: Run clang-format style check for C/C++/Protobuf programs.
+        uses: jidicula/clang-format-action@v4.10.1
+        with:
+          clang-format-version: '14'
+          check-path: ${{ matrix.path['check'] }}
+          exclude-regex: ${{ matrix.path['exclude'] }}
+          fallback-style: 'Mozilla' # optional
 
       - name: setup bazelisk ${{ matrix.bazelisk }}
         uses: bazelbuild/setup-bazelisk@v2
@@ -142,27 +177,81 @@ jobs:
           path: |
             ~/.cache/bazel
             ~/.cache/bazel-repo
+            ~/.cache/pip
+            ~/vcpkg
+            ./build/vcpkg_installed
+            ${{ env.HOME }}/.cache/vcpkg/archives
+            ${{ env.XDG_CACHE_HOME }}/vcpkg/archives
+            ${{ env.LOCALAPPDATA }}\vcpkg\archives
+            ${{ env.APPDATA }}\vcpkg\archives
           key: bazel-cache-${{ runner.os }}-${{ hashFiles('WORKSPACE') }}
           restore-keys: |
             bazel-cache-
             bazel-cache-${{ runner.os }}-
+  # unit-test:
+  #   name: ${{ github.repository }} Unit tests using ${{ matrix.compiler.name }}
+  #   needs: []
+  #   runs-on: ${{ matrix.config.os }}
+  #   # if: github.event.workflow_run.conclusion != 'skipped'
+  #   timeout-minutes: 20
+  #   strategy:
+  #     fail-fast: false
+  #     # max-parallel: 1
+  #     matrix:
+  #       bazel: [6.0.0]
+  #       bazelisk: [1.15.0]
+  #       # python-version: [3.10]
+  #       # compilation_mode: [ fastbuild, dbg, opt]
+  #       # shared: [true, false]
+  #       folder:
+  #         - "."
+  #         - "e2e/workspace"
+  #       config:
+  #         - { name: "Ubuntu", os: ubuntu-latest, target: "linux" }
 
-      - name: Display goals of main and test packages.
-        run: |
-          ls -laFS ${{ github.workspace }}
-          bazelisk build  --config linux --nobuild //...
-          bazelisk query @com.github.doevelopper.rules-infra//...
+  #   # Steps represent a sequence of tasks that will be executed as part of the job
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - name: Checkout ${{ github.ref }} ( ${{ github.sha }} )
+  #       if: ${{ github.event_name != 'pull_request_target' }}
+  #       uses: actions/checkout@v3
+  #       with:
+  #         # Disabling shallow clone is recommended for improving relevancy of reporting
+  #         submodules: 'recursive'
+  #         fetch-depth: 0
 
-      - name: Compile the main source code
-        env:
-          # Bazelisk will download bazel to here, ensure it is cached between runs.
-          XDG_CACHE_HOME: ~/.cache/bazel-repo
-        working-directory: ${{ matrix.folder }}
-        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc build @com.github.doevelopper.rules-infra//...
+  #     # - name: Set up Python ${{ matrix.python-version }}
+  #     #   uses: actions/setup-python@v2
+  #     #   with:
+  #     #     python-version: ${{ matrix.python-version }}
+  #     #     architecture: x64
+  #     #     cache: 'pip'
+  #     #     cache-dependency-path: '**/dev-requirements'
+  #     # - name: Install dependencies
+  #     #   run: |
+  #     #     python -m pip install --upgrade pip
+  #     #     python -m pip install --upgrade setuptools
+  #     #     python -m pip install -e .[dev]
+  #     #     python -m pip install tox tox-gh-action pyperf
 
-      - name: Compile the test source code and rune unit tests
-        env:
-          # Bazelisk will download bazel to here, ensure it is cached between runs.
-          XDG_CACHE_HOME: ~/.cache/bazel-repo
-        working-directory: ${{ matrix.folder }}
-        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test @com.github.doevelopper.rules-infra//...
+
+
+  #     - name: Display goals of main and test packages.
+  #       run: |
+  #         ls -laFS ${{ github.workspace }}
+  #         bazelisk build  --config linux --nobuild //...
+  #         bazelisk query @com.github.doevelopper.rules-infra//...
+
+  #     - name: Compile the main source code
+  #       env:
+  #         # Bazelisk will download bazel to here, ensure it is cached between runs.
+  #         XDG_CACHE_HOME: ~/.cache/bazel-repo
+  #       working-directory: ${{ matrix.folder }}
+  #       run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc build @com.github.doevelopper.rules-infra//...
+
+  #     - name: Compile the test source code and rune unit tests
+  #       env:
+  #         # Bazelisk will download bazel to here, ensure it is cached between runs.
+  #         XDG_CACHE_HOME: ~/.cache/bazel-repo
+  #       working-directory: ${{ matrix.folder }}
+  #       run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test @com.github.doevelopper.rules-infra//...

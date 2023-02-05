@@ -67,7 +67,8 @@ analyzer:## Check with clang static analyzer'
 
 .PHONY: deps
 deps:
-	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS)   @net_zlib_zlib//...
+	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @net_zlib_zlib//...
+	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @com_google_googletest//...
 
 .PHONY: main-compile
 main-compile: ## Build all main target rules
@@ -83,7 +84,11 @@ compile: main-compile test-compile ## Build projects main and test sources
 
 .PHONY: test
 test: compile ## Build projects sources and run unit test
-	@bazelisk test --config linux --config gnu-gcc --define=VERSION=$(RELEASE_LEVEL) @com.github.doevelopper.rules-infra//... --test_output=all
+	@bazelisk test --config linux --config gnu-gcc --define=VERSION=$(RELEASE_LEVEL) @com.github.doevelopper.rules-infra//... --test_output=all --test_output=streamed
+
+.PHONY: run
+run: compile ## Build projects sources and run unit test
+	@bazelisk run --config linux --config gnu-gcc --define=VERSION=$(RELEASE_LEVEL) @com.github.doevelopper.rules-infra//src/main/cpp:com.github.doevelopper.rules.infra.main.bin
 
 .PHONY: clean
 clean: ## Cleaned up the objects and intermediary files
