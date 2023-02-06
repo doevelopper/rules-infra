@@ -22,7 +22,7 @@ def qa_repositories():
     _maybe(
         http_archive,
         name = "cpplint",
-        #build_file = clean_dep("//src/main/resources/bazel/cpplint:cpplint.BUILD"),
+        #build_file = clean_dep("@com.github.doevelopper.rules-infra//src/main/resources/bazel/cpplint:cpplint.BUILD"),
         build_file = "@com.github.doevelopper.rules-sdlc//src/main/resources/starlark/rules/cpplint:cpplint.BUILD",
         # sha256 = "96db293564624543a2fd3b1a0d23f663b8054c79853a5918523655721a9f6b53",
         strip_prefix = "cpplint-{}".format(cpplint_version),
@@ -102,6 +102,17 @@ def qa_repositories():
         url = "https://github.com/google/fuzztest/archive/%s.tar.gz" % fuzztest_ver,
 
     )
+
+    # maybe(
+    #     http_archive,
+    #     name = "com_google_fuzztest",
+    #     # build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.perl.bazel"),
+    #     sha256 = "aeb973da474f14210d3e1a1f942dcf779e2ae7e71e4c535e6c53ebabe632cc98",
+    #     urls = [
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+    #     ],
+    # )
 
     # _maybe(
     #     git_repository,

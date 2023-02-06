@@ -9,14 +9,14 @@ filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"
 config_setting(
     name = "platform_osx",
     constraint_values = [
-        "@bazel_tools//platforms:osx",
+        "@bazel_tools//src/conditions:darwin",
     ],
 )
 
 config_setting(
     name = "platform_linux",
     constraint_values = [
-        "@bazel_tools//platforms:linux",
+        "@bazel_tools//src/conditions:linux",
     ],
 )
 

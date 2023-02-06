@@ -1,5 +1,5 @@
 # buildifier: disable=module-docstring
-# load("//bazel:debug.bzl", "describe")
+# load("@com.github.doevelopper.rules-infra//bazel:debug.bzl", "describe")
 def add_attribute_if_not_present(attrs, attr_name, value):
     attribute = attrs.get(attr_name)
     if attribute:

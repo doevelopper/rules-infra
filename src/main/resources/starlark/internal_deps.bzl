@@ -157,15 +157,41 @@ def rules_infra_internal_deps():
         urls = ["https://github.com/bazelbuild/rules_fuzzing/archive/v0.3.2.zip"],
     )
 
-    # http_archive(
-    #     name = "rules_perl",
-    #     sha256 = "391edb08802860ba733d402c6376cfe1002b598b90d2240d9d302ecce2289a64",
-    #     strip_prefix = "rules_perl-7f10dada09fcba1dc79a6a91da2facc25e72bd7d",
+    http_archive(
+        name = "build_bazel_rules_apple",
+        sha256 = "43737f28a578d8d8d7ab7df2fb80225a6b23b9af9655fcdc66ae38eb2abcf2ed",
+        url = "https://github.com/bazelbuild/rules_apple/releases/download/2.0.0/rules_apple.2.0.0.tar.gz",
+    )
+
+    http_archive(
+        name = "rules_perl",
+        sha256 = "391edb08802860ba733d402c6376cfe1002b598b90d2240d9d302ecce2289a64",
+        strip_prefix = "rules_perl-7f10dada09fcba1dc79a6a91da2facc25e72bd7d",
+        urls = [
+            "https://github.com/bazelbuild/rules_perl/archive/7f10dada09fcba1dc79a6a91da2facc25e72bd7d.tar.gz",
+        ],
+    )
+
+    http_archive(
+        name = "perl",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.perl.bazel"),
+        sha256 = "aeb973da474f14210d3e1a1f942dcf779e2ae7e71e4c535e6c53ebabe632cc98",
+        urls = [
+            "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+            "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+        ],
+    )
+
+    # maybe(
+    #     http_archive,
+    #     name = "perl",
+    #     build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/openssl:BUILD.perl.bazel"),
+    #     sha256 = "aeb973da474f14210d3e1a1f942dcf779e2ae7e71e4c535e6c53ebabe632cc98",
     #     urls = [
-    #         "https://github.com/bazelbuild/rules_perl/archive/7f10dada09fcba1dc79a6a91da2facc25e72bd7d.tar.gz",
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
+    #         "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
     #     ],
     # )
-
     # # Register toolchains for tests
     # register_jq_toolchains()
     # register_yq_toolchains()

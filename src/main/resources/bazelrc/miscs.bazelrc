@@ -25,7 +25,7 @@
 # # only do the cpplint testing and nothing else.
 # # Do bazel test --config=cpplint <target> to enable this configuration.
 # # To enable the lint test, the BUILD *must* load the cpplint.bzl by having
-# # 'load("//tools:cpplint.bzl", "cpplint")' at the beginning and 'cpplint()'
+# # 'load("@com.github.doevelopper.rules-infra//tools:cpplint.bzl", "cpplint")' at the beginning and 'cpplint()'
 # # at the end.
 # # test:cpplint --test_tag_filters=cpplint
 # # test:cpplint --build_tests_only

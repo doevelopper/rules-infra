@@ -8,7 +8,7 @@ def autotools_repositories():
     maybe(
         http_archive,
         name = "m4",
-        build_file = Label("//autotools:BUILD.m4.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/autotools:BUILD.m4.bazel"),
         strip_prefix = "m4-1.4.19",
         urls = [
             "https://mirror.bazel.build/ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz",
@@ -20,7 +20,7 @@ def autotools_repositories():
     maybe(
         http_archive,
         name = "autoconf",
-        build_file = Label("//autotools:BUILD.autoconf.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/autotools:BUILD.autoconf.bazel"),
         strip_prefix = "autoconf-2.71",
         urls = [
             "https://mirror.bazel.build/ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz",
@@ -32,7 +32,7 @@ def autotools_repositories():
     maybe(
         http_archive,
         name = "automake",
-        build_file = Label("//autotools:BUILD.automake.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/autotools:BUILD.automake.bazel"),
         strip_prefix = "automake-1.16.4",
         urls = [
             "https://mirror.bazel.build/ftp.gnu.org/gnu/automake/automake-1.16.4.tar.gz",
@@ -44,7 +44,7 @@ def autotools_repositories():
     maybe(
         http_archive,
         name = "libtool",
-        build_file = Label("//autotools:BUILD.libtool.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/autotools:BUILD.libtool.bazel"),
         strip_prefix = "libtool-2.4.6",
         urls = [
             "https://mirror.bazel.build/ftpmirror.gnu.org/libtool/libtool-2.4.6.tar.gz",

@@ -7,7 +7,7 @@ def libpng_repositories():
     maybe(
         http_archive,
         name = "libpng",
-        build_file = Label("//libpng:BUILD.libpng.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//libpng:BUILD.libpng.bazel"),
         sha256 = "2f1e960d92ce3b3abd03d06dfec9637dfbd22febf107a536b44f7a47c60659f6",
         strip_prefix = "libpng-1.6.34",
         urls = [

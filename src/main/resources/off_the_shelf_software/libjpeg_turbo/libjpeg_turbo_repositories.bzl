@@ -13,5 +13,5 @@ def libjpeg_turbo_repositories():
             "https://mirror.bazel.build/github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.90.tar.gz",
             "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/2.0.90.tar.gz",
         ],
-        build_file = Label("//libjpeg_turbo:BUILD.libjpeg_turbo.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//libjpeg_turbo:BUILD.libjpeg_turbo.bazel"),
     )

@@ -8,7 +8,7 @@ def python_repositories():
     maybe(
         http_archive,
         name = "python3",
-        build_file = Label("//python:BUILD.python3.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//python:BUILD.python3.bazel"),
         strip_prefix = "Python-3.10.1",
         urls = [
             "https://www.python.org/ftp/python/3.10.1/Python-3.10.1.tgz",

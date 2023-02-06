@@ -7,11 +7,11 @@ def gn_repositories():
     maybe(
         new_git_repository,
         name = "gn",
-        build_file = Label("//gn:BUILD.gn.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/gn:BUILD.gn.bazel"),
         commit = "dfcbc6fed0a8352696f92d67ccad54048ad182b3",
         patch_args = [],
         patch_tool = "bash",
-        patches = [Label("//gn:patch.gen_ninja.sh")],
+        patches = [Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/gn:patch.gen_ninja.sh")],
         remote = "https://gn.googlesource.com/gn",
         shallow_since = "1612864120 +0000",
     )

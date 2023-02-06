@@ -14,7 +14,7 @@
 # build_test(
 #     name = "log4cxx_build_test",
 #     targets = [
-#         "@log4cxx//:log4cxx",
+#         "@org_apache_log4cxx//:log4cxx",
 #     ],
 #     visibility = ["//:__pkg__"],
 # )

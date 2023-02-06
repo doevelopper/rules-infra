@@ -89,7 +89,7 @@ configure_make(
     configure_in_place = True,
     configure_options = CONFIGURE_OPTIONS,
     env = select({
-        "@platforms//os:macos": {
+        "@bazel_tools//src/conditions:darwin": {
             "AR": "",
             "PERL": "$$EXT_BUILD_ROOT$$/$(PERL)",
         },
@@ -103,7 +103,7 @@ configure_make(
     # Note that for Linux builds, libssl must come before libcrypto on the linker command-line.
     # As such, libssl must be listed before libcrypto
     out_shared_libs = select({
-        "@platforms//os:macos": [
+        "@bazel_tools//src/conditions:darwin": [
             "libssl.1.1.dylib",
             "libcrypto.1.1.dylib",
         ],

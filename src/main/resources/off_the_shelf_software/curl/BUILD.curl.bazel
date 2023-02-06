@@ -13,7 +13,7 @@ _CACHE_ENTRIES = {
     "BUILD_SHARED_LIBS": "off",
     "CMAKE_BUILD_TYPE": "RELEASE",
     "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$/openssl",
-    "CMAKE_USE_OPENSSL": "on",
+    "CURL_USE_OPENSSL": "on",
     # TODO: ldap should likely be enabled
     "CURL_DISABLE_LDAP": "on",
     "OPENSSL_ROOT_DIR": "$$EXT_BUILD_DEPS$$/openssl",
@@ -31,29 +31,29 @@ _LINUX_CACHE_ENTRIES = dict(_CACHE_ENTRIES.items() + {
 cmake(
     name = "curl",
     cache_entries = select({
-        "@platforms//os:linux": _LINUX_CACHE_ENTRIES,
-        "@platforms//os:macos": _MACOS_CACHE_ENTRIES,
+        "@bazel_tools//src/conditions:linux": _LINUX_CACHE_ENTRIES,
+        "@bazel_tools//src/conditions:darwin": _MACOS_CACHE_ENTRIES,
         "//conditions:default": _CACHE_ENTRIES,
     }),
     generate_args = select({
-        "@platforms//os:windows": ["-GNinja"],
+        "@bazel_tools//src/conditions:windows": ["-GNinja"],
         "//conditions:default": [],
     }),
     generate_crosstool_file = False,
     lib_source = ":all_srcs",
     linkopts = select({
-        "@platforms//os:linux": [
+        "@bazel_tools//src/conditions:linux": [
             "-lpthread",
         ],
         "//conditions:default": [],
     }),
     out_static_libs = select({
-        "@platforms//os:windows": ["libcurl.lib"],
+        "@bazel_tools//src/conditions:windows": ["libcurl.lib"],
         "//conditions:default": ["libcurl.a"],
     }),
     visibility = ["//visibility:public"],
     deps = [
-        "@openssl",
-        "@zlib",
+        "@com_github_openssl_openssl//:openssl",
+        "@net_zlib_zlib//:zlib",
     ],
 )

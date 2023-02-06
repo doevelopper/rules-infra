@@ -337,7 +337,7 @@ def soup_dependencies():
      " " "Dependencies and toolchains required to use rules_proto. " " "
     load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
     load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-    load("//repos/private:dependencies.bzl", "dependencies")
+    load("@com.github.doevelopper.rules-infra//repos/private:dependencies.bzl", "dependencies")
 def rules_sdlc_dependencies():
     for name in dependencies:
         maybe(http_archive, name, **dependencies[name])
