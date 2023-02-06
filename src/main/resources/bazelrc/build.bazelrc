@@ -7,6 +7,7 @@ build --show_timestamps --color=yes
 build --announce_rc
 # # Do not show warnings from external dependencies.
 # build --output_filter="^//"
+# build --copt='-std=c++17' --linkopt='-L/usr/local/lib'
 
 
 ###############################                GCC  Compiler                  ###############################

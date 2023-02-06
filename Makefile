@@ -69,6 +69,7 @@ analyzer:## Check with clang static analyzer'
 deps:
 	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @net_zlib_zlib//...
 	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @com_google_googletest//...
+	@bazelisk build --config linux --config gnu-gcc @org_apache_xerces//:xerces
 
 .PHONY: main-compile
 main-compile: ## Build all main target rules

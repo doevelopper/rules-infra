@@ -57,11 +57,11 @@ cmake(
     }),
 
     out_static_libs = select({
-        "@bazel_tools//platforms:osx": [
+        "@bazel_tools//src/conditions:darwin": [
             "libexpat.a",
         ],
-        # considere using "@platforms//os:windows": or @bazel_tools//platforms:windows or "@bazel_tools//src/conditions:windows":
-        "@platforms//os:windows": [
+
+        "@bazel_tools//src/conditions:windows": [
             "libexpat.lib",
         ],
         "//conditions:default": [

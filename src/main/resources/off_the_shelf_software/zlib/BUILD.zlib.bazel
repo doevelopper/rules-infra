@@ -12,7 +12,7 @@ filegroup(
 )
 
 cmake(
-    name = "net_zlib_zlib",
+    name = "zlib",
     generate_args = select({
         "@bazel_tools//src/conditions:windows": ["-GNinja"],
         "//conditions:default": [],

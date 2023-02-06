@@ -17,10 +17,10 @@ configure_make(
     ],
 
     out_static_libs = select({
-        "@bazel_tools//platforms:osx": [
+        "@bazel_tools//src/conditions:darwin": [
             "libxerces-c.a",
         ],
-        "@bazel_tools//platforms:windows": [
+        "@bazel_tools//src/conditions:windows": [
             "libxerces-c.lib",
         ],
         "//conditions:default": [
@@ -29,15 +29,14 @@ configure_make(
     }),
 
     out_shared_libs = select({
-        "@bazel_tools//platforms:osx": [
+        "@bazel_tools//src/conditions:darwin": [
             "libxerces-c.dylib",
         ],
-        "@bazel_tools//platforms:windows": [
+        "@bazel_tools//src/conditions:windows": [
             "libxerces-c.lib",
         ],
         "//conditions:default": [
             "libxerces-c.so",
         ],
     }),
-
 )

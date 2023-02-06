@@ -10,7 +10,7 @@ exports_files(
 cc_binary(
     name = "zlib_usage_example",
     srcs = ["zlib-example.cpp"],
-    deps = ["@net_zlib_zlib"],
+    deps = ["@net_zlib_zlib//:zlib"],
 )
 
 sh_test(

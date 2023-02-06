@@ -24,6 +24,7 @@ configure_make(
     visibility = ["//visibility:public"],
     deps = [
         "@org_apache_apr//:apr",
-        "@com_github_expat//:expat",
+        # "@com_github_expat//:expat",
+        "@io_github_libexpat//:expat",
     ],
 )
