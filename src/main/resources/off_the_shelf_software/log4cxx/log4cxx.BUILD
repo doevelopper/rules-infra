@@ -22,9 +22,9 @@ cmake(
         "BUILD_TESTING": "OFF",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_VERBOSE_MAKEFILE": "ON",
-        "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$;$$EXT_BUILD_DEPS$$/apr;$$EXT_BUILD_DEPS$$/expat/;$$EXT_BUILD_DEPS$$/aprutil;$$EXT_BUILD_DEPS$$/openssl",
+        "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$;$$EXT_BUILD_DEPS$$/apr;$$EXT_BUILD_DEPS$$/expat/;$$EXT_BUILD_DEPS$$/apr_util;$$EXT_BUILD_DEPS$$/openssl",
         # "LOG4CXX_ABI_CHEC":"OFF",
-        "VERSION": "0.13.0",
+        "VERSION": "1.0.0",
     #     # "CMAKE_CXX_FLAGS": "-m64 -Og",  #-D_GLIBCXX_DEBUG -O0
         "LOG4CXX_WCHAR_T": "YES",
     #     # "LOG4CXX_UNICHAR": "YES", # In static member function 'static bool log4cxx::NDC::pop(std::__cxx11::basic_string<short unsigned int>&)': has no member named 'message'   330 |    Transcoder::encode(stack.top().message, dst);
@@ -113,7 +113,7 @@ cmake(
     deps = [
         "@org_apache_apr//:apr",
         "@com_github_libexpat//:expat",
-        "@org_apache_apr_util//:aprutil",
+        "@org_apache_apr_util//:apr_util",
         "@com_github_openssl//:openssl",
     ],
 )

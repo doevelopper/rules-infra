@@ -7,7 +7,7 @@ def sqlite_repositories():
     maybe(
         http_archive,
         name = "sqlite",
-        build_file = Label("@com.github.doevelopper.rules-infra//sqlite:BUILD.sqlite.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/sqlite:BUILD.sqlite.bazel"),
         sha256 = "f52b72a5c319c3e516ed7a92e123139a6e87af08a2dc43d7757724f6132e6db0",
         strip_prefix = "sqlite-autoconf-3350500",
         urls = [

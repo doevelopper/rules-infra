@@ -139,12 +139,12 @@ jobs:
 
       - name: Run clang format
         uses: DoozyX/clang-format-lint-action@v0.14
-          with:
-            source: '.'
-            exclude: './src/main/resources ./src/test/resources'
-            extensions: 'hpp,cpp'
-            clangFormatVersion: 14
-            # style: chromium
+        with:
+          source: './src/main/cpp'
+          exclude: './src/main/resources ./src/test/resources'
+          extensions: 'hpp,cpp'
+          clangFormatVersion: 14
+          # style: chromium
 
       - name: Run clang-format style check for C/C++/Protobuf programs.
         uses: jidicula/clang-format-action@v4.10.1

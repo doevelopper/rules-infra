@@ -52,6 +52,7 @@ cmake(
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
         "-DCMAKE_VERBOSE_MAKEFILE=ON",
         "-DCMAKE_CXX_STANDARD=17",
+        "-DBUILD_SHARED_LIBS=off",
         # "-DCMAKE_PREFIX_PATH=$EXT_BUILD_DEPS/apr_util;$EXT_BUILD_DEPS/apr",
     ] + select({
         "@bazel_tools//src/conditions:windows": [
@@ -80,6 +81,20 @@ cmake(
     ],
 
     lib_source = ":all_srcs",
+
+    out_static_libs = select({
+        "@bazel_tools//src/conditions:darwin": [
+            "liblog4cxx.a",
+        ],
+
+        "@bazel_tools//src/conditions:windows": [
+            "liblog4cxx.lib",
+        ],
+        "//conditions:default": [
+            "liblog4cxx.a",
+        ],
+    }),
+
     visibility = ["//visibility:public"],
     deps = [
         "@org_apache_apr//:apr",

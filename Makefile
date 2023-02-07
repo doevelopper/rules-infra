@@ -70,6 +70,11 @@ deps:
 	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @net_zlib_zlib//...
 	@bazelisk build --config linux --config gnu-gcc $(BAZEL_BUILD_ARGS) @com_google_googletest//...
 	@bazelisk build --config linux --config gnu-gcc @org_apache_xerces//:xerces
+	@bazelisk build --config linux --config gnu-gcc @com_github_Tencent_rapidjson//:rapidjson
+	@bazelisk build --config linux --config gnu-gcc @org_apache_apr//:apr
+	@bazelisk build --config linux --config gnu-gcc @org_apache_apr_util//:apr_util
+	@bazelisk build --config linux --config gnu-gcc @org_apache_log4cxx//:log4cxx
+
 
 .PHONY: main-compile
 main-compile: ## Build all main target rules

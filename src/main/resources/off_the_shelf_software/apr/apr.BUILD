@@ -15,6 +15,7 @@ CONFIGURE_OPTIONS = [
     "--enable-allocator-guard-pages",
     "--enable-pool-concurrency-check",
     "--enable-other-child",
+    "-fPIC",
 ]
 
 configure_make(
@@ -34,6 +35,7 @@ configure_make(
         ] + CONFIGURE_OPTIONS,
         "@bazel_tools//platforms:linux": [
             # "--prefix=${INSTALLDIR}",
+            "-fPIC",
         ] + CONFIGURE_OPTIONS,
         "//conditions:default": [
             "-fPIC",

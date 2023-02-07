@@ -11,7 +11,7 @@ filegroup(
 configure_make(
     name = "sqlite",
     env = select({
-        "@platforms//os:macos": {"AR": ""},
+        "@bazel_tools//src/conditions:darwin": {"AR": ""},
         "//conditions:default": {},
     }),
     lib_source = ":all_srcs",
