@@ -31,13 +31,8 @@ space_redirects     = true    # like -sr
 indent_style = tab
 indent_size = 8
 
-# C
-[*.{c,h}]
-indent_style = tab
-indent_size = 8
-
 # C++
-[*.{cpp,hpp}]
+[*.{c,h,cpp,hpp}]
 indent_style = space
 indent_size = 4
 

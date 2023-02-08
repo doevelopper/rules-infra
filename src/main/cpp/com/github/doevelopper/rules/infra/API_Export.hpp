@@ -2,9 +2,10 @@
 #define COM_GITHUB_DOEVELOPPER_RULES_INFRA_API_EXPORT_HPP
 
 #include <com/github/doevelopper/rules/infra/CompilerDetection.hpp>
+#include <com/github/doevelopper/rules/infra/Poison.hpp>
 #include <functional>
 
-// #include <rules/sdlc/common/Poison.hpp>
+
 // Generic helper definitions for shared library support
 
 #if defined _WIN32 || defined __CYGWIN__
@@ -64,6 +65,5 @@
 #else
     #define API_EXPORT SYMBOL_IMPORT
 #endif
-
 
 #endif

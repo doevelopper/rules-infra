@@ -67,9 +67,18 @@ DARWIN_LINKOPTS = []
 cc_library(
     # linkshared/linkstatic=True,
     name = "com.github.doevelopper.rules.infra.main",
+    hdrs = [
+        "com/github/doevelopper/rules/infra/API_Export.hpp",
+        "com/github/doevelopper/rules/infra/CompilerDetection.hpp",
+        "com/github/doevelopper/rules/infra/Poison.hpp",
+    ],
     srcs = [
       "com/github/doevelopper/rules/infra/guide/Dummy.cpp",
       "com/github/doevelopper/rules/infra/guide/Dummy.hpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
     ] + COMMON_SRCS + COMMON_HDRS + select({
         "@bazel_tools//src/conditions:windows": WIN32_SRCS + WIN32_HDRS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_SRCS + LINUX_HDRS,

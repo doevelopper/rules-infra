@@ -40,12 +40,15 @@
     }                                                                                                                  \
     while (&x == 0)
 
+/** Useful for Release mode, when some debugging variables are unused */
+#define SDLC_SUPPRESS_WUNUSED(x) DO_ONCE( if (sizeof(x) == 0) throw )
+
 #if defined(__GNUC__)
-#define UNUSED(x) UNUSED_##x __attribute__((unused))
+    #define UNUSED(x) UNUSED_##x __attribute__((unused))
 #elif defined(__LCLINT__)
-#define UNUSED(x) /*@unused@*/ x
+    #define UNUSED(x) /*@unused@*/ x
 #else
-#define UNUSED(x) x
+    #define UNUSED(x) x
 #endif
 
 #define SDLC_FORWARD_DECLARE_CLASS(name)  class name;

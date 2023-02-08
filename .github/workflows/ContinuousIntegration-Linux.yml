@@ -105,16 +105,16 @@ jobs:
             cxx: g++
             ld: ld
             bazelisk: "1.16.0"
-
+          # jdk: [ 17]
         # host_os: [ubuntu-22.04, ubuntu-20.04]
         # # target_os: [linux, ios, android, windows, arm64v8l]
-        # jdk: [8, 11, 14]
+        # jdk: [8, 11, 14, 17]
         # bazelisk: [1.16.0]
     runs-on: ${{ matrix.host_os }}
-    env:
-      JDK_VERSION:  ${{ matrix.jdk }}
+    # env:
+    #   JDK_VERSION:  ${{ matrix.jdk }}
 
-    name: Java ${{ matrix.Java }} sample
+    # name: Java ${{ matrix.Java }} sample
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout ${{ github.ref }} ( ${{ github.sha }} )
@@ -125,11 +125,11 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
 
-      - name: Setup java version ${{ matrix.java }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: ${{ matrix.java }}
+      # - name: Setup java version ${{ matrix.java }}
+      #   uses: actions/setup-java@v3
+      #   with:
+      #     distribution: 'oracle'
+      #     java-version: ${{ matrix.java }}
 
       - name: Set up Clang
         uses: egor-tensin/setup-clang@v1

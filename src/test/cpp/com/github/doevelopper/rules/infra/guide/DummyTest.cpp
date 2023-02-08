@@ -23,7 +23,7 @@ void DummyTest::SetUp()
 void DummyTest::TearDown()
 {
     // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__ );
-    if(m_targetUnderTest)
+    if (m_targetUnderTest)
         m_targetUnderTest = nullptr;
     delete m_targetUnderTest;
 }

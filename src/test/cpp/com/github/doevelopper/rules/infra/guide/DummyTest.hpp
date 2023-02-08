@@ -23,9 +23,10 @@ namespace com::github::doevelopper::rules::infra::guide::test
         void TearDown() override;
 
     protected:
-        com::github::doevelopper::rules::infra::guide::Dummy * m_targetUnderTest;
-    private:
 
+        com::github::doevelopper::rules::infra::guide::Dummy * m_targetUnderTest;
+
+    private:
     };
 }
 

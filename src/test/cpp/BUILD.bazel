@@ -19,6 +19,10 @@ cc_library(
     srcs = [
       "com/github/doevelopper/rules/infra/guide/DummyTest.cpp",
       "com/github/doevelopper/rules/infra/guide/DummyTest.hpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivateTest.cpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivateTest.hpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServiceTest.cpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServiceTest.hpp",
     ],
 
     copts = [
