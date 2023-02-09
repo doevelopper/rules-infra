@@ -23,6 +23,10 @@ cc_library(
       # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivateTest.hpp",
       # "com/github/doevelopper/rules/infra/logging/LoggingServiceTest.cpp",
       # "com/github/doevelopper/rules/infra/logging/LoggingServiceTest.hpp",
+      "com/github/doevelopper/rules/infra/app/ApplicationTest.cpp",
+      "com/github/doevelopper/rules/infra/app/ApplicationTest.hpp",
+      "com/github/doevelopper/rules/infra/semver/VersionTest.cpp",
+      "com/github/doevelopper/rules/infra/semver/VersionTest.hpp",
     ],
 
     copts = [
@@ -82,9 +86,9 @@ cc_test(
           ],
         "@bazel_tools//src/conditions:darwin": [],
     }),
-#     deps = [
-#         "@com.github.doevelopper.rules-infra//src/test/cpp:com.github.doevelopper.rules.infra.test",
-#     ],
+    deps = [
+        "@com.github.doevelopper.rules-infra//src/test/cpp:com.github.doevelopper.rules.infra.test",
+    ],
 
     # env = [
     #   "GTEST_INSTALL_FAILURE_SIGNAL_HANDLER:1",

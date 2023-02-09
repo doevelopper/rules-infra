@@ -37,7 +37,7 @@ cmake(
     name = "log4cxx",
     cache_entries = {
         "CMAKE_C_FLAGS": "-fPIC",
-        "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$;$$EXT_BUILD_DEPS$$/apr;$$EXT_BUILD_DEPS$$/expat/;$$EXT_BUILD_DEPS$$/apr_util;$$EXT_BUILD_DEPS$$/openssl",
+        "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$;$$EXT_BUILD_DEPS$$/apr;$$EXT_BUILD_DEPS$$/expat/;$$EXT_BUILD_DEPS$$/apr_util;$$EXT_BUILD_DEPS$$/openssl;$$EXT_BUILD_DEPS$$/zip",
     },
 
     generate_args = [

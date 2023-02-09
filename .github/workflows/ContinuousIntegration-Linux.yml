@@ -81,8 +81,8 @@ jobs:
       LD: ${{matrix.ld}}
     strategy:
       fail-fast: false # Keep running other jobs even if one fails
-      bazel_compilation_mode: ["fastbuild", "dbg" , "opt"]
       matrix:
+        # bazel_compilation_mode: ["fastbuild", "dbg" , "opt"]
         path:
           - check: 'src'
             exclude: '(hello|world)' # Exclude file paths containing "hello" or "world"

@@ -22,8 +22,8 @@ namespace com::github::doevelopper::rules::infra::logging::test
         void TearDown() override;
 
     protected:
-    private:
         com::github::doevelopper::rules::infra::logging::LoggingService * m_targetUnderTest;
+    private:
     };
 }
 

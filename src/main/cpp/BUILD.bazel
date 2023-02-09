@@ -75,10 +75,16 @@ cc_library(
     srcs = [
       "com/github/doevelopper/rules/infra/guide/Dummy.cpp",
       "com/github/doevelopper/rules/infra/guide/Dummy.hpp",
-      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
-      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
-      "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
-      "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
+      # "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
+      "com/github/doevelopper/rules/infra/app/AppInfo.hpp",
+      "com/github/doevelopper/rules/infra/app/Application.cpp",
+      "com/github/doevelopper/rules/infra/app/Application.hpp",
+      "com/github/doevelopper/rules/infra/semver/GitRevision.hpp",
+      "com/github/doevelopper/rules/infra/semver/Version.cpp",
+      "com/github/doevelopper/rules/infra/semver/Version.hpp",
     ] + COMMON_SRCS + COMMON_HDRS + select({
         "@bazel_tools//src/conditions:windows": WIN32_SRCS + WIN32_HDRS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_SRCS + LINUX_HDRS,
@@ -91,14 +97,15 @@ cc_library(
         "//conditions:default": [],
     }),
 
-    copts = select({
-        "@platforms//os:windows": [
-            "/std:c++17"
-        ],
-        "//conditions:default": [
-            "-DLOG_LEVEL=1",
-    #         "-D_REENTRANT",
-        ],
+    copts = [
+        "-DLOG_LEVEL=1",
+    ] + select({
+            "@bazel_tools//src/conditions:windows": [
+                "/std:c++17"
+            ],
+            "//conditions:default": [
+            "-D_REENTRANT",
+          ],
     }),  #+ SHARED_LIBRARY_SUPPORT + DEFAULT_COPTS,
 
 #     features = select({
@@ -111,7 +118,8 @@ cc_library(
     ],
 
     linkopts = [
-
+        "-L$$EXT_BUILD_DEPS$$/log4cxx",
+        "-L$$EXT_BUILD_DEPS$$/org_apache_logging_log4cxx/copy_log4cxx/log4cxx/lib",
     ] + select({
         "@bazel_tools//src/conditions:windows": WIN32_LINKOPTS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_LINKOPTS,
@@ -119,7 +127,7 @@ cc_library(
     }),
 
     deps = [
-        "@org_apache_log4cxx//:log4cxx",
+        # "@org_apache_log4cxx//:log4cxx",
     ] + select({
         "@bazel_tools//src/conditions:windows": [],
         "@bazel_tools//src/conditions:linux_x86_64": [],
