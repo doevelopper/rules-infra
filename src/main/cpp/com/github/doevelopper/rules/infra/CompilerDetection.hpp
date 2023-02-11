@@ -5,7 +5,9 @@
 
 #ifndef SDLC_BEGIN_DECLS
     #ifdef __cplusplus
-        #define SDLC_BEGIN_DECLS  extern "C" {
+        #define SDLC_BEGIN_DECLS                                                                                       \
+            extern "C"                                                                                                 \
+            {
         #define SDLC_END_DECLS }
     #else
         #define SDLC_BEGIN_DECLS
@@ -41,7 +43,7 @@
     while (&x == 0)
 
 /** Useful for Release mode, when some debugging variables are unused */
-#define SDLC_SUPPRESS_WUNUSED(x) DO_ONCE( if (sizeof(x) == 0) throw )
+#define SDLC_SUPPRESS_WUNUSED(x) DO_ONCE(if (sizeof(x) == 0) throw)
 
 #if defined(__GNUC__)
     #define UNUSED(x) UNUSED_##x __attribute__((unused))
@@ -55,31 +57,31 @@
 #define SDLC_FORWARD_DECLARE_STRUCT(name) struct name;
 
 #if defined(__cplusplus)
-#if __has_cpp_attribute(clang::fallthrough)
-#define SDLC_FALLTHROUGH() [[clang::fallthrough]]
-#elif __has_cpp_attribute(gnu::fallthrough)
-#define SDLC_FALLTHROUGH() [[gnu::fallthrough]]
-#elif __has_cpp_attribute(fallthrough)
-#define SDLC_FALLTHROUGH() [[fallthrough]]
-#endif
+    #if __has_cpp_attribute(clang::fallthrough)
+        #define SDLC_FALLTHROUGH() [[clang::fallthrough]]
+    #elif __has_cpp_attribute(gnu::fallthrough)
+        #define SDLC_FALLTHROUGH() [[gnu::fallthrough]]
+    #elif __has_cpp_attribute(fallthrough)
+        #define SDLC_FALLTHROUGH() [[fallthrough]]
+    #endif
 #endif
 
 #ifndef SDLC_FALLTHROUGH
-#if (defined(__GNUC__) && __GNUC__ >= 700)
-#define SDLC_FALLTHROUGH() __attribute__((fallthrough))
-#else
-#define SDLC_FALLTHROUGH() (void)0
-#endif
+    #if (defined(__GNUC__) && __GNUC__ >= 700)
+        #define SDLC_FALLTHROUGH() __attribute__((fallthrough))
+    #else
+        #define SDLC_FALLTHROUGH() (void)0
+    #endif
 #endif
 
 #ifdef __GNUC__
-#define SDLC_NEVER_INLINE  __attribute__((noinline))
-#define SDLC_ALWAYS_INLINE inline __attribute__((always_inline))
-#define SDLC_NORETURN      __attribute__((__noreturn__))
+    #define SDLC_NEVER_INLINE  __attribute__((noinline))
+    #define SDLC_ALWAYS_INLINE inline __attribute__((always_inline))
+    #define SDLC_NORETURN      __attribute__((__noreturn__))
 #else
-#define SDLC_NEVER_INLINE
-#define SDLC_ALWAYS_INLINE inline
-#define SDLC_NORETURN
+    #define SDLC_NEVER_INLINE
+    #define SDLC_ALWAYS_INLINE inline
+    #define SDLC_NORETURN
 #endif
 
 // qt5/qtbase/src/corelib/global/qglobal.h
@@ -223,9 +225,9 @@ private:                                                                        
 #define Q_CAST_IGNORE_ALIGN(body) QT_WARNING_PUSH QT_WARNING_DISABLE_GCC("-Wcast-align") body QT_WARNING_POP
 
 #if defined __GNUG__
-#define D_PRETTY_FUNCTION __PRETTY_FUNCTION__
+    #define D_PRETTY_FUNCTION __PRETTY_FUNCTION__
 #else
-#define D_PRETTY_FUNCTION __func__
+    #define D_PRETTY_FUNCTION __func__
 #endif
 
 #define D_UNUSED(variable) void(variable);
@@ -289,28 +291,28 @@ inline auto qGetPtrHelper(Ptr & ptr) -> decltype(ptr.operator->())
  * Configure the compiler warnings.
  */
 #if defined(__clang__)
-#define SDLC_BEGIN_CONFIGURE_WARNINGS                                                                                  \
-    _Pragma(STRINGIFY(clang diagnostic push)) _Pragma(STRINGIFY(clang diagnostic ignored "-Wweak-vtables"))            \
-        _Pragma(STRINGIFY(clang diagnostic ignored "-Wc++98-compat"))                                                  \
-            _Pragma(STRINGIFY(clang diagnostic ignored "-Wpadded"))                                                    \
-                _Pragma(STRINGIFY(clang diagnostic ignored "-Wdocumentation-unknown-command"))                         \
-                    _Pragma(STRINGIFY(clang diagnostic ignored "-Wglobal-constructors"))                               \
-                        _Pragma(STRINGIFY(clang diagnostic ignored "-Wexit-time-destructors"))
+    #define SDLC_BEGIN_CONFIGURE_WARNINGS                                                                              \
+        _Pragma(STRINGIFY(clang diagnostic push)) _Pragma(STRINGIFY(clang diagnostic ignored "-Wweak-vtables"))        \
+            _Pragma(STRINGIFY(clang diagnostic ignored "-Wc++98-compat"))                                              \
+                _Pragma(STRINGIFY(clang diagnostic ignored "-Wpadded"))                                                \
+                    _Pragma(STRINGIFY(clang diagnostic ignored "-Wdocumentation-unknown-command"))                     \
+                        _Pragma(STRINGIFY(clang diagnostic ignored "-Wglobal-constructors"))                           \
+                            _Pragma(STRINGIFY(clang diagnostic ignored "-Wexit-time-destructors"))
 #elif defined(__GNUC__) || defined(__GNUG__)
-#define SDLC_BEGIN_CONFIGURE_WARNINGS _Pragma(STRINGIFY(GCC diagnostic push))
+    #define SDLC_BEGIN_CONFIGURE_WARNINGS _Pragma(STRINGIFY(GCC diagnostic push))
 #elif defined(_MSC_VER)
-#define SDLC_BEGIN_CONFIGURE_WARNINGS __pragma(warning(push))
+    #define SDLC_BEGIN_CONFIGURE_WARNINGS __pragma(warning(push))
 #endif
 
 /**
  * Restore the original compiler warning configuration.
  */
 #if defined(__clang__)
-#define SDLC_END_CONFIGURE_WARNINGS _Pragma(STRINGIFY(clang diagnostic pop))
+    #define SDLC_END_CONFIGURE_WARNINGS _Pragma(STRINGIFY(clang diagnostic pop))
 #elif defined(__GNUC__) || defined(__GNUG__)
-#define SDLC_END_CONFIGURE_WARNINGS _Pragma(STRINGIFY(GCC diagnostic pop))
+    #define SDLC_END_CONFIGURE_WARNINGS _Pragma(STRINGIFY(GCC diagnostic pop))
 #elif defined(_MSC_VER)
-#define SDLC_END_CONFIGURE_WARNINGS __pragma(warning(pop))
+    #define SDLC_END_CONFIGURE_WARNINGS __pragma(warning(pop))
 #endif
 
 //<epilog>

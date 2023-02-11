@@ -25,7 +25,7 @@ void VersionTest::SetUp()
 void VersionTest::TearDown()
 {
     // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    if(this->m_targetUnderTest)
+    if (this->m_targetUnderTest)
         delete m_targetUnderTest;
     this->m_targetUnderTest = nullptr;
 }

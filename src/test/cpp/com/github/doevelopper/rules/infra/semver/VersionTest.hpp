@@ -12,17 +12,19 @@ namespace com::github::doevelopper::rules::infra::semver::test
     public:
 
         VersionTest();
-        VersionTest(const VersionTest&) = delete;
-        VersionTest(VersionTest&&) = delete;
-        VersionTest& operator=(const VersionTest&) = delete;
-        VersionTest& operator=(VersionTest&&) = delete;
+        VersionTest(const VersionTest &)             = delete;
+        VersionTest(VersionTest &&)                  = delete;
+        VersionTest & operator=(const VersionTest &) = delete;
+        VersionTest & operator=(VersionTest &&)      = delete;
         virtual ~VersionTest();
 
         void SetUp() override;
         void TearDown() override;
 
     protected:
+
         com::github::doevelopper::rules::infra::semver::Version * m_targetUnderTest;
+
     private:
     };
 }

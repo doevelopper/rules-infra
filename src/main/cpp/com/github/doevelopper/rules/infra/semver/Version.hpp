@@ -8,11 +8,12 @@ namespace com::github::doevelopper::rules::infra::semver
     public:
 
         Version();
-        Version(const Version&) = delete;
-        Version(Version&&) = delete;
-        Version& operator=(const Version&) = delete;
-        Version& operator=(Version&&) = delete;
+        Version(const Version &)             = delete;
+        Version(Version &&)                  = delete;
+        Version & operator=(const Version &) = delete;
+        Version & operator=(Version &&)      = delete;
         virtual ~Version();
+
     protected:
     private:
     };

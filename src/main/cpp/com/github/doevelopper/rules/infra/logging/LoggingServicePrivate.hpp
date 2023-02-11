@@ -1,8 +1,6 @@
 #ifndef COM_GITHUB_DOEVELOPPER_RULES_INFRA_LOGGING_LOGGINGSERVICEPRIVATE_HPP
 #define COM_GITHUB_DOEVELOPPER_RULES_INFRA_LOGGING_LOGGINGSERVICEPRIVATE_HPP
 
-#include <com/github/doevelopper/rules/infra/API_Export.hpp>
-
 #include <apr-1/apr.h>
 #include <log4cxx/appender.h>
 #include <log4cxx/basicconfigurator.h>
@@ -13,6 +11,8 @@
 #include <log4cxx/logmanager.h>
 #include <log4cxx/logstring.h> // has typedefed string type used in log4cxx
 // #include <log4cxx/net/socketappender.h>
+#include <stdexcept>
+#include <string>
 #include <log4cxx/nt/nteventlogappender.h>
 #include <log4cxx/nt/outputdebugstringappender.h> // NT OUTPUTDEBUGSTRING Appender
 #include <log4cxx/patternlayout.h>
@@ -25,20 +25,19 @@
 #include <log4cxx/rolling/triggeringpolicy.h>
 #include <log4cxx/simplelayout.h>
 #include <log4cxx/xml/domconfigurator.h>
-#include <stdexcept>
-#include <string>
 
 namespace com::github::doevelopper::rules::infra::logging
 {
     class LoggingServicePrivate
     {
-        public:
+    public:
+
         LoggingServicePrivate() noexcept;
         LoggingServicePrivate(unsigned long delay);
-        LoggingServicePrivate(const LoggingServicePrivate&) noexcept = default;
-        LoggingServicePrivate(LoggingServicePrivate&&) noexcept =  default;
-        LoggingServicePrivate& operator=(const LoggingServicePrivate&) noexcept = default;
-        LoggingServicePrivate& operator=(LoggingServicePrivate&&) noexcept = default;
+        LoggingServicePrivate(const LoggingServicePrivate &) noexcept             = default;
+        LoggingServicePrivate(LoggingServicePrivate &&) noexcept                  = default;
+        LoggingServicePrivate & operator=(const LoggingServicePrivate &) noexcept = default;
+        LoggingServicePrivate & operator=(LoggingServicePrivate &&) noexcept      = default;
         virtual ~LoggingServicePrivate() noexcept;
 
         // log4cxx::LoggerPtr operator->()
@@ -70,11 +69,9 @@ namespace com::github::doevelopper::rules::infra::logging
             return name ? log4cxx::Logger::getLogger(name) : log4cxx::LoggerPtr();
         }
 
-        auto getLogger(const std::string& name) -> log4cxx::LoggerPtr
+        auto getLogger(const std::string & name) -> log4cxx::LoggerPtr
         {
-            return name.empty()
-                ? log4cxx::LogManager::getRootLogger()
-                : log4cxx::LogManager::getLogger(name);
+            return name.empty() ? log4cxx::LogManager::getRootLogger() : log4cxx::LogManager::getLogger(name);
         }
 
         /*!
@@ -104,8 +101,17 @@ namespace com::github::doevelopper::rules::infra::logging
             return log4cxx::Logger::getLogger(s);
         }
 
+        void trace(const std::string & s);
+        void debug(const std::string & s);
+        void info(const std::string & s);
+        void warn(const std::string & s);
+        void error(const std::string & s);
+        void fatal(const std::string & s);
+        void flush();
+
     protected:
     private:
+
         static const char * configEnv;
         log4cxx::LoggerPtr m_logger;
         /*!
@@ -113,6 +119,6 @@ namespace com::github::doevelopper::rules::infra::logging
          * or modified!
          */
         unsigned long m_watchPeriod;
-	};
+    };
 }
 #endif

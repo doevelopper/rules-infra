@@ -12,17 +12,19 @@ namespace com::github::doevelopper::rules::infra::logging::test
     public:
 
         LoggingServiceTest();
-        LoggingServiceTest(const LoggingServiceTest&) = delete;
-        LoggingServiceTest(LoggingServiceTest&&) = delete;
-        LoggingServiceTest& operator=(const LoggingServiceTest&) = delete;
-        LoggingServiceTest& operator=(LoggingServiceTest&&) = delete;
+        LoggingServiceTest(const LoggingServiceTest &)             = delete;
+        LoggingServiceTest(LoggingServiceTest &&)                  = delete;
+        LoggingServiceTest & operator=(const LoggingServiceTest &) = delete;
+        LoggingServiceTest & operator=(LoggingServiceTest &&)      = delete;
         virtual ~LoggingServiceTest();
 
         void SetUp() override;
         void TearDown() override;
 
     protected:
+
         com::github::doevelopper::rules::infra::logging::LoggingService * m_targetUnderTest;
+
     private:
     };
 }

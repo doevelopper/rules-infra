@@ -56,8 +56,8 @@ MAKEFLAGS += --no-print-directory
 .PHONY: format
 format:
 	@echo "Formating codes"
-	@find src/main/cpp/com/github/doevelopper/rules/infra/guide  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
-	@find src/test/cpp/com/github/doevelopper/rules/infra/guide  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
+	@find src/main/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
+	@find src/test/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
 
 .PHONY: tidy
 tidy:## Check with clang-tidy

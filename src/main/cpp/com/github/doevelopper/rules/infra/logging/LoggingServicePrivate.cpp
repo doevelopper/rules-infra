@@ -11,13 +11,11 @@ using namespace com::github::doevelopper::rules::infra::logging;
 LoggingServicePrivate::LoggingServicePrivate()
     : m_watchPeriod(5000UL)
 {
-
 }
 
 LoggingServicePrivate::LoggingServicePrivate(unsigned long delay)
     : m_watchPeriod(delay)
 {
-
 }
 
 LoggingServicePrivate::~LoggingServicePrivate()

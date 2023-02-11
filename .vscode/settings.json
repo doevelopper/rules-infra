@@ -25,7 +25,8 @@
         ".clang-format": "yaml",
         "header-units.json": "jsonc",
         "**/stl/inc/**": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "string": "cpp"
     },
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,

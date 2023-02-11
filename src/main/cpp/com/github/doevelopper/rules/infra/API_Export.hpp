@@ -5,7 +5,6 @@
 #include <com/github/doevelopper/rules/infra/Poison.hpp>
 #include <functional>
 
-
 // Generic helper definitions for shared library support
 
 #if defined _WIN32 || defined __CYGWIN__
@@ -17,7 +16,7 @@
         #define SDLC_API_IMPORT __attribute__((visibility("default")))
         #define SDLC_API_EXPORT __attribute__((visibility("default")))
         #define SDLC_API_HIDDEN __attribute__((visibility("hidden")))
-        // -fvisibility-inlines-hidden
+    // -fvisibility-inlines-hidden
     #else
         #define SDLC_API_IMPORT
         #define SDLC_API_EXPORT

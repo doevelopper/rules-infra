@@ -12,17 +12,19 @@ namespace com::github::doevelopper::rules::infra::app::test
     public:
 
         ApplicationTest();
-        ApplicationTest(const ApplicationTest&) = delete;
-        ApplicationTest(ApplicationTest&&) = delete;
-        ApplicationTest& operator=(const ApplicationTest&) = delete;
-        ApplicationTest& operator=(ApplicationTest&&) = delete;
+        ApplicationTest(const ApplicationTest &)             = delete;
+        ApplicationTest(ApplicationTest &&)                  = delete;
+        ApplicationTest & operator=(const ApplicationTest &) = delete;
+        ApplicationTest & operator=(ApplicationTest &&)      = delete;
         virtual ~ApplicationTest();
 
         void SetUp() override;
         void TearDown() override;
 
     protected:
+
         com::github::doevelopper::rules::infra::app::Application * m_targetUnderTest;
+
     private:
     };
 }

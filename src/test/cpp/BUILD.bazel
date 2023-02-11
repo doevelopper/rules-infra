@@ -72,7 +72,7 @@ cc_test(
     name = "com.github.doevelopper.rules.infra.test.bin",
     size = "small",
     srcs = [
-        "main.cpp",
+        "unitTestRunner.cpp",
     ],
 
     copts = [
