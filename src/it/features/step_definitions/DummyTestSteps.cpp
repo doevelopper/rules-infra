@@ -37,8 +37,6 @@ using namespace com::github::doevelopper::rules::infra::guide::test::it;
 //     LOG4CXX_TRACE(DummyTestSteps::logger, "After any scenario" );
 // }
 
-
-
 /*
    GIVEN("^a dummy initialised with \"([^\"]*)\" and \"([^\"]*)\"$")
    {

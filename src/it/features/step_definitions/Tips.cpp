@@ -1,8 +1,7 @@
 
 #include <memory>
-#include <gmock/gmock.h>
 #include <cucumber-cpp/autodetect.hpp>
-
+#include <gmock/gmock.h>
 
 namespace tips
 {
@@ -11,46 +10,43 @@ namespace tips
     {
     public:
 
-        virtual ~IFface()
-        {
-        };
-        virtual void methodCall () const = 0;
+        virtual ~IFface() {};
+        virtual void methodCall() const = 0;
     };
 
-    class IFfaceMock
-        : public IFface
+    class IFfaceMock : public IFface
     {
     public:
 
-        MOCK_CONST_METHOD( methodCall, void());
+        MOCK_CONST_METHOD(methodCall, void());
     };
 
     struct MockContext
     {
-        std::shared_ptr < IFfaceMock > mock;
+        std::shared_ptr<IFfaceMock> mock;
     };
 
-    GIVEN( "^a mock class with method methodCall$" )
+    GIVEN("^a mock class with method methodCall$")
     {
-        ScenarioScope < MockContext > context{ };
-        context->mock = std::make_shared < IFfaceMock > ();
+        ScenarioScope<MockContext> context {};
+        context->mock = std::make_shared<IFfaceMock>();
     }
 
-    GIVEN( "^the tests expects that methodCall is called once$" )
+    GIVEN("^the tests expects that methodCall is called once$")
     {
-        ScenarioScope < MockContext > context{ };
-        EXPECT_CALL( *context->mock, methodCall());
+        ScenarioScope<MockContext> context {};
+        EXPECT_CALL(*context->mock, methodCall());
     }
 
-    WHEN( "^methodCall is called on the mock$" )
+    WHEN("^methodCall is called on the mock$")
     {
-        ScenarioScope < MockContext > context{ };
+        ScenarioScope<MockContext> context {};
         context->mock->methodCall();
     }
 
-    THEN( "^the test should pass$" )
+    THEN("^the test should pass$")
     {
-        ScenarioScope < MockContext > context{ };
-        ASSERT_TRUE( ::testing::Mock::VerifyAndClearExpectations( context->mock.get()));
+        ScenarioScope<MockContext> context {};
+        ASSERT_TRUE(::testing::Mock::VerifyAndClearExpectations(context->mock.get()));
     }
 }
