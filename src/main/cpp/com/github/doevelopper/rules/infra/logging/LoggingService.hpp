@@ -13,11 +13,20 @@
 #include <string>
 #include <typeinfo>
 
-#define LOG4CXX_DECLARE_STATIC_LOGGER private : static log4cxx::LoggerPtr logger;
-#define LOG4CXX_DECLARE_STATIC_TEST_LOGGER protected : static log4cxx::LoggerPtr logger;
-#define LOG4CXX_DEFINE_CLASS_LOGGER(i) (boost::core::demangle(typeid(i).name()))
+#define LOG4CXX_DECLARE_STATIC_LOGGER                                                                                  \
+private:                                                                                                               \
+                                                                                                                       \
+    static log4cxx::LoggerPtr logger;
+#define LOG4CXX_DECLARE_STATIC_TEST_LOGGER                                                                             \
+protected:                                                                                                             \
+                                                                                                                       \
+    static log4cxx::LoggerPtr logger;
+#define LOG4CXX_DEFINE_CLASS_LOGGER(i)    (boost::core::demangle(typeid(i).name()))
 #define LOG4CXX_DEFINE_CLASS_LOGGER(name) log4cxx::Logger::getLogger(std::string(boost::core::demangle(name)));
-#define LOG4CXX_DECLARE_CLASS_LOGGER(name) private : log4cxx::LoggerPtr name;
+#define LOG4CXX_DECLARE_CLASS_LOGGER(name)                                                                             \
+private:                                                                                                               \
+                                                                                                                       \
+    log4cxx::LoggerPtr name;
 
 namespace com::github::doevelopper::rules::infra::logging
 {
