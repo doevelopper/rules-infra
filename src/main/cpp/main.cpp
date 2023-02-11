@@ -1,5 +1,5 @@
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 
 #include <cstdlib>
@@ -11,36 +11,33 @@
  *             (an array of character pointers)
  * @return the completion status code (zero indicates success)
  */
-int main(
-    [[maybe_unused]] int argc,
-    [[maybe_unused]] char**argv)
+int main([[maybe_unused]] int argc, [[maybe_unused]] char ** argv)
 {
-
     std::uint_fast64_t runStatus = 0;
 
     std::cout << "argc == " << argc << '\n';
 
-    for(int ndx{}; ndx != argc; ++ndx)
+    for (int ndx {}; ndx != argc; ++ndx)
     {
         std::cout << "argv[" << ndx << "] == " << std::quoted(argv[ndx]) << '\n';
     }
 
-    std::cout << "argv[" << argc << "] == " << static_cast<void*>(argv[argc]) << '\n';
+    std::cout << "argv[" << argc << "] == " << static_cast<void *>(argv[argc]) << '\n';
 
     try
     {
         // UnitTestBuilder unit_test;
         // runStatus = unit_test.run(argc,argv);
     }
-    catch ( const std::exception & e )
+    catch (const std::exception & e)
     {
-        std::cerr << e.what ( ) << std::endl;
-        return ( EXIT_FAILURE );
+        std::cerr << e.what() << std::endl;
+        return (EXIT_FAILURE);
     }
-    catch ( ... )
+    catch (...)
     {
         std::cerr << "unknown exception\n";
-        return ( EXIT_FAILURE );
+        return (EXIT_FAILURE);
     }
 
     if (runStatus != EXIT_SUCCESS)
