@@ -26,7 +26,8 @@
         "header-units.json": "jsonc",
         "**/stl/inc/**": "cpp",
         "cstdlib": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "*.ipp": "cpp"
     },
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,

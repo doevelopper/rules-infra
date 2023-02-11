@@ -6,6 +6,7 @@ namespace com::github::doevelopper::rules::infra::app
 {
     class Application
     {
+        // LOG4CXX_DECLARE_STATIC_LOGGER
     public:
 
         Application();

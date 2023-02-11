@@ -4,11 +4,27 @@
 
 #include <com/github/doevelopper/rules/infra/API_Export.hpp>
 
+#include <boost/core/demangle.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <log4cxx/logger.h>
+
+#include <ctime>
+#include <memory>
+#include <string>
+#include <typeinfo>
+
+#define LOG4CXX_DECLARE_STATIC_LOGGER private : static log4cxx::LoggerPtr logger;
+#define LOG4CXX_DECLARE_STATIC_TEST_LOGGER protected : static log4cxx::LoggerPtr logger;
+#define LOG4CXX_DEFINE_CLASS_LOGGER(i) (boost::core::demangle(typeid(i).name()))
+#define LOG4CXX_DEFINE_CLASS_LOGGER(name) log4cxx::Logger::getLogger(std::string(boost::core::demangle(name)));
+#define LOG4CXX_DECLARE_CLASS_LOGGER(name) private : log4cxx::LoggerPtr name;
+
 namespace com::github::doevelopper::rules::infra::logging
 {
     class LoggingServicePrivate;
     class LoggingService
     {
+        // std::string logger = "com.github" + boost::core::demangle(typeid(this).name()) + ".";
     public:
 
         LoggingService() noexcept;

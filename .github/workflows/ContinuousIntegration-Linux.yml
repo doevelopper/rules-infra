@@ -85,7 +85,7 @@ jobs:
         # bazel_compilation_mode: ["fastbuild", "dbg" , "opt"]
         path:
           - check: 'src'
-            exclude: '(hello|world)' # Exclude file paths containing "hello" or "world"
+            exclude: '(it|resources|assembly)' # Exclude file paths containing "hello" or "world"
           - check: 'examples'
             exclude: ''              # Nothing to exclude
         include:
