@@ -95,20 +95,20 @@ cmake(
     #     ],
     # }),
 
-    # out_shared_libs = select({
-    #     "@bazel_tools//platforms:osx": [
-    #         "liblog4cxx.dylib",
-    #     ],
-    #     # considere using "@platforms//os:windows": or @bazel_tools//platforms:windows or "@bazel_tools//src/conditions:windows":
-    #     "@bazel_tools//platforms:windows": [
-    #         "liblog4cxx.lib",
-    #     ],
-    #     "//conditions:default": [
-    #         "liblog4cxx.so",
-    #         "liblog4cxx.so.13",
-    #         "liblog4cxx.so.13.0.0",
-    #     ],
-    # }),
+    out_shared_libs = select({
+        "@bazel_tools//src/conditions:darwin": [
+            "liblog4cxx.dylib",
+        ],
+
+        "@bazel_tools//src/conditions:windows": [
+            "liblog4cxx.lib",
+        ],
+        "//conditions:default": [
+            "liblog4cxx.so",
+            "liblog4cxx.so.15",
+            "liblog4cxx.so.15.0.0",
+        ],
+    }),
 
     deps = [
         "@org_apache_apr//:apr",

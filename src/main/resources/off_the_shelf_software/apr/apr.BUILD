@@ -15,7 +15,6 @@ CONFIGURE_OPTIONS = [
     "--enable-allocator-guard-pages",
     "--enable-pool-concurrency-check",
     "--enable-other-child",
-    "-fPIC",
 ]
 
 configure_make(

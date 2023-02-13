@@ -41,18 +41,18 @@ cmake(
     },
 
     generate_args = [
-        "-DAPU_STATIC=YES",
-        "-DAPR_STATIC=YES",
+        # "-DAPU_STATIC=YES",
+        # "-DAPR_STATIC=YES",
         "-DPREFER_BOOST=OFF",
         "-DLOG4CXX_UNICHAR=YES",
         "-DBUILD_TESTING=OFF",
-        "-DLOG4CXX=1",
+        # "-DLOG4CXX=1",
         "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
         "-DLOG4CXX_ABI_CHEC=OFF",
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
         "-DCMAKE_VERBOSE_MAKEFILE=ON",
         "-DCMAKE_CXX_STANDARD=17",
-        "-DBUILD_SHARED_LIBS=off",
+        # "-DBUILD_SHARED_LIBS=off",
         # "-DCMAKE_PREFIX_PATH=$EXT_BUILD_DEPS/apr_util;$EXT_BUILD_DEPS/apr",
     ] + select({
         "@bazel_tools//src/conditions:windows": [
@@ -82,16 +82,32 @@ cmake(
 
     lib_source = ":all_srcs",
 
-    out_static_libs = select({
+    # out_static_libs = select({
+    #     "@bazel_tools//src/conditions:darwin": [
+    #         "liblog4cxx.a",
+    #     ],
+
+    #     "@bazel_tools//src/conditions:windows": [
+    #         "liblog4cxx.lib",
+    #     ],
+    #     "//conditions:default": [
+    #         "liblog4cxx.a",
+    #     ],
+    # }),
+
+
+    out_shared_libs = select({
         "@bazel_tools//src/conditions:darwin": [
-            "liblog4cxx.a",
+            "liblog4cxx.dylib",
         ],
 
         "@bazel_tools//src/conditions:windows": [
             "liblog4cxx.lib",
         ],
         "//conditions:default": [
-            "liblog4cxx.a",
+            "liblog4cxx.so",
+            "liblog4cxx.so.15",
+            "liblog4cxx.so.15.0.0",
         ],
     }),
 

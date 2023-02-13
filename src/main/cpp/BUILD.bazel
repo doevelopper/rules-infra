@@ -75,10 +75,10 @@ cc_library(
     srcs = [
       "com/github/doevelopper/rules/infra/guide/Dummy.cpp",
       "com/github/doevelopper/rules/infra/guide/Dummy.hpp",
-      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
-      # "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
-      # "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
-      # "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
+      "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
       "com/github/doevelopper/rules/infra/app/AppInfo.hpp",
       "com/github/doevelopper/rules/infra/app/Application.cpp",
       "com/github/doevelopper/rules/infra/app/Application.hpp",
@@ -127,7 +127,7 @@ cc_library(
     }),
 
     deps = [
-        # "@org_apache_log4cxx//:log4cxx",
+        "@org_apache_log4cxx//:log4cxx",
     ] + select({
         "@bazel_tools//src/conditions:windows": [],
         "@bazel_tools//src/conditions:linux_x86_64": [],

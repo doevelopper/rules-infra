@@ -1,5 +1,5 @@
 #ifndef COM_GITHUB_DOEVELOPPER_RULES_INFRA_GUIDE_CODINGSTYLE_HPP
-    #define COM_GITHUB_DOEVELOPPER_RULES_INFRA_GUIDE_CODINGSTYLE_HPP
+#define COM_GITHUB_DOEVELOPPER_RULES_INFRA_GUIDE_CODINGSTYLE_HPP
 
 /*!
  *
@@ -12,13 +12,10 @@
  * @brief Coding Style declaration.
  */
 
-    #ifndef PATH_TO_FOLDER_CODINGSTYLE_HPP
-        #define PATH_TO_FOLDER_CODINGSTYLE_HPP
-
-        #include <3rtparty/headers>
-        #include <project/headers>
-        #include <standard/library/headers>
-        #include <System/headers>
+#include <3rtparty/headers>
+#include <project/headers>
+#include <standard/library/headers>
+#include <System/headers>
 
 namespace com::github::doevelopper::rules::infra::guide
 {
@@ -104,4 +101,4 @@ namespace com::github::doevelopper::rules::infra::guide
         int member; /*! A brief description */
     };
 }
-    #endif
+#endif

@@ -146,13 +146,13 @@ jobs:
           clangFormatVersion: 14
           # style: chromium
 
-      - name: Run clang-format style check for C/C++/Protobuf programs.
-        uses: jidicula/clang-format-action@v4.10.1
-        with:
-          clang-format-version: '14'
-          check-path: ${{ matrix.path['check'] }}
-          exclude-regex: ${{ matrix.path['exclude'] }}
-        #   fallback-style: 'Mozilla' # optional
+    #   - name: Run clang-format style check for C/C++/Protobuf programs.
+    #     uses: jidicula/clang-format-action@v4.10.1
+    #     with:
+    #       clang-format-version: '14'
+    #       check-path: ${{ matrix.path['check'] }}
+    #       exclude-regex: ${{ matrix.path['exclude'] }}
+    #     #   fallback-style: 'Mozilla' # optional
 
       - name: setup bazelisk ${{ matrix.bazelisk }}
         uses: bazelbuild/setup-bazelisk@v2

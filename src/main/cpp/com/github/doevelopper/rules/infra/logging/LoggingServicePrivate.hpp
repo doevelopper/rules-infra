@@ -101,6 +101,9 @@ namespace com::github::doevelopper::rules::infra::logging
             return log4cxx::Logger::getLogger(s);
         }
 
+        bool initLogger();
+        bool loggerReset();
+
         void trace(const std::string & s);
         void debug(const std::string & s);
         void info(const std::string & s);

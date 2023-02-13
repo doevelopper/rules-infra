@@ -53,6 +53,12 @@ endif
 
 MAKEFLAGS += --no-print-directory
 
+.PHONY: aol
+aol:
+	@echo "Query possibles AOL"
+	@bazelisk query @bazel_tools//platforms/...
+	@bazelisk query @bazel_tools//src/conditions/...
+
 .PHONY: format
 format:
 	@echo "Formating codes"
