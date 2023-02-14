@@ -36,3 +36,21 @@ def log4cxx_repositories():
             "https://github.com/apache/logging-log4cxx/archive/refs/tags/rel/v1.0.0.tar.gz",
         ],
     )
+
+    # # log4cxx_ref = "tags"
+    # # log4cxx_ver = "20220623.0"
+
+    # # # Use these values to get the tip of the master branch:
+    # # log4cxx_ref = "heads"
+    # # log4cxx_ver = "master"
+    # ## Feb 7, 2023
+    log4cxx_ver="afeaab6d0f0107c77dfadcbe3708f170c48d5ed9"
+
+    maybe(
+        http_archive,
+        name = "org_apache_log4cxx_latest",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/log4cxx:BUILD.log4cxx.bazel"),
+        # sha256 = "6df9f1f682650de6045309473d5b2fe1f798a03ceb36a74a5b21f5520962d32f",
+        strip_prefix = "apache-log4cxx-%s"% log4cxx_ver,
+        url ="https://github.com/apache/logging-log4cxx/archive/%s.tar.gz" % log4cxx_ver,
+    )

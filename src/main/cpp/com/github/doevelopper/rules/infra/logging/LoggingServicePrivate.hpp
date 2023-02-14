@@ -64,12 +64,12 @@ namespace com::github::doevelopper::rules::infra::logging
          *        possibility of returning default initialized logger_types.
          */
 
-        log4cxx::LoggerPtr getLogger(const char * const name)
+        auto getLogger(const char * const name) -> log4cxx::LoggerPtr
         {
             return name ? log4cxx::Logger::getLogger(name) : log4cxx::LoggerPtr();
         }
 
-        auto getLogger(const std::string & name) -> log4cxx::LoggerPtr
+        auto getLogger(const std::string & name)
         {
             return name.empty() ? log4cxx::LogManager::getRootLogger() : log4cxx::LogManager::getLogger(name);
         }
@@ -103,6 +103,10 @@ namespace com::github::doevelopper::rules::infra::logging
 
         bool initLogger();
         bool loggerReset();
+        void loggerConfigure(std::string const & filename);
+        bool checkLogManagerStatus();
+        void setRootDefaultLevel(const std::string & level);
+        void setLoggerLevel(const std::string & loggerId, const std::string & level);
 
         void trace(const std::string & s);
         void debug(const std::string & s);
