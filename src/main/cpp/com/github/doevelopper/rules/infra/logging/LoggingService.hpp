@@ -35,7 +35,6 @@ namespace com::github::doevelopper::rules::infra::logging
     class LoggingServicePrivate;
     class LoggingService
     {
-
     public:
 
         LoggingService() noexcept;

@@ -16,7 +16,6 @@ LoggingServicePrivate::LoggingServicePrivate()
 LoggingServicePrivate::LoggingServicePrivate(unsigned long delay)
     : m_watchPeriod(delay)
 {
-
 }
 
 LoggingServicePrivate::~LoggingServicePrivate()
@@ -42,7 +41,6 @@ bool LoggingServicePrivate::initLogger()
     {
         try
         {
-
             char * filePath = nullptr;
             if ((filePath = getenv("LOG4CXX_CONFIGURATION")) == nullptr)
             {
@@ -70,8 +68,8 @@ bool LoggingServicePrivate::initLogger()
     if (configurationPath.empty() /*&& getenv(log4cxx.properties)*/)
     {
         // https://logging.apache.org/log4j/2.x/manual/layouts.html
-         log4cxx::PatternLayoutPtr layout(
-            new log4cxx::PatternLayout(LOG4CXX_STR("%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] - [%15.15t] - %-35c{1.} -- %m%n")));
+        log4cxx::PatternLayoutPtr layout(new log4cxx::PatternLayout(
+            LOG4CXX_STR("%d{yyyy-MM-dd HH:mm:ss.SSS} [%-6p] - [%15.15t] - %-35c{1.} -- %m%n")));
 
         // log4cxx::PatternLayoutPtr layout( new log4cxx::PatternLayout(
         // "[%-6.6p] %d{HH:mm:ss.SSS} [%15.15t] (%20.20c)  (%-10.20l) - %-20.20M - %m%n"));
@@ -103,10 +101,9 @@ bool LoggingServicePrivate::initLogger()
         log4cxx::LogManager::getLoggerRepository()->setConfigured(true);
     }
     LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), "----START LOGGING-----");
-    LOG4CXX_TRACE( log4cxx::Logger::getRootLogger(),
-        "Logger initialized with "
-        << log4cxx::Logger::getRootLogger()->getAllAppenders().size()
-        << " Appenders");
+    LOG4CXX_TRACE(
+        log4cxx::Logger::getRootLogger(),
+        "Logger initialized with " << log4cxx::Logger::getRootLogger()->getAllAppenders().size() << " Appenders");
 
     LOG4CXX_INFO(log4cxx::Logger::getRootLogger(), std::locale("").name().c_str());
     return (this->checkLogManagerStatus());
@@ -141,8 +138,7 @@ void LoggingServicePrivate::loggerConfigure(std::string const & configFilename)
         if (std::filesystem::path(configFilename).extension().compare(".xml") == 0)
         {
 #if APR_HAS_THREADS
-            log4cxx::xml::DOMConfigurator::configureAndWatch(
-                    configFilename, static_cast<long>(m_watchPeriod));
+            log4cxx::xml::DOMConfigurator::configureAndWatch(configFilename, static_cast<long>(m_watchPeriod));
 #else
             log4cxx::xml::DOMConfigurator::configure(configFilename);
 #endif
@@ -150,8 +146,7 @@ void LoggingServicePrivate::loggerConfigure(std::string const & configFilename)
         else
         {
 #if APR_HAS_THREADS
-            log4cxx::PropertyConfigurator::configureAndWatch(
-                    configFilename, static_cast<long>(m_watchPeriod));
+            log4cxx::PropertyConfigurator::configureAndWatch(configFilename, static_cast<long>(m_watchPeriod));
 #else
             log4cxx::PropertyConfigurator::configure(configFilename);
 #endif
