@@ -188,6 +188,13 @@ jobs:
           restore-keys: |
             bazel-cache-
             bazel-cache-${{ runner.os }}-
+
+      - name: Build the code
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc build --config linux --config gnu-gcc @com.github.doevelopper.rules-infra//...
+
+      - name: Test the code
+        run: bazelisk --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test --config linux --config gnu-gcc @com.github.doevelopper.rules-infra//...
+
   # unit-test:
   #   name: ${{ github.repository }} Unit tests using ${{ matrix.compiler.name }}
   #   needs: []

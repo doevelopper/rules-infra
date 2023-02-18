@@ -23,7 +23,7 @@ namespace com::github::doevelopper::rules::infra::semver::test
 
     protected:
 
-        com::github::doevelopper::rules::infra::semver::Version * m_targetUnderTest;
+        // com::github::doevelopper::rules::infra::semver::Version * m_targetUnderTest;
 
     private:
     };

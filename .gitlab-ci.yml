@@ -12,3 +12,10 @@
 #   stage: test
 # include:
 #   - template: Security/SAST.gitlab-ci.yml
+
+
+trigger job:
+    when: manual
+    image: everpeace/curl-jq:latest
+    script:
+        - curl --request POST --form "token=$CI_JOB_TOKEN" --form ref=master https://gitlab.com/api/v4/projects/$GITLAB_PROJECT_ID/trigger/pipeline

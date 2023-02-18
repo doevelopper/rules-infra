@@ -6,6 +6,7 @@
 
 #include <boost/core/demangle.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/preprocessor/stringize.hpp>
 #include <log4cxx/logger.h>
 
 #include <ctime>
@@ -29,6 +30,8 @@ protected:                                                                      
 private:                                                                                                               \
                                                                                                                        \
     log4cxx::LoggerPtr name;
+
+#define DEFAULT_LOGGER() log4cxx::Logger::getRootLogger()
 
 namespace com::github::doevelopper::rules::infra::logging
 {

@@ -85,6 +85,7 @@ cc_library(
       "com/github/doevelopper/rules/infra/semver/GitRevision.hpp",
       "com/github/doevelopper/rules/infra/semver/Version.cpp",
       "com/github/doevelopper/rules/infra/semver/Version.hpp",
+      "com/github/doevelopper/rules/infra/logging/Singleton.hpp",
     ] + COMMON_SRCS + COMMON_HDRS + select({
         "@bazel_tools//src/conditions:windows": WIN32_SRCS + WIN32_HDRS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_SRCS + LINUX_HDRS,
