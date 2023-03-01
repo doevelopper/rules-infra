@@ -80,8 +80,37 @@ rules_fuzzing_dependencies()
 load("@rules_fuzzing//fuzzing:init.bzl", "rules_fuzzing_init")
 rules_fuzzing_init()
 
+# # For running our own unit tests
+load(
+    "@bazel_skylib//:workspace.bzl",
+    "bazel_skylib_workspace"
+)
+bazel_skylib_workspace()
+
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 rules_pkg_dependencies()
+
+load(
+    "@bazelruby_rules_ruby//ruby:deps.bzl",
+    "rules_ruby_dependencies",
+    "rules_ruby_select_sdk",
+)
+
+bazel_skylib_workspace()
+rules_ruby_select_sdk(version = "2.6.3")
+# rules_ruby_select_sdk(version = "host")
+
+
+load(
+    "@bazelruby_rules_ruby//ruby:defs.bzl",
+    "ruby_bundle",
+)
+
+ruby_bundle(
+    name = "bundle",
+    gemfile = "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:Gemfile",
+    gemfile_lock = "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:Gemfile.lock",
+)
 
 # load(
 #     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:repositories.bzl",
@@ -97,12 +126,7 @@ rules_pkg_dependencies()
 #     rules_infra_version = "1.14.2",
 # )
 
-# # For running our own unit tests
-# load(
-#     "@bazel_skylib//:workspace.bzl",
-#     "bazel_skylib_workspace"
-# )
-# bazel_skylib_workspace()
+
 
 # load("@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules:sw_qa.bzl","qa_repositories")
 # qa_repositories()

@@ -1,9 +1,13 @@
+
+#include <com/github/doevelopper/rules/infra/extensions/UnitTestBuilder.hpp>
+
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 
 #include <cstdlib>
 
+using namespace com::github::doevelopper::rules::infra::extensions::test;
 /*!
  * @brief
  * @param argc number of string arguments passed via argv
@@ -26,8 +30,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char ** argv)
 
     try
     {
-        // UnitTestBuilder unit_test;
-        // runStatus = unit_test.run(argc,argv);
+        UnitTestBuilder unit_test;
+        runStatus = unit_test.run(argc, argv);
     }
     catch (const std::exception & e)
     {

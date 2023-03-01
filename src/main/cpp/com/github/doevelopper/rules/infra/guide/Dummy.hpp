@@ -1,5 +1,11 @@
-/*!
- *      Copyright {{ year }} {{ organization }}
+/*
+    SPDX-FileCopyrightText: 2020, 2022 Adrien H <rolland.doe@gmail.com>
+    SPDX-FileCopyrightText: 2023 Adrien H <rolland.doe@gmail.com>
+    SPDX-FileCopyrightText: 2023 Acme Systems Eng CO LTD
+    SPDXVersion: SPDX-2.2
+    SPDX-License-Identifier: Apache-2.0
+
+      Copyright 2023  {{ organization }}
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,6 +23,8 @@
 #ifndef COM_GITHUB_DOEVELOPPER_RULES_INFRA_GUIDE_DUMMY_HPP
 #define COM_GITHUB_DOEVELOPPER_RULES_INFRA_GUIDE_DUMMY_HPP
 
+#include <com/github/doevelopper/rules/infra/logging/LoggingService.hpp>
+
 #include <string>
 
 namespace com::github::doevelopper::rules::infra::guide
@@ -26,22 +34,23 @@ namespace com::github::doevelopper::rules::infra::guide
      */
     class Dummy
     {
-        // LOG4CXX_DECLARE_STATIC_LOGGER
+        LOG4CXX_DECLARE_STATIC_LOGGER
 
     public:
 
-        Dummy();
+        Dummy() noexcept;
+        Dummy(const Dummy &)             = default;
+        Dummy(Dummy &&)                  = default;
+        Dummy & operator=(const Dummy &) = default;
+        Dummy & operator=(Dummy &&)      = default;
+        virtual ~Dummy() noexcept;
+
         /*!
          * @brief Dummy who knows how to say hello world
          * @param hello_string 'Hello' in my language
          * @param world_string 'World' in my language
          */
-        // Dummy(const std::string& hello_string, const std::string& world_string);
-        Dummy(const Dummy &)             = default;
-        Dummy(Dummy &&)                  = default;
-        Dummy & operator=(const Dummy &) = default;
-        Dummy & operator=(Dummy &&)      = default;
-        virtual ~Dummy();
+        Dummy(const std::string & hello_string, const std::string & world_string);
 
         // std::string speak() const;
         bool speechless() const;

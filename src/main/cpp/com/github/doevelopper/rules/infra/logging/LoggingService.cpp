@@ -4,6 +4,13 @@
 
 using namespace com::github::doevelopper::rules::infra::logging;
 // std::string logger = "com.github" + boost::core::demangle(typeid(this).name()) + ".";
+
+LoggingService::LoggingService()
+    : d_ptr(new LoggingServicePrivate())
+{
+    Q_D(LoggingService);
+}
+
 LoggingService::LoggingService(unsigned long loggerWatchDelay)
     : d_ptr(new LoggingServicePrivate(loggerWatchDelay))
 {

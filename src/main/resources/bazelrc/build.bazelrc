@@ -114,7 +114,10 @@ build:linux --cxxopt="-fdiagnostics-color=always"
 # build:windows --define wasm=disabled
 # build:windows --define manual_stamp=manual_stamp
 # build:windows --cxxopt="/std:c++17"
-
+# build:windows --copt=-DWIN32_LEAN_AND_MEAN
+# build:windows --host_copt=-DWIN32_LEAN_AND_MEAN
+# build:windows --copt=-DNOGDI
+# build:windows --host_copt=-DNOGDI
 
 # Release builds without debug symbols.
 # build:release -c opt

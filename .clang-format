@@ -147,7 +147,6 @@ IncludeCategories:
 # Major 3rd-Party components of tests & modules
   - Regex:           '^<gtest/'
     Priority:        200
-
   - Regex:           '^(<|"(gtest|gmock|json)/)'
     Priority:        205
   - Regex:           '^<boost/'

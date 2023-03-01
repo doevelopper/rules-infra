@@ -35,7 +35,7 @@
 
     /* Your custom insecure APIs here */
 
-    //#	pragma GCC poison ouat-ize-phoque
+    // #	pragma GCC poison ouat-ize-phoque
 
 #endif
 

@@ -51,3 +51,7 @@ src/site/docs/*.md linguist-generated=true
 # language statistics.
 *.pat linguist-generated
 *.svg linguist-generated
+
+# Ensure  detection of .cfg as Python.
+*.cfg linguist-language=Python
+*.pl linguist-language=Perl

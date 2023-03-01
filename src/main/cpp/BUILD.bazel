@@ -53,9 +53,11 @@ LINUX_HDRS = []
 LINUX_SRCS = []
 LINUX_LINKOPTS = [
     "-L/usr/local/lib",
-    "-pthread",
+    "-lpthread",
     "-lrt",
-    "-luuid", #avoid having libapr-1.a(rand.o):rand.c:function apr_os_uuid_get: error: undefined reference to 'uuid_generate'
+    #  coometed out below because /usr/bin/gcc @bazel-out/k8-fastbuild/bin/src/main/cpp/libcom.github.doevelopper.rules.infra.main.so-2.params)
+    # "-luuid", #avoid having libapr-1.a(rand.o):rand.c:function apr_os_uuid_get: error: undefined reference to 'uuid_generate'
+
 ]
 
 # ===== darwin =====
@@ -75,17 +77,21 @@ cc_library(
     srcs = [
       "com/github/doevelopper/rules/infra/guide/Dummy.cpp",
       "com/github/doevelopper/rules/infra/guide/Dummy.hpp",
+
       "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.cpp",
       "com/github/doevelopper/rules/infra/logging/LoggingServicePrivate.hpp",
       "com/github/doevelopper/rules/infra/logging/LoggingService.cpp",
       "com/github/doevelopper/rules/infra/logging/LoggingService.hpp",
+      "com/github/doevelopper/rules/infra/logging/Singleton.hpp",
+
       "com/github/doevelopper/rules/infra/app/AppInfo.hpp",
       "com/github/doevelopper/rules/infra/app/Application.cpp",
       "com/github/doevelopper/rules/infra/app/Application.hpp",
+
       "com/github/doevelopper/rules/infra/semver/GitRevision.hpp",
       "com/github/doevelopper/rules/infra/semver/Version.cpp",
       "com/github/doevelopper/rules/infra/semver/Version.hpp",
-      "com/github/doevelopper/rules/infra/logging/Singleton.hpp",
+
     ] + COMMON_SRCS + COMMON_HDRS + select({
         "@bazel_tools//src/conditions:windows": WIN32_SRCS + WIN32_HDRS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_SRCS + LINUX_HDRS,
@@ -109,18 +115,18 @@ cc_library(
           ],
     }),  #+ SHARED_LIBRARY_SUPPORT + DEFAULT_COPTS,
 
-#     features = select({
-#         ":windows": ["windows_export_all_symbols"],
-#         "//conditions:default": [],
-#     }),
+    features = select({
+        "@bazel_tools//src/conditions:windows": ["windows_export_all_symbols"],
+        "//conditions:default": [],
+    }),
 
     includes = [
         ".",
     ],
 
     linkopts = [
-        "-L$$EXT_BUILD_DEPS$$/log4cxx",
-        "-L$$EXT_BUILD_DEPS$$/org_apache_logging_log4cxx/copy_log4cxx/log4cxx/lib",
+    #     # "-L$$EXT_BUILD_DEPS$$/log4cxx",
+    #     # "-L$$EXT_BUILD_DEPS$$/org_apache_logging_log4cxx/copy_log4cxx/log4cxx/lib",
     ] + select({
         "@bazel_tools//src/conditions:windows": WIN32_LINKOPTS,
         "@bazel_tools//src/conditions:linux_x86_64": LINUX_LINKOPTS,
@@ -129,6 +135,20 @@ cc_library(
 
     deps = [
         "@org_apache_log4cxx//:log4cxx",
+        "@org_boost//:core",
+        "@org_boost//:serialization",
+        "@org_boost//:atomic",
+        "@org_boost//:date_time",
+        "@org_boost//:algorithm",
+        "@org_boost//:program_options",
+        "@org_boost//:asio",
+        "@org_boost//:chrono",
+        "@org_boost//:filesystem",
+        "@org_boost//:locale",
+        "@org_boost//:system",
+        "@org_boost//:thread",
+        "@org_boost//:signals2",
+        "@com_github_Tencent_rapidjson//:rapidjson",
     ] + select({
         "@bazel_tools//src/conditions:windows": [],
         "@bazel_tools//src/conditions:linux_x86_64": [],
@@ -136,11 +156,11 @@ cc_library(
         "//conditions:default": [],
     }),
 
-#     # Uncomment this to enable full static link.
-#     # features = ['fully_static_link'],
+# #     # Uncomment this to enable full static link.
+# #     # features = ['fully_static_link'],
 
-#     # Comment this out to use system malloc runtime.
-#     # malloc = '@com_google_tcmalloc//tcmalloc'
+# #     # Comment this out to use system malloc runtime.
+# #     # malloc = '@com_google_tcmalloc//tcmalloc'
 
     visibility = ["//visibility:public"],
 )
@@ -150,6 +170,7 @@ cc_binary(
     srcs = [
         "main.cpp",
     ],
+
     deps = [
         ":com.github.doevelopper.rules.infra.main",
     ],

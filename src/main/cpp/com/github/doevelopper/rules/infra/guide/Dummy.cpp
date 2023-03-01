@@ -21,42 +21,32 @@
 
 using namespace com::github::doevelopper::rules::infra::guide;
 
-// log4cxx::LoggerPtr Dummy::logger = log4cxx::Logger::getLogger(std::string("Dummy"));
+log4cxx::LoggerPtr Dummy::logger =
+    log4cxx::Logger::getLogger(std::string("com.github.doevelopper.rules.infra.guideummy"));
 
-Dummy::Dummy()
+Dummy::Dummy() noexcept
 {
-    // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
 
-Dummy::~Dummy()
+Dummy::~Dummy() noexcept
 {
-    // LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-}
-/*
-Dummy::Dummy(const std::string& hello,  const std::string& world)
-    : m_hello{hello}
-    , m_world{world}
-    , m_speechless{}
-{
-    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
-    m_speechless = (hello.empty() && world.empty());
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 }
 
-std::string Dummy::speak() const
+Dummy::Dummy(const std::string & hello, const std::string & world)
+// : m_hello{hello}
+// , m_world{world}
+// , m_speechless{}
 {
-    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 
-    auto hello = m_hello;
-    hello.append(" ");
-    hello.append(m_world);
-
-    return (hello);
+    // return (hello);
 }
 
 bool Dummy::speechless() const
 {
-    //LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
+    LOG4CXX_TRACE(logger, __LOG4CXX_FUNC__);
 
     return m_speechless;
 }
-*/

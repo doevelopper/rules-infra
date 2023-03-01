@@ -2,13 +2,16 @@
 #ifndef COM_GITHUB_DOEVELOPPER_RULES_INFRA_EXTENSIONS_UNITTESTBUILDER_HPP
 #define COM_GITHUB_DOEVELOPPER_RULES_INFRA_EXTENSIONS_UNITTESTBUILDER_HPP
 
-#include <com/github/doevelopper/rules/infra/logging/LoggingService.hpp>
+#include <com/github/doevelopper/rules/infra/extensions/ConfigurableEventListener.hpp>
+
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 namespace com::github::doevelopper::rules::infra::extensions::test
 {
     class UnitTestBuilder
     {
+        LOG4CXX_DECLARE_STATIC_LOGGER
     public:
 
         UnitTestBuilder();

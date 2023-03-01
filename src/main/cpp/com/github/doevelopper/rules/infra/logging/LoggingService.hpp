@@ -7,6 +7,8 @@
 #include <boost/core/demangle.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/preprocessor/stringize.hpp>
+#include <boost/type_index.hpp>
+
 #include <log4cxx/logger.h>
 
 #include <ctime>
@@ -32,6 +34,8 @@ private:                                                                        
     log4cxx::LoggerPtr name;
 
 #define DEFAULT_LOGGER() log4cxx::Logger::getRootLogger()
+
+#define DEFINE_LOGGER std::string logger {boost::typeindex::type_id<decltype(*this)>().pretty_name()};
 
 namespace com::github::doevelopper::rules::infra::logging
 {

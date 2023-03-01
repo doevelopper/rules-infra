@@ -11,15 +11,18 @@ namespace com::github::doevelopper::rules::infra::app
         LOG4CXX_DECLARE_STATIC_LOGGER
     public:
 
-        Application();
+        Application() noexcept;
         Application(const Application &)             = delete;
         Application(Application &&)                  = delete;
         Application & operator=(const Application &) = delete;
         Application & operator=(Application &&)      = delete;
-        virtual ~Application();
+        virtual ~Application() noexcept;
 
     protected:
     private:
+
+        // com::github::doevelopper::rules::infra::semver::Version * m_version;
+        com::github::doevelopper::rules::infra::logging::LoggingService * m_loggerService;
     };
 }
 #endif

@@ -245,15 +245,16 @@ namespace com::github::doevelopper::rules::infra::semver
         void set(const char *);
         void set(const std::string &);
         int compareVersion(const Version & rhs) const noexcept;
-
-        std::uint8_t m_major; ///< Major version, change only on incompatible API modifications.
-        std::uint8_t m_minor; ///< Minor version, change on backwards-compatible API modifications.
-        std::uint8_t m_patch; ///< Patch version, change only on bugfixes.
+        // clang-format off
+        std::uint8_t m_major;       ///< Major version, change only on incompatible API modifications.
+        std::uint8_t m_minor;       ///< Minor version, change on backwards-compatible API modifications.
+        std::uint8_t m_patch;       ///< Patch version, change only on bugfixes.
         ReleaseLevel m_releaseType; ///< Release identification.
-        std::uint8_t m_tweak; ///< CI Build Identification.
-        std::string m_extra; ///< GI sha1
-        std::string m_build; ///< Major.Minor.Patch-[RC|Alpha|...]-Build[0-9]
+        std::uint8_t m_tweak;       ///< CI Build Identification.
+        std::string m_extra;        ///< GI sha1
+        std::string m_build;        ///< Major.Minor.Patch-[RC|Alpha|...]-Build[0-9]
         std::ostringstream oss;
+        // clang-format on
     };
 }
 #endif

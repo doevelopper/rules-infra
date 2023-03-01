@@ -62,10 +62,10 @@ aol:
 .PHONY: format
 format:
 	@echo "Formating codes"
-	@find src/main/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
-	@find src/test/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
-	@find src/main/cpp  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
-	@find src/test/cpp  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-14 -style=file -i -fallback-style=none {} \;
+	@find src/main/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-15 -style=file -i -fallback-style=none {} \;
+	@find src/test/cpp/com/github/doevelopper/rules/infra  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-15 -style=file -i -fallback-style=none {} \;
+	@find src/main/cpp  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-15 -style=file -i -fallback-style=none {} \;
+	@find src/test/cpp  -regex '.*\.\(cpp\|hpp\|cu\|c\|h\)' -exec clang-format-15 -style=file -i -fallback-style=none {} \;
 
 .PHONY: tidy
 tidy:## Check with clang-tidy
@@ -82,6 +82,7 @@ deps:
 	@bazelisk build --config linux --config gnu-gcc @org_apache_apr//:apr
 	@bazelisk build --config linux --config gnu-gcc @org_apache_apr_util//:apr_util
 	@bazelisk build --config linux --config gnu-gcc @org_apache_log4cxx//:log4cxx
+	@bazelisk build --config linux --config gnu-gcc @org_boost//...
 
 
 .PHONY: main-compile

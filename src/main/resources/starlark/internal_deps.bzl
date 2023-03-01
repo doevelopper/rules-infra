@@ -5,10 +5,14 @@ statement from these, that's a bug in our distribution.
 """
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", _git_repository = "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
 def http_archive(name, **kwargs):
     maybe(_http_archive, name = name, **kwargs)
+
+def git_repository(name, **kwargs):
+    maybe(_git_repository, name = name, **kwargs)
 
 def rules_infra_internal_deps():
     "Fetch deps needed for local development"
@@ -85,7 +89,7 @@ def rules_infra_internal_deps():
     #     strip_prefix = "rules_foreign_cc-0.9.0",
     #     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
     # )
-   # this version contains procedure  runnable_binary  need to build openssl
+    # WARNING  this version contains procedure  runnable_binary  need to build openssl
     http_archive(
         name = "rules_foreign_cc",
         sha256 = "ff5b7cdb650377b5baf358e38abf7d849395add601116393b16e722ffb33eb4b",
@@ -180,6 +184,22 @@ def rules_infra_internal_deps():
             "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
             "https://strawberryperl.com/download/5.32.1.1/strawberry-perl-5.32.1.1-64bit.zip",
         ],
+    )
+
+    # Use these values to get the tip of the master branch:
+    # rules_ruby_ref = "heads"
+    # rules_ruby_ver = "master"
+    # rules_ruby_ver="0a3275b235dd4093a2a44e2f08d96a9f07ecbe0a" 2.6.3 ot available in this commit
+    # rules_ruby_sha256="7c0da7ac6a89c980ad5fb9b815bb254bd06c153a774857bfc37bb4b90de769d8",
+    rules_ruby_ver="a2309dc9b475b58179a9a25d98fb88c53a631788"
+    rules_ruby_sha256="e4c7e2ca69c0e3f82f4127bf7f672cdf4e162c7a92cd6a22eee162152eec9ecf"
+
+    http_archive(
+        name = "bazelruby_rules_ruby",
+        # sha256 = rules_ruby_sha256,
+        strip_prefix = "rules_ruby-%s" % rules_ruby_ver,
+        # url = "https://github.com/bazelruby/rules_ruby/archive/refs/%s/%s.tar.gz" % (rules_ruby_ref, rules_ruby_ver),
+        url = "https://github.com/bazelruby/rules_ruby/archive/%s.tar.gz" % rules_ruby_ver,
     )
 
     # maybe(
