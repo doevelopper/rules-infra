@@ -83,27 +83,35 @@ def rules_infra_internal_deps():
         ],
     )
 
+    # missing runnable_binary need to build openssl
     # http_archive(
     #     name = "rules_foreign_cc",
     #     sha256 = "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
     #     strip_prefix = "rules_foreign_cc-0.9.0",
     #     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
     # )
-    # WARNING  this version contains procedure  runnable_binary  need to build openssl
+
+    rules_foreign_cc_ver="798242e04d1c13a199f47ca52cc4568a7128311d"
+    rules_foreign_cc_sha256="8b1089b96e3086c41fc775fb7234ee93b8b2ce2b2265a9a6e2c20c5d37c9f153"
+    # WARNING  this version contains procedure runnable_binary  need to build openssl
     http_archive(
         name = "rules_foreign_cc",
-        sha256 = "ff5b7cdb650377b5baf358e38abf7d849395add601116393b16e722ffb33eb4b",
-        strip_prefix = "rules_foreign_cc-34fa6a796d6933cc0529950fee313579cd0d8c51",
+        sha256 = rules_foreign_cc_sha256,
+        strip_prefix = "rules_foreign_cc-%s" % rules_foreign_cc_ver,
         urls = [
-            "https://github.com/bazelbuild/rules_foreign_cc/archive/34fa6a796d6933cc0529950fee313579cd0d8c51.tar.gz",
+            "https://github.com/bazelbuild/rules_foreign_cc/archive/%s.tar.gz" % rules_foreign_cc_ver,
         ],
     )
 
+    rules_cc_ver="0.0.6"
+    rules_cc_sha256="3d9e271e2876ba42e114c9b9bc51454e379cbf0ec9ef9d40e2ae4cec61a31b40"
     http_archive(
         name = "rules_cc",
-        urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.0.4/rules_cc-0.0.4.tar.gz"],
-        sha256 = "af6cc82d87db94585bceeda2561cb8a9d55ad435318ccb4ddfee18a43580fb5d",
-        strip_prefix = "rules_cc-0.0.4",
+        sha256 = rules_cc_sha256,
+        urls = [
+            "https://github.com/bazelbuild/rules_cc/releases/download/%s/rules_cc-%s.tar.gz" % (rules_cc_ver, rules_cc_ver),
+        ],
+        strip_prefix = "rules_cc-%s" % rules_cc_ver,
     )
 
     http_archive(

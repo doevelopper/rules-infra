@@ -9,7 +9,6 @@ filegroup(
 _CACHE_ENTRIES = {
     "BUILD_SHARED_LIBS": "off",
     "BUILD_CURL_EXE": "off",
-    # "CMAKE_PREFIX_PATH": "$CMAKE_PREFIX_PATH;$EXT_BUILD_DEPS/boost",
     "CMAKE_C_FLAGS": "-fPIC",
     "CUKE_ENABLE_EXAMPLES": "OFF",
     "CUKE_USE_STATIC_GTEST": "OFF",
@@ -18,6 +17,10 @@ _CACHE_ENTRIES = {
     "CUKE_ENABLE_QT": "OFF",
     "CUKE_TESTS_E2E": "OFF",
     "CUKE_TESTS_UNIT": "OFF",
+    "Boost_NO_WARN_NEW_VERSIONS": "ON", # get rid of New Boost version may have incorrect or missing dependencies and imported
+    "Boost_USE_STATIC_LIBS": "ON",
+    "Boost_NO_BOOST_CMAKE": "ON", #Could NOT find Boost (missing: thread system regex date_time program_options filesystem) (found suitable version "1.81.0", minimum required is "1.46")
+    # "CMAKE_PREFIX_PATH": "$$EXT_BUILD_DEPS$$/org_boost;$$EXT_BUILD_DEPS$$/boost",
 }
 
 _MACOS_CACHE_ENTRIES = dict(_CACHE_ENTRIES.items() + {
@@ -67,6 +70,7 @@ cmake(
         "@org_boost//:algorithm",
         "@org_boost//:program_options",
         "@org_boost//:asio",
+        "@org_boost//:regex",
         "@org_boost//:chrono",
         "@org_boost//:filesystem",
         "@org_boost//:locale",

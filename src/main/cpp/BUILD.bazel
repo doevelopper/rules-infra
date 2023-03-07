@@ -144,7 +144,7 @@ cc_library(
         "@org_boost//:asio",
         "@org_boost//:chrono",
         "@org_boost//:filesystem",
-        "@org_boost//:locale",
+        # "@org_boost//:locale", #1.81
         "@org_boost//:system",
         "@org_boost//:thread",
         "@org_boost//:signals2",

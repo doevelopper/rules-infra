@@ -22,20 +22,48 @@
 # # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # # SUCH DAMAGE.
 
-# load(
-#     "@rules_pkg//:pkg.bzl",
-#     "pkg_deb",
-#     "pkg_tar"
-# )
+load(
+    "@rules_pkg//:pkg.bzl",
+    "pkg_deb",
+    "pkg_tar"
+)
 
-# licenses(["notice"])  # Apache License
+licenses(["notice"])  # Apache License
 
-# load(
-#     "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:defs.bzl",
-#     "gherkin_library",
-#     "gherkin_test",
-#     "cc_gherkin_steps"
-# )
+load(
+    "@com.github.doevelopper.rules-infra//src/main/resources/starlark/rules/cc_bdd:defs.bzl",
+    "gherkin_library",
+    "gherkin_test",
+    "cc_gherkin_steps"
+)
+
+gherkin_library(
+    name = "com.github.doevelopper.rules.infra.feature",
+    # srcs = glob(["**/*.feature"]),
+    srcs =[
+        "features/0000-Dummy.feature",
+    ],
+)
+
+cc_gherkin_steps(
+    name = "com.github.doevelopper.rules.infra.steps",
+    srcs = [
+        "project/object/model/features/step_definitions/DummyTestSteps.hpp",
+        "project/object/model/features/step_definitions/DummyTestSteps.cpp",
+    ],
+    includes = [
+        ".",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com.github.doevelopper.rules-infra//src/main/cpp:com.github.doevelopper.rules.infra.main",
+        "@com_google_googletest//:gtest",
+        # "@cucumber_cpp//src:cucumber_main",
+        "@com_github_cucumber_cucumber_cpp//:cucumber_cpp",
+        # "@org_apache_logging_log4cxx//:log4cxx",
+    ],
+)
+
 
 # cc_gherkin_steps(
 #     name = "com.github.doevelopper.rules.infra.steps",

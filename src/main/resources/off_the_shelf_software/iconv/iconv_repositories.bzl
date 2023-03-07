@@ -13,7 +13,7 @@ def iconv_repositories():
         type = "tar.gz",
         sha256 = "e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04",
         strip_prefix = "libiconv-1.16",
-        build_file = Label("@com.github.doevelopper.rules-infra//iconv:BUILD.iconv.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/iconv:BUILD.iconv.bazel"),
     )
 
     maybe(
@@ -25,5 +25,17 @@ def iconv_repositories():
         type = "tar.gz",
         sha256 = "f7729999a9f2adc8c158012bc4bc8d69bea5dec88c8203cdd62067f91ed60b43",
         strip_prefix = "libiconv-59/libiconv",
-        build_file = Label("@com.github.doevelopper.rules-infra//iconv:BUILD.iconv.macos.bazel"),
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/iconv:BUILD.iconv.macos.bazel"),
+    )
+
+    maybe(
+        http_archive,
+        name = "org_apache_apr_iconv",
+        urls = [
+            "https://dlcdn.apache.org//apr/apr-iconv-1.2.2.tar.gz",
+        ],
+        type = "tar.gz",
+        # sha256 = "f7729999a9f2adc8c158012bc4bc8d69bea5dec88c8203cdd62067f91ed60b43",
+        strip_prefix = "apr-iconv-1.2.2",
+        build_file = Label("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/iconv:BUILD.apr.iconv"),
     )
