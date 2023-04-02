@@ -48,3 +48,17 @@
     allow_failure: true
     variables:
         GITLAB_DANGERFILES_VERSION: "3.1.0"
+
+.only-default: &only-default
+    only:
+        - master
+        - merge_requests
+        - tags
+
+# Lint
+
+.lint_template: &lint_definition
+    stage: lint
+    variables:
+      GIT_SUBMODULE_STRATEGY: none
+    <<: *only-default

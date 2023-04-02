@@ -4,35 +4,41 @@
     entry: check-added-large-files
     language: python
     stages: [commit, push, manual]
+
 -   id: check-ast
     name: check python ast
     description: simply checks whether the files parse as valid python.
     entry: check-ast
     language: python
     types: [python]
+
 -   id: check-byte-order-marker
     name: 'check BOM - deprecated: use fix-byte-order-marker'
     description: forbids files which have a utf-8 byte-order marker.
     entry: check-byte-order-marker
     language: python
     types: [text]
+
 -   id: check-builtin-literals
     name: check builtin type constructor use
     description: requires literal syntax when initializing empty or zero python builtin types.
     entry: check-builtin-literals
     language: python
     types: [python]
+
 -   id: check-case-conflict
     name: check for case conflicts
     description: checks for files that would conflict in case-insensitive filesystems.
     entry: check-case-conflict
     language: python
+
 -   id: check-docstring-first
     name: check docstring is first
     description: checks a common error of defining a docstring after code.
     entry: check-docstring-first
     language: python
     types: [python]
+
 -   id: check-executables-have-shebangs
     name: check that executables have shebangs
     description: ensures that (non-binary) executables have a shebang.
@@ -40,12 +46,14 @@
     language: python
     types: [text, executable]
     stages: [commit, push, manual]
+
 -   id: check-json
     name: check json
     description: checks json files for parseable syntax.
     entry: check-json
     language: python
     types: [json]
+
 -   id: check-shebang-scripts-are-executable
     name: check that scripts with shebangs are executable
     description: ensures that (non-binary) files with a shebang are executable.
@@ -53,30 +61,35 @@
     language: python
     types: [text]
     stages: [commit, push, manual]
+
 -   id: pretty-format-json
     name: pretty format json
     description: sets a standard for formatting json files.
     entry: pretty-format-json
     language: python
     types: [json]
+
 -   id: check-merge-conflict
     name: check for merge conflicts
     description: checks for files that contain merge conflict strings.
     entry: check-merge-conflict
     language: python
     types: [text]
+
 -   id: check-symlinks
     name: check for broken symlinks
     description: checks for symlinks which do not point to anything.
     entry: check-symlinks
     language: python
     types: [symlink]
+
 -   id: check-toml
     name: check toml
     description: checks toml files for parseable syntax.
     entry: check-toml
     language: python
     types: [toml]
+
 -   id: check-vcs-permalinks
     name: check vcs permalinks
     description: ensures that links to vcs websites are permalinks.
@@ -199,3 +212,31 @@
     language: python
     types: [text]
     stages: [commit, push, manual]
+
+- id: commitizen
+  name: commitizen check
+  description: >
+    Check whether the current commit message follows commiting rules. Allow
+    empty commit messages by default, because they typically indicate to Git
+    that the commit should be aborted.
+  entry: cz check
+  args: [--allow-abort, --commit-msg-file]
+  stages: [commit-msg]
+  language: python
+  language_version: python3
+  minimum_pre_commit_version: "1.4.3"
+
+- id: commitizen-branch
+  name: commitizen check branch
+  description: >
+    Check all commit messages that are already on the current branch but not the
+    default branch on the origin repository. Useful for checking messages after
+    the fact (e.g., pre-push or in CI) without an expensive check of the entire
+    repository history.
+  entry: cz check
+  args: [--rev-range, origin/HEAD..HEAD]
+  always_run: true
+  pass_filenames: false
+  language: python
+  language_version: python3
+  minimum_pre_commit_version: "1.4.3"

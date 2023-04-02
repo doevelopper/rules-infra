@@ -74,14 +74,27 @@ def rules_infra_internal_deps():
         sha256 = "eea0f59c28a9241156a47d7a8e32db9122f3d50b505fae0f33de6ce4d9b61834",
     )
 
+    # com_github_bazelbuild_buildtools_ver="798242e04d1c13a199f47ca52cc4568a7128311d"
+    # com_github_bazelbuild_buildtools_sha256="8b1089b96e3086c41fc775fb7234ee93b8b2ce2b2265a9a6e2c20c5d37c9f153"
     http_archive(
         name = "com_github_bazelbuild_buildtools",
-        sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
+        # sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
         strip_prefix = "buildtools-4.2.2",
         urls = [
             "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
         ],
     )
+
+    # com_github_bazelbuild_buildtools_ver="6.0.1"
+    # com_github_bazelbuild_buildtools_sha256="ca524d4df8c91838b9e80543832cf54d945e8045f6a2b9db1a1d02eec20e8b8c"
+    # http_archive(
+    #     name = "com_github_bazelbuild_buildtools",
+    #     sha256 = com_github_bazelbuild_buildtools_sha256,
+    #     strip_prefix = "buildtools-%s" % com_github_bazelbuild_buildtools_ver,
+    #     urls = [
+    #         "https://github.com/bazelbuild/buildtools/archive/refs/tags/%s.tar.gz" % (com_github_bazelbuild_buildtools_ver),
+    #     ],
+    # )
 
     # missing runnable_binary need to build openssl
     # http_archive(
@@ -89,6 +102,21 @@ def rules_infra_internal_deps():
     #     sha256 = "2a4d07cd64b0719b39a7c12218a3e507672b82a97b98c6a89d38565894cf7c51",
     #     strip_prefix = "rules_foreign_cc-0.9.0",
     #     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/refs/tags/0.9.0.tar.gz",
+    # )
+
+    # # bazelbuild_platforms_ver="829cd4bc1a34331947b794ed3b20577984481dde"
+    # bazelbuild_platforms_ver="0.0.6"
+    # bazelbuild_platforms_sha256="5308fc1d8865406a49427ba24a9ab53087f17f5266a7aabbfc28823f3916e1ca"
+
+    # http_archive(
+    #     name = "com_github_bazelbuild_platforms",
+    #     sha256 = bazelbuild_platforms_sha256,
+    #     # strip_prefix = "platforms-%s" % bazelbuild_platforms_ver,
+    #     urls = [
+    #         "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/%s/platforms-%s.tar.gz" % (bazelbuild_platforms_ver, bazelbuild_platforms_ver),
+    #         "https://github.com/bazelbuild/platforms/releases/download/%s/platforms-%s.tar.gz" % (bazelbuild_platforms_ver, bazelbuild_platforms_ver),
+    #         # https://github.com/bazelbuild/platforms/archive/refs/heads/main.zip
+    #     ],
     # )
 
     rules_foreign_cc_ver="798242e04d1c13a199f47ca52cc4568a7128311d"
@@ -136,7 +164,7 @@ def rules_infra_internal_deps():
     #     name = "rules_python",
     #     sha256 = "48a838a6e1983e4884b26812b2c748a35ad284fd339eb8e2a6f3adf95307fbcd",
     #     strip_prefix = "rules_python-0.16.2",
-    #     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.16.2.tar.gz",
+    #     url = "https://github.com/bazelbuild/rules_python/archive/refs/taspect_bazel_lib_dependenciesags/0.16.2.tar.gz",
     # )
 
     http_archive(
@@ -169,6 +197,13 @@ def rules_infra_internal_deps():
         urls = ["https://github.com/bazelbuild/rules_fuzzing/archive/v0.3.2.zip"],
     )
 
+    http_archive(
+        name = "honggfuzz",
+        build_file = "@rules_fuzzing//:honggfuzz.BUILD",
+        strip_prefix = "honggfuzz-e0670137531242d66c9cf8a6dee677c055a8aacb",
+        sha256 = "a6f8040ea62e0f630737f66dce46fb1b86140f118957cb5e3754a764de7a770a",
+        url = "https://github.com/google/honggfuzz/archive/e0670137531242d66c9cf8a6dee677c055a8aacb.zip",
+    )
     http_archive(
         name = "build_bazel_rules_apple",
         sha256 = "43737f28a578d8d8d7ab7df2fb80225a6b23b9af9655fcdc66ae38eb2abcf2ed",
@@ -224,3 +259,10 @@ def rules_infra_internal_deps():
     # register_jq_toolchains()
     # register_yq_toolchains()
     # register_coreutils_toolchains()
+
+    http_archive(
+        name = "aspect_rules_format",
+        sha256 = "c8d04f68082c0eeac2777e15f65048ece2f17d632023bdcc511602f8c5faf177",
+        strip_prefix = "bazel-super-formatter-2.0.0",
+        url = "https://github.com/aspect-build/bazel-super-formatter/archive/refs/tags/v2.0.0.tar.gz",
+    )

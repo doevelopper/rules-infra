@@ -19,7 +19,7 @@ load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_soft
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/zstd:zstd_repositories.bzl","zstd_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/boost:boost_repositories.bzl","boost_repositories")
 load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/cucumber_cpp:cucumber_cpp_repositories.bzl","cucumber_cpp_repositories")
-
+load("@com.github.doevelopper.rules-infra//src/main/resources/off_the_shelf_software/iconv:iconv_repositories.bzl","iconv_repositories")
 
 
 # buildifier: disable=unnamed-macro
@@ -30,18 +30,17 @@ def of_the_shell_repositories():
   zlib_repositories()
   apr_repositories()
   expat_repositories()
+  iconv_repositories()
   apr_util_repositories()
   log4cxx_repositories()
   xerces_repositories()
   rapidjson_repositories()
   perl_rules_dependencies()
   perl_register_toolchains()
-  # cares_repositories()
   openssl_repositories()
   curl_repositories()
   boost_repositories()
   bzip2_repositories()
   zstd_repositories()
   lzma_repositories()
-  boost_repositories()
   cucumber_cpp_repositories()

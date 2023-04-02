@@ -1,12 +1,12 @@
-# load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
-# exports_files(
-#     [
-#         "BUILD.iconv.bazel",
-#         "BUILD.iconv.macos.bazel",
-#     ],
-#     visibility = ["//visibility:public"],
-# )
+exports_files(
+    [
+        "BUILD.iconv.bazel",
+        "BUILD.iconv.macos.bazel",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 # build_test(
 #     name = "iconv_linux_build_test",

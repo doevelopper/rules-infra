@@ -56,6 +56,15 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+# Ruby
+[*.{rb,gemspec}]
+indent_style = space
+indent_size = 2
+
+[Dangerfile, Rakefile, Guardfile, Gemfile]
+indent_style = space
+indent_size = 2
+
 # YAML
 [*.{yml,yaml}]
 indent_style = space
